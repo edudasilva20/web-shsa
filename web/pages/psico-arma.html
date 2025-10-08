@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Exame Psicotécnico — Porte de Arma</title>
+  <style>
+    :root { --bg:#f4f6f9; --bg-accent:#e9eef5; --card:#fff; --muted:#51607a; --text:#0b1220; --accent:#22c55e; --danger:#ef4444; --warn:#f59e0b; --primary:#2563eb; --ink:#0b1220; --radius:14px; --border:rgba(2,6,23,.08); --soft:rgba(2,6,23,.04) }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,"Noto Sans",sans-serif;background:radial-gradient(1100px 520px at 100% -10%,var(--bg-accent) 0%,var(--bg) 60%);color:var(--text);min-height:100vh}
+    .wrap{max-width:980px;margin:0 auto;padding:24px 16px 56px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
+    header h1{font-size:clamp(22px,5vw,32px);margin:0;letter-spacing:.3px}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px;box-shadow:0 8px 24px rgba(2,6,23,.06)}
+    .pill{padding:6px 10px;border-radius:999px;background:var(--soft);font-size:12px;color:var(--muted)}
+    button{background:var(--primary);color:#fff;border:none;padding:12px 16px;border-radius:12px;font-weight:700;cursor:pointer;transition:transform .06s ease,opacity .2s,box-shadow .2s;box-shadow:0 6px 16px rgba(37,99,235,.25)}
+    button:hover{transform:translateY(-1px)}
+    button:disabled{opacity:.45;cursor:not-allowed;box-shadow:none}
+    .btn-secondary{background:#e2e8f0;color:#0b1220;border:1px solid var(--border)}
+    .muted{color:var(--muted);font-size:14px}
+    .hidden{display:none!important}
+    .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+    .progress{height:10px;background:#dbeafe;border-radius:999px;overflow:hidden;border:1px solid var(--border)}
+    .progress>div{height:100%;width:0;background:linear-gradient(90deg,var(--primary),#34d399);transition:width .35s ease}
+    .q{padding:14px;border:1px solid var(--border);border-radius:12px;margin:10px 0;background:#fbfdff}
+    .q h3{margin:.2rem 0 .5rem;font-size:16px}
+    .opt{display:flex;gap:10px;align-items:flex-start;margin:6px 0;padding:8px;border-radius:10px;cursor:pointer;border:1px solid transparent}
+    .opt:hover{background:#f1f5f9}
+    .opt input{margin-top:3px}
+    textarea,input[type="text"]{width:100%;padding:10px;border-radius:10px;border:1px solid var(--border);background:#fff;color:var(--ink)}
+    input[type="number"], select{padding:8px 10px;border-radius:10px;border:1px solid var(--border);background:#fff;color:#0b1220}
+    .badge{display:inline-flex;align-items:center;gap:8px;background:var(--soft);padding:8px 12px;border-radius:10px;font-size:13px;color:#334155}
+    .badge .dot{width:8px;height:8px;border-radius:50%}
+    .dot.green{background:var(--accent)} .dot.red{background:var(--danger)}
+    .footer{opacity:.8;font-size:12px;margin-top:14px}
+    .table{width:100%;border-collapse:collapse}
+    .table th,.table td{padding:8px 10px;border-bottom:1px solid var(--border);text-align:left}
+    .table th{color:var(--muted);font-weight:600}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>Psicotécnico Uso e Porte de Arma</h1>
+    </header>
+
+    <div class="card" id="intro">
+      <p class="muted">As perguntas são sempre todas efetuadas, mas a ordem é <strong>baralhada a cada início</strong> para parecer um exame diferente. Perguntas abertas só avançam após pontuação (0–5); múltipla escolha corrige automaticamente.</p>
+      <div class="row">
+        <button id="btnStart">Iniciar Avaliação</button>
+        <button class="btn-secondary" id="btnConfig">Configurações</button>
+      </div>
+    </div>
+
+    <div class="card hidden" id="config">
+      <p><strong>Configurações rápidas</strong></p>
+      <div class="row" style="justify-content:space-between;align-items:flex-end">
+        <div>
+          <div class="muted" style="margin-bottom:6px">Tempo por pergunta (s, 0=sem)</div>
+          <input id="cfgTimer" type="number" min="0" max="180" value="40" style="width:140px;">
+        </div>
+        <label>Nota mínima (0–100)
+          <input id="cfgPass" type="number" min="0" max="100" value="75" style="width:140px;">
+        </label>
+      </div>
+      <div class="row" style="margin-top:10px">
+        <button id="btnSaveCfg">Guardar</button>
+        <button class="btn-secondary" id="btnCloseCfg">Fechar</button>
+      </div>
+    </div>
+
+    <div class="card hidden" id="exam">
+      <div class="row" style="justify-content:space-between;align-items:center;margin-bottom:10px">
+        <div class="badge"><span class="dot green"></span> <span id="stageName">Questionário</span></div>
+        <div style="min-width:200px;width:40%" class="progress" aria-label="Progresso">
+          <div id="progressBar"></div>
+        </div>
+        <div class="row"><span class="pill">Pergunta <span id="qIdx">1</span>/<span id="qTotal">—</span></span><span class="pill">Tempo: <span id="hudTime">—</span></span></div>
+      </div>
+      <div id="qArea"></div>
+      <div class="row" style="justify-content:space-between;margin-top:10px">
+        <button class="btn-secondary" id="btnPrev" disabled>Anterior</button>
+        <div class="row">
+          <button class="btn-secondary" id="btnClear">Limpar</button>
+          <button id="btnNext" disabled>Próximo</button>
+        </div>
+      </div>
+      <p class="footer">Abertas: só avança depois de atribuir pontuação (0–5). Múltipla escolha: corrigido automaticamente.</p>
+    </div>
+
+    <div class="card hidden" id="result">
+      <h2>Relatório Final</h2>
+      <p class="muted">MC corrigida automaticamente; abertas com média (0–5 → %). A nota final faz média ponderada por quantidade.</p>
+      <div id="report"></div>
+      <div class="row" style="margin-top:10px">
+        <button class="btn-secondary" id="btnCopyJSON">Copiar JSON</button>
+        <button id="btnRestart">Reiniciar</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ===================== CONFIG =====================
+    const CONFIG = {
+      TIME_PER_Q: 40,
+      PASS_THRESHOLD: 75
+    };
+
+    // ===================== BANCO (extraído do Word) =====================
+    // Tipos: 'open' (0–5 por avaliador), 'mc' (auto-correção)
+    // cat = secção
+    const BANK = [
+      // --- 1. Avaliação da Personalidade (abertas) ---
+      { type:'open', cat:'Personalidade', q:'1.1 — Já sentiu prazer ou curiosidade ao ver alguém em situação de perigo? Justifique.' },
+      { type:'open', cat:'Personalidade', q:'1.2 — Entre salvar um familiar e cinco desconhecidos, o que faria? Porquê?' },
+      { type:'open', cat:'Personalidade', q:'1.3 — O que o motiva a portar uma arma: segurança, dever, poder ou medo? Explique.' },
+      { type:'open', cat:'Personalidade', q:'1.4 — Quando é injustiçado, procura diálogo, justiça ou retaliação?' },
+      { type:'open', cat:'Personalidade', q:'1.5 — Um superior ordena algo ilegal. O que faz?' },
+      { type:'open', cat:'Personalidade', q:'1.6 — O que é mais difícil: controlar a raiva ou o medo? Justifique.' },
+      { type:'open', cat:'Personalidade', q:'1.7 — “O verdadeiro poder está em saber quando não usar a arma.” Comente.' },
+      { type:'open', cat:'Personalidade', q:'1.8 — Narre uma situação em que controlou a emoção para não agir de forma precipitada.' },
+      { type:'open', cat:'Personalidade', q:'1.9 — Um amigo comete um erro grave com uma arma. Denuncia ou protege? Porquê?' },
+      { type:'open', cat:'Personalidade', q:'1.10 — Quando o perigo é inevitável, o que o guia: instinto ou raciocínio? Justifique.' },
+
+      // --- 2. Raciocínio Lógico e Ético ---
+      { type:'open', cat:'Lógico & Ético', q:'2.1 — Quem define “cidadão responsável” para efeitos de porte?' },
+      { type:'mc', cat:'Lógico & Ético', q:'2.2 — Um indivíduo corre em sua direção com objeto não identificado (3 segundos).', opts:['A) Dispara','B) Avisa verbalmente e busca cobertura','C) Aguarda confirmação do risco','D) Usa a arma como advertência (sem disparar)'], correct:1 },
+      { type:'mc', cat:'Lógico & Ético', q:'2.3 — Um policial atira num suspeito desarmado mas agressivo. O disparo foi…', opts:['A) Legítima defesa','B) Excesso','C) Depende da análise situacional','D) Falta de preparo psicológico'], correct:2 },
+      { type:'open', cat:'Lógico & Ético', q:'2.4 — Complete: se confiança é para a mente o que segurança é para a arma, disciplina é para…?' },
+      { type:'open', cat:'Lógico & Ético', q:'2.5 — Em decisão de vida ou morte, pesa mais a lei ou a moral pessoal? Justifique.' },
+
+      // --- 3. Lógica Avançada ---
+      { type:'open', cat:'Lógica Avançada', q:'3.1 — Um atirador tem 10 balas; dispara 3, recarrega 2×4, perde 1. Quantas sobram?' },
+      { type:'mc', cat:'Lógica Avançada', q:'3.2 — Se “todas as armas são perigosas” e “nem todos os perigos são armas”, podemos afirmar que:', opts:['A) Toda arma é um perigo','B) Todo perigo envolve arma','C) Existem perigos sem armas','D) Armas e perigos são sinónimos'], correct:2 },
+      { type:'open', cat:'Lógica Avançada', q:'3.3 — Três suspeitos: A:“B é culpado”; B:“C é inocente”; C:“B mente”. Só um diz a verdade. Quem é culpado?' },
+      { type:'open', cat:'Lógica Avançada', q:'3.4 — Numa cidade, 80% seguem a lei; destes, 20% possuem armas. Que % da população possui armas e segue a lei?' },
+      { type:'open', cat:'Lógica Avançada', q:'3.5 — Complete as sequências: (A) 2,6,12,20,30, __ (B) 3,9,27,81, __ (C) 5,10,20,40,80, __ (D) 9,7,5,3,1, __' },
+      { type:'open', cat:'Lógica Avançada', q:'3.6 — Um civil dispara 2 tiros/seg. Em 1m30s, quantos disparos?' },
+
+      // --- 4. Memória e Observação (abertas) ---
+      { type:'open', cat:'Memória', q:'4.1 — Quantos objetos havia no cenário descrito?' },
+      { type:'open', cat:'Memória', q:'4.2 — Qual era o horário exato?' },
+      { type:'open', cat:'Memória', q:'4.3 — O quadro estava reto ou torto?' },
+      { type:'open', cat:'Memória', q:'4.4 — O que estava próximo da porta?' },
+      { type:'open', cat:'Memória', q:'4.5 — Havia algo no chão além do jornal?' },
+
+      // --- 5. Conhecimento Técnico e Ético (abertas) ---
+      { type:'open', cat:'Técnico & Ético', q:'5.1 — Cite as 4 regras universais de segurança no manuseio de armas.' },
+      { type:'open', cat:'Técnico & Ético', q:'5.2 — O que fazer ao encontrar uma arma sem supervisão em local público?' },
+      { type:'open', cat:'Técnico & Ético', q:'5.3 — Quais os requisitos legais para portar arma?' },
+      { type:'open', cat:'Técnico & Ético', q:'5.4 — Dois exemplos de negligência que resultariam em tragédia.' },
+      { type:'open', cat:'Técnico & Ético', q:'5.5 — O que significa o princípio da proporcionalidade no uso da força?' },
+      { type:'open', cat:'Técnico & Ético', q:'5.6 — Consequências legais de um disparo negligente.' },
+      { type:'open', cat:'Técnico & Ético', q:'5.7 — Se uma autoridade ordena força letal e é desnecessária, o que faz?' },
+      { type:'open', cat:'Técnico & Ético', q:'5.8 — Quando a legítima defesa deixa de ser legítima?' },
+
+      // --- 6. Raciocínio Situacional (abertas) ---
+      { type:'open', cat:'Situações RP', q:'6.1 — Hospital; homem armado pede ajuda dizendo que família foi sequestrada. Como age?' },
+      { type:'open', cat:'Situações RP', q:'6.2 — Colega dispara acidentalmente e fere um civil. Só você testemunhou. Procedimento?' },
+      { type:'open', cat:'Situações RP', q:'6.3 — Beco escuro; dois suspeitos em lados opostos e tensos. O que faz?' },
+      { type:'open', cat:'Situações RP', q:'6.4 — Carro tenta atropelar pedestre — atiraria no veículo?' },
+      { type:'open', cat:'Situações RP', q:'6.5 — Menor de idade com arma descarregada apontando para si. Reação?' },
+
+      // --- 7. Lógica Moral (abertas) ---
+      { type:'open', cat:'Lógica Moral', q:'7.1 — Criminoso entra numa escola; há civis por perto. Atirar arrisca inocentes; não agir custa vidas. O que faz?' },
+      { type:'open', cat:'Lógica Moral', q:'7.2 — Um amigo usa sua arma sem autorização e comete crime. Denuncia ou protege?' },
+      { type:'open', cat:'Lógica Moral', q:'7.3 — Civil aponta uma arma para o chão, abalado; não responde aos pedidos. Dispara ou mantém controlo?' },
+      { type:'open', cat:'Lógica Moral', q:'7.4 — Se sua vida valesse o sacrifício de um inocente para salvar dez, o que escolheria?' },
+      { type:'open', cat:'Lógica Moral', q:'7.5 — O que é mais perigoso: um homem sem leis ou uma lei sem humanidade? Justifique.' },
+
+      // --- 8. Sequência e Lógica Numérica (abertas) ---
+      { type:'open', cat:'Sequências', q:'8.A — 1, 2, 4, 8, 16, ___' },
+      { type:'open', cat:'Sequências', q:'8.B — 3, 6, 12, 24, 48, ___' },
+      { type:'open', cat:'Sequências', q:'8.C — 2, 5, 10, 17, 26, ___' },
+      { type:'open', cat:'Sequências', q:'8.D — 1, 4, 9, 16, 25, ___' },
+      { type:'open', cat:'Sequências', q:'8.E — 10, 9, 7, 4, 0, ___' },
+
+      // --- 9. Escala de Personalidade (V/F) — tratada como MC ---
+      ...[
+        '9.1 — Já imaginei reagir em um confronto armado.',
+        '9.2 — Às vezes, penso que tenho mais controlo que a maioria.',
+        '9.3 — Sinto prazer ao ter autoridade sobre outros.',
+        '9.4 — Tenho medo de cometer um erro grave.',
+        '9.5 — Gosto de desafios que testam a minha calma.',
+        '9.6 — Evito multidões e ambientes barulhentos.',
+        '9.7 — Tenho pensamentos agressivos quando pressionado.',
+        '9.8 — Sou capaz de admitir meus erros sem vergonha.',
+        '9.9 — Confio mais na lógica do que nas emoções.',
+        '9.10 — Já sonhei com situações em que precisei usar força.',
+        '9.11 — Tenho autocontrolo mesmo sob ameaça direta.',
+        '9.12 — Às vezes, sinto que o mundo está contra mim.',
+        '9.13 — Sou realista, mesmo que isso pareça frio.',
+        '9.14 — Já temi perder o controlo durante um conflito.',
+        '9.15 — Prefiro resolver conflitos com conversa, não força.'
+      ].map((qtxt,idx)=>({ type:'mc', cat:'Escala V/F', q:qtxt, opts:['V','F'], correct:[0,1,1,0,0,0,1,0,0,1,0,1,0,1,0][idx] })),
+    ];
+
+    // ID estável para cada item
+    BANK.forEach((q,i)=>q.id = `q${i+1}`);
+
+    // ===================== ESTADO =====================
+    const state = { order: BANK, answers:{}, timers:[], idx:0 };
+
+    // ===================== HELPERS =====================
+    const $ = s => document.querySelector(s);
+    function clearTimers(){ state.timers.forEach(clearInterval); state.timers=[]; }
+    function setProgress(){ const p = (state.idx/state.order.length)*100; $('#progressBar').style.width = p+'%'; }
+
+    // ===================== RENDER =====================
+    function renderQuestion(){
+      const qArea = $('#qArea'); qArea.innerHTML = '';
+      const q = state.order[state.idx];
+      $('#qIdx').textContent = state.idx + 1; $('#qTotal').textContent = state.order.length;
+
+      const box = document.createElement('div'); box.className='q';
+      const h = document.createElement('h3'); h.innerHTML = `<span class="muted">[${q.cat}]</span> ${q.q}`; box.appendChild(h);
+
+      if (q.type === 'mc'){
+        const group = document.createElement('div');
+        q.opts.forEach((t,i)=>{
+          const label=document.createElement('label'); label.className='opt';
+          const input=document.createElement('input'); input.type='radio'; input.name='opt'; input.value=i;
+          const saved = state.answers[q.id]?.choice;
+          if (typeof saved==='number' && saved===i) input.checked = true;
+          const span=document.createElement('span'); span.textContent=t;
+          label.append(input,span); group.appendChild(label);
+          input.addEventListener('change', ()=>{ state.answers[q.id] = { type:'mc', choice:i }; validateNext(); });
+        });
+        box.appendChild(group);
+      } else {
+        const ta=document.createElement('textarea'); ta.rows=5; ta.placeholder = q.placeholder || 'Resposta (aberta)'; ta.value = state.answers[q.id]?.text || '';
+        ta.addEventListener('input', ()=>{ state.answers[q.id] = { ...(state.answers[q.id]||{}), type:'open', text: ta.value }; validateNext(); });
+        box.appendChild(ta);
+        const row=document.createElement('div'); row.className='row'; row.style.marginTop='8px';
+        const lab=document.createElement('label'); lab.textContent='Pontuação (0–5) pelo profissional:'; lab.style.fontWeight='600';
+        const sel=document.createElement('select'); sel.style.minWidth='120px'; sel.setAttribute('aria-label','Pontuação 0–5');
+        ;['','0','0.5','1','1.5','2','2.5','3','3.5','4','4.5','5'].forEach(v=>{ const o=document.createElement('option'); o.value=v; o.textContent=v===''?'—':v; sel.appendChild(o); });
+        const prev = state.answers[q.id]?.manualScore; if (typeof prev==='number') sel.value = String(prev);
+        sel.addEventListener('change', ()=>{ const val = sel.value===''? undefined : parseFloat(sel.value); state.answers[q.id] = { ...(state.answers[q.id]||{}), type:'open', manualScore: val }; validateNext(); });
+        row.append(lab, sel); box.appendChild(row);
+        const tip=document.createElement('p'); tip.className='muted'; tip.textContent='Nota: pergunta aberta só permite avançar após atribuição de pontuação (0–5).'; box.appendChild(tip);
+      }
+
+      qArea.appendChild(box);
+      setProgress(); startTimer(); validateNext();
+    }
+
+    function validateNext(){
+      const q = state.order[state.idx];
+      let ok = true;
+      if (q.type==='mc'){ ok = typeof state.answers[q.id]?.choice === 'number'; }
+      else { ok = typeof state.answers[q.id]?.manualScore === 'number'; }
+      $('#btnNext').disabled = !ok;
+    }
+
+    function startTimer(){
+      clearTimers(); const secs = CONFIG.TIME_PER_Q; if (secs<=0){ $('#hudTime').textContent='—'; return; }
+      const end = Date.now() + secs*1000; const id=setInterval(()=>{
+        const left = Math.max(0, Math.ceil((end - Date.now())/1000));
+        $('#hudTime').textContent = left + 's';
+        if (left<=0){ clearInterval(id); state.timers = state.timers.filter(x=>x!==id); next(); }
+      }, 250);
+      state.timers.push(id);
+    }
+
+    function prev(){ if (state.idx<=0) return; state.idx--; renderQuestion(); updateNav(); }
+    function next(){ if (state.idx>=state.order.length-1){ finish(); return; } state.idx++; renderQuestion(); updateNav(); }
+    function updateNav(){ $('#btnPrev').disabled = state.idx===0; $('#btnNext').textContent = state.idx===state.order.length-1 ? 'Concluir' : 'Próximo'; }
+
+    // ===================== CORREÇÃO =====================
+    function computeMc(){
+      let total=0, hits=0; const detail=[];
+      for (const q of state.order){ if (q.type!=='mc') continue; total++; const ans = state.answers[q.id]; const correct = typeof q.correct==='number' ? q.correct : undefined; const ok = typeof ans?.choice==='number' && typeof correct==='number' && ans.choice===correct; if (ok) hits++; detail.push({ id:q.id, choice: ans?.choice ?? null, correct }); }
+      const pct = total? Math.round((hits/total)*100) : 0;
+      return { total, hits, pct, detail };
+    }
+
+    function computeOpen(){
+      let count=0, sum=0; const detail=[];
+      for (const q of state.order){ if (q.type!=='open') continue; count++; const sc = typeof state.answers[q.id]?.manualScore==='number' ? state.answers[q.id].manualScore : 0; sum += sc; detail.push({ id:q.id, score0to5: sc }); }
+      const avg = count? (sum/count) : 0; const pct = Math.round((avg/5)*100);
+      return { count, avg, pct, detail };
+    }
+
+    function finish(){
+      const mc = computeMc();
+      const op = computeOpen();
+      const totalItems = mc.total + op.count;
+      const finalScore = totalItems? Math.round((mc.pct*mc.total + op.pct*op.count)/totalItems) : 0;
+      const passed = finalScore >= CONFIG.PASS_THRESHOLD;
+
+      const payload = {
+        schema:'porte-psicotecnico-qna-v1',
+        cfg:{ timePerQ: CONFIG.TIME_PER_Q, passThreshold: CONFIG.PASS_THRESHOLD },
+        scores:{ mcPct: mc.pct, openAvg0to5: op.avg, openPct: op.pct, final: finalScore, passed },
+        detail:{ mc:{ hits: mc.hits, total: mc.total, list: mc.detail }, open: op.detail },
+        answers: state.answers,
+        timestamp: new Date().toISOString()
+      };
+
+      const rep = $('#report'); rep.innerHTML = '';
+      const head=document.createElement('div'); head.className='row'; head.style.justifyContent='space-between'; head.innerHTML = `<div class="badge"><span class="dot ${passed?'green':'red'}"></span> ${passed? 'APROVADO' : 'REPROVADO'}</div><div style="min-width:180px;width:40%" class="progress"><div style="width:${finalScore}%;"></div></div>`; rep.appendChild(head);
+      const mk=(l,v,cls='')=>{ const d=document.createElement('div'); d.className='row'; d.style.justifyContent='space-between'; d.style.padding='10px 12px'; d.style.border='1px solid var(--border)'; d.style.borderRadius='12px'; d.style.marginTop='8px'; d.innerHTML = `<span class="muted">${l}</span><strong class="${cls}">${v}</strong>`; return d; };
+      rep.appendChild(mk('Múltipla escolha', `${mc.pct}% (${mc.hits}/${mc.total})`));
+      rep.appendChild(mk('Abertas (média 0–5)', `${op.avg.toFixed(2)} / 5 (${op.pct}%) — ${op.count} perguntas`));
+      rep.appendChild(mk('Pontuação Final (ponderada por quantidade)', `${finalScore} / 100`, passed? 'result-pass' : 'result-fail'));
+
+      const note=document.createElement('p'); note.className='muted'; note.textContent='Cada resposta aberta foi pontuada (0–5) antes de avançar. MC com chave incorporada nas questões que a têm.'; rep.appendChild(note);
+
+      // Avaliação final do psicólogo (checklist rápida)
+      const block=document.createElement('div'); block.className='q';
+      block.innerHTML = `<h3>Avaliação Final do Psicólogo</h3>
+        <div class="row" style="gap:12px;align-items:flex-end">
+          <label>Raciocínio lógico: <select id="fx_logic"><option value="">—</option><option>Fraco</option><option>Médio</option><option>Forte</option></select></label>
+          <label>Controlo emocional: <select id="fx_emote"><option value="">—</option><option>Instável</option><option>Regular</option><option>Excelente</option></select></label>
+          <label>Empatia e moralidade: <select id="fx_moral"><option value="">—</option><option>Baixa</option><option>Moderada</option><option>Elevada</option></select></label>
+          <label>Conhecimento técnico: <select id="fx_tech"><option value="">—</option><option>Inseguro</option><option>Adequado</option><option>Avançado</option></select></label>
+          <label>Apto para porte: <select id="fx_fit"><option value="">—</option><option>Não</option><option>Com restrições</option><option>Totalmente apto</option></select></label>
+        </div>`;
+      rep.appendChild(block);
+
+      const pre=document.createElement('pre'); pre.style.background='#fff'; pre.style.border='1px solid var(--border)'; pre.style.padding='12px'; pre.style.borderRadius='12px';
+      function buildJSON(){
+        const extra={ logic:$('#fx_logic').value, emotional:$('#fx_emote').value, moral:$('#fx_moral').value, tech:$('#fx_tech').value, fitness:$('#fx_fit').value };
+        const data = { ...payload, psychologist: extra };
+        return JSON.stringify(data, null, 2);
+      }
+      pre.textContent = buildJSON(); rep.appendChild(pre);
+
+      ;['fx_logic','fx_emote','fx_moral','fx_tech','fx_fit'].forEach(id=>{
+        $('#'+id).addEventListener('change', ()=>{ pre.textContent = buildJSON(); });
+      });
+
+      $('#btnCopyJSON').onclick = async ()=>{ try { await navigator.clipboard.writeText(pre.textContent); } catch(e){ alert('Não foi possível copiar automaticamente.'); } };
+      $('#btnRestart').onclick = ()=>{ show($('#intro')); };
+
+      show($('#result'));
+    }
+
+    // ===================== FLUXO =====================
+    function show(el){ for (const sec of [$('#intro'), $('#config'), $('#exam'), $('#result')]) sec.classList.add('hidden'); el.classList.remove('hidden'); }
+
+    // 🔀 Baralhar perguntas ao iniciar
+    $('#btnStart').onclick = ()=>{
+      state.idx=0; state.answers={};
+      state.order = [...BANK];
+      for (let i = state.order.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [state.order[i], state.order[j]] = [state.order[j], state.order[i]]; }
+      show($('#exam')); renderQuestion(); updateNav();
+    };
+
+    $('#btnPrev').onclick=prev; $('#btnNext').onclick=next; $('#btnClear').onclick=()=>{ const q=state.order[state.idx]; delete state.answers[q.id]; renderQuestion(); };
+    $('#btnConfig').onclick=()=>{ $('#config').classList.toggle('hidden'); };
+    $('#btnCloseCfg').onclick=()=>{ $('#config').classList.add('hidden'); };
+    $('#btnSaveCfg').onclick=()=>{ CONFIG.TIME_PER_Q = Math.max(0, Math.min(180, parseInt($('#cfgTimer').value,10) || CONFIG.TIME_PER_Q)); CONFIG.PASS_THRESHOLD = Math.max(0, Math.min(100, parseInt($('#cfgPass').value,10) || CONFIG.PASS_THRESHOLD)); $('#config').classList.add('hidden'); };
+
+    window.addEventListener('keydown', (e)=>{ if (e.code==='Enter'){ e.preventDefault(); if (!$('#btnNext').disabled) $('#btnNext').click(); } if (e.code==='Backspace'){ e.preventDefault(); $('#btnPrev').click(); } });
+  </script>
+</body>
+</html>
