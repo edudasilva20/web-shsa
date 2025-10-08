@@ -125,20 +125,23 @@
             <div><div class="text-slate-500 text-xs">Contacto</div><div id="drContacto" class="font-medium"></div></div>
           </div>
         </div>
-        <div id="tab-documentos" class="tab-pane hidden">
-          <div class="grid gap-3 text-sm">
-            <div>
-              <div class="text-slate-500 text-xs">Curriculum Vitae (PDF)</div>
-              <div><a id="drCV" href="#" class="underline text-blue-600" target="_blank" rel="noopener">Abrir CV</a></div>
-            </div>
-            <div>
-              <div class="text-slate-500 text-xs">Carta / Cartões</div>
-              <div class="flex flex-wrap items-center gap-2">
-                <a id="drCarta" href="#" class="underline text-blue-600" target="_blank" rel="noopener">Ver Carta</a>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div id="tab-documentos" class="tab-pane hidden">
+  <div class="grid gap-3 text-sm">
+    <div>
+      <div class="text-slate-500 text-xs">Cartão de Cidadão</div>
+      <div><a id="drCC" href="#" class="underline text-blue-600" target="_blank" rel="noopener">Ver Cartão</a></div>
+    </div>
+    <div>
+      <div class="text-slate-500 text-xs">Carta de Condução</div>
+      <div><a id="drCarta" href="#" class="underline text-blue-600" target="_blank" rel="noopener">Ver Carta</a></div>
+    </div>
+    <div>
+      <div class="text-slate-500 text-xs">Curriculum Vitae</div>
+      <div><a id="drCV" href="#" class="underline text-blue-600" target="_blank" rel="noopener">Abrir CV</a></div>
+    </div>
+  </div>
+</div>
+
         
       </div>
     </aside>
@@ -146,14 +149,43 @@
 
 <script>
 const DATA = [
-  { patente: 'Diretor Regional', ident: '400', nome: 'Enzo Silva', categoria: 'Administração', estado: 'Ativo', email: 'enzo.silva@pillbox.sa', conta: 'SA400400400', contacto: '@Enzo', especialidade: 'Cardioligia', admissao: '12/03/2022', foto: 'enzo.jpg' , cv: '../documentos/enzo/cv.pdf', carta: '../documentos/enzo/carta.png'},
-  { patente: 'Diretor Hospitalar', ident: '401', nome: 'Tiago Guimarães', categoria: 'Administração', estado: 'Ausente', email: 'tiago.guimaraes@pillbox.sa', conta: 'SA401401401', contacto: '@Tiago', especialidade: 'Medicina Geral', admissao: '08/07/2022', foto: 'tiago.jpg' , cv: '../documentos/tiago/cv.pdf', carta: '../documentos/tiago/carta.jpg'},
-  { patente: 'Vice-Diretor ', ident: '403', nome: 'Rui Quintas', categoria: 'Administração', estado: 'Ativo', email: 'rui.quintas@pillbox.sa', conta: 'SA403403403', contacto: '@Rui', especialidade: 'Pré-Hospitalar', admissao: '15/01/2023', foto: 'rui.jpg' , cv: '../documentos/rui/cv.pdf', carta: '../documentos/rui/carta.jpg'},
-  { patente: 'Médico Chefe', ident: '404', nome: 'Alice Trewinnard', categoria: 'Administração', estado: 'Inativo', email: 'alice.trewinnard@pillbox.sa', conta: 'SA404404404', contacto: '@Alice', especialidade: 'Medicina Interna', admissao: '25/04/2023', foto: 'alice.jpg' , cv: '../documentos/alice/cv.pdf', carta: '../documentos/alice/carta.jpg'},
-  { patente: 'Paramédico Chefe', ident: '405', nome: 'Eduardo Guedes', categoria: 'Administração', estado: 'Ativo', email: 'eduardo.guedes@pillbox.sa', conta: 'SA405405405', contacto: '@Edu', especialidade: 'Pré-Hospitalar', admissao: '10/09/2023', foto: 'edu.jpg' , cv: '../documentos/eduardo/cv.pdf', carta: '../documentos/eduardo/carta.jpg'},
-  { patente: 'Psiquiatra', ident: '410', nome: 'Eva Santos', categoria: 'Psicólogo', estado: 'Ausente', email: 'eva.santos@pillbox.sa', conta: 'SA410410410', contacto: '@Eva', especialidade: 'Psicología', admissao: '03/02/2024', foto: 'eva.jpg' , cv: '../documentos/eva/cv.pdf', carta: '../documentos/eva/carta.jpg'},
-  { patente: 'Médico', ident: '412', nome: 'Peter Monteiro', categoria: 'Médico', estado: 'Ativo', email: 'peter.monteiro@pillbox.sa', conta: 'SA412412412', contacto: '@Peter', especialidade: 'Medicina de Trauma', admissao: '14/06/2024', foto: 'peter.png' , cv: '../documentos/peter/cv.pdf', carta: '../documentos/peter/carta.jpg'}
+  { patente: 'Diretor Regional', ident: '400', nome: 'Enzo Silva', categoria: 'Administração', estado: 'Ativo', email: 'enzo.silva@pillbox.sa', conta: 'SA400400400', contacto: '@Enzo', especialidade: 'Cardioligia', admissao: '12/03/2022', foto: 'enzo.jpg',
+    cc: '../documentos/enzo/cc.png',
+    carta: '../documentos/enzo/carta.png',
+    cv: '../documentos/enzo/cv.pdf'
+  },
+  { patente: 'Diretor Hospitalar', ident: '401', nome: 'Tiago Guimarães', categoria: 'Administração', estado: 'Ausente', email: 'tiago.guimaraes@pillbox.sa', conta: 'SA401401401', contacto: '@Tiago', especialidade: 'Medicina Geral', admissao: '08/07/2022', foto: 'tiago.jpg',
+    cc: '../documentos/tiago/cc.png',
+    carta: '../documentos/tiago/carta.png',
+    cv: '../documentos/tiago/cv.pdf'
+  },
+  { patente: 'Vice-Diretor ', ident: '403', nome: 'Rui Quintas', categoria: 'Administração', estado: 'Ativo', email: 'rui.quintas@pillbox.sa', conta: 'SA403403403', contacto: '@Rui', especialidade: 'Pré-Hospitalar', admissao: '15/01/2023', foto: 'rui.jpg',
+    cc: '../documentos/rui/cc.png',
+    carta: '../documentos/rui/carta.png',
+    cv: '../documentos/rui/cv.pdf'
+  },
+  { patente: 'Médico Chefe', ident: '404', nome: 'Alice Trewinnard', categoria: 'Administração', estado: 'Inativo', email: 'alice.trewinnard@pillbox.sa', conta: 'SA404404404', contacto: '@Alice', especialidade: 'Medicina Interna', admissao: '25/04/2023', foto: 'alice.jpg',
+    cc: '../documentos/alice/cc.png',
+    carta: '../documentos/alice/carta.png',
+    cv: '../documentos/alice/cv.pdf'
+  },
+  { patente: 'Paramédico Chefe', ident: '405', nome: 'Eduardo Guedes', categoria: 'Administração', estado: 'Ativo', email: 'eduardo.guedes@pillbox.sa', conta: 'SA405405405', contacto: '@Edu', especialidade: 'Pré-Hospitalar', admissao: '10/09/2023', foto: 'edu.jpg',
+    cc: '../documentos/eduardo/cc.png',
+    carta: '../documentos/eduardo/carta.png',
+    cv: '../documentos/eduardo/cv.pdf'
+  },
+  { patente: 'Psiquiatra', ident: '410', nome: 'Eva Santos', categoria: 'Psicólogo', estado: 'Ausente', email: 'eva.santos@pillbox.sa', conta: 'SA410410410', contacto: '@Eva', especialidade: 'Psicología', admissao: '03/02/2024', foto: 'eva.jpg',
+    cc: '../documentos/eva/cc.png',
+    carta: '../documentos/eva/carta.png',
+    cv: '../documentos/eva/cv.pdf'
+  },
+  { patente: 'Médico', ident: '412', nome: 'Peter Monteiro', categoria: 'Médico', estado: 'Ativo', email: 'peter.monteiro@pillbox.sa', conta: 'SA412412412', contacto: '@Peter', especialidade: 'Medicina de Trauma', admissao: '14/06/2024', foto: 'peter.png',
+    cc: '../documentos/peter/cc.png',
+    carta: '../documentos/peter/carta.png',
+    cv: '../documentos/peter/cv.pdf'
+  }
 ];
+
 
 
 
@@ -248,16 +280,25 @@ function openDrawer(p){
   document.getElementById('drContacto').textContent = p.contacto;
 
   // Documentos
-  const cvEl = document.getElementById('drCV');
-  const cartaEl = document.getElementById('drCarta');
-  if (cvEl) {
-    if (p.cv) { cvEl.href = p.cv; cvEl.parentElement.classList.remove('hidden'); }
-    else { cvEl.parentElement.classList.add('hidden'); }
-  }
-  if (cartaEl) {
-    if (p.carta) { cartaEl.href = p.carta; cartaEl.parentElement.classList.remove('hidden'); }
-    else { cartaEl.parentElement.classList.add('hidden'); }
-  }
+ const cvEl = document.getElementById('drCV');
+const cartaEl = document.getElementById('drCarta');
+const ccEl = document.getElementById('drCC');
+
+if (ccEl) {
+  if (p.cc) { ccEl.href = p.cc; ccEl.parentElement.classList.remove('hidden'); }
+  else { ccEl.parentElement.classList.add('hidden'); }
+}
+
+if (cartaEl) {
+  if (p.carta) { cartaEl.href = p.carta; cartaEl.parentElement.classList.remove('hidden'); }
+  else { cartaEl.parentElement.classList.add('hidden'); }
+}
+
+if (cvEl) {
+  if (p.cv) { cvEl.href = p.cv; cvEl.parentElement.classList.remove('hidden'); }
+  else { cvEl.parentElement.classList.add('hidden'); }
+}
+
 
   // Estado dinâmico
   const estadoEl = document.getElementById('drEstado');
