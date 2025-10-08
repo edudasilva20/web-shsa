@@ -1,8 +1,8 @@
 name: Deploy Pages (web/)
 on:
   push:
-    branches: [ main ]   # corre sempre que fizeres push para a branch main
-  workflow_dispatch:     # permite correr manualmente (botão "Run workflow")
+    branches: [ main ]   
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -18,12 +18,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Preparar site (copiar pasta web/)
+      - name: Preparar site a partir de web/
         run: |
           mkdir -p ./_site
           cp -r web/* ./_site/
-      - name: Fazer upload do artefacto do site
-        uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v3
         with:
           path: "./_site"
 
