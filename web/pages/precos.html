@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Preçário — Hospital Pillbox</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    html { font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; }
+    body { background:#fff; color:#0f172a; }
+    .container { max-width: 1050px; }
+    .card { background:#fff; border:1px solid #e2e8f0; border-radius:16px; }
+    table thead { background:#f1f5f9; color:#475569; }
+    table tr { border-top: 1px solid #e2e8f0; }
+    .grid-2 { display:grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 1rem; }
+    @media (max-width: 900px){ .grid-2 { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
+    <div class="flex items-center justify-between mb-4">
+      <h1 class="text-xl font-semibold">Preçário</h1>
+      <div class="flex gap-2">
+        
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <!-- Consultas -->
+      <div class="card overflow-x-auto">
+        <table id="tbl_consultas" class="min-w-full text-sm">
+          <thead><tr><th class="text-left px-4 py-2">Consultas — Tipologia</th><th class="text-left px-4 py-2">Preço</th></tr></thead>
+          <tbody>
+            <tr><td class="px-4 py-2">Consulta Geral/Familiar</td><td class="px-4 py-2">350 €</td></tr>
+            <tr><td class="px-4 py-2">Psicologia</td><td class="px-4 py-2">250 €</td></tr>
+            <tr><td class="px-4 py-2">Psiquiatria</td><td class="px-4 py-2">250 €</td></tr>
+            <tr><td class="px-4 py-2">Especialidade</td><td class="px-4 py-2">350 €</td></tr>
+            <tr><td class="px-4 py-2">Urgência Hospitalar</td><td class="px-4 py-2">200 €</td></tr>
+            <tr><td class="px-4 py-2">Transporte Ambulância</td><td class="px-4 py-2">200 €</td></tr>
+            <tr><td class="px-4 py-2">Psicotécnicos</td><td class="px-4 py-2">550 €</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Exames -->
+      <div class="card overflow-x-auto">
+        <table id="tbl_exames" class="min-w-full text-sm">
+          <thead><tr><th class="text-left px-4 py-2">Exames — Tipologia</th><th class="text-left px-4 py-2">Preço</th></tr></thead>
+          <tbody>
+            <tr><td class="px-4 py-2">Eletrocardiograma</td><td class="px-4 py-2">150 €</td></tr>
+            <tr><td class="px-4 py-2">Prova de esforço</td><td class="px-4 py-2">200 €</td></tr>
+            <tr><td class="px-4 py-2">Raio-X</td><td class="px-4 py-2">100 €</td></tr>
+            <tr><td class="px-4 py-2">TAC</td><td class="px-4 py-2">150 €</td></tr>
+            <tr><td class="px-4 py-2">Ressonância magnética</td><td class="px-4 py-2">200 €</td></tr>
+            <tr><td class="px-4 py-2">Ecografia</td><td class="px-4 py-2">100 €</td></tr>
+            <tr><td class="px-4 py-2">Autópsia</td><td class="px-4 py-2">400 €</td></tr>
+            <tr><td class="px-4 py-2">Outro</td><td class="px-4 py-2">125 €</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Cirurgias -->
+      <div class="card overflow-x-auto">
+        <table id="tbl_cirurgias" class="min-w-full text-sm">
+          <thead><tr><th class="text-left px-4 py-2">Cirurgias — Tipologia</th><th class="text-left px-4 py-2">Preço</th></tr></thead>
+          <tbody>
+            <tr><td class="px-4 py-2">Cardíaca</td><td class="px-4 py-2">270 €</td></tr>
+            <tr><td class="px-4 py-2">Dermatológica</td><td class="px-4 py-2">260 €</td></tr>
+            <tr><td class="px-4 py-2">Neurológica</td><td class="px-4 py-2">300 €</td></tr>
+            <tr><td class="px-4 py-2">Plástica</td><td class="px-4 py-2">1620 €</td></tr>
+            <tr><td class="px-4 py-2">Ortopédica</td><td class="px-4 py-2">260 €</td></tr>
+            <tr><td class="px-4 py-2">Microcirurgia</td><td class="px-4 py-2">260 €</td></tr>
+            <tr><td class="px-4 py-2">Outros</td><td class="px-4 py-2">240 €</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Laboratório -->
+      <div class="card overflow-x-auto">
+        <table id="tbl_laboratorio" class="min-w-full text-sm">
+          <thead><tr><th class="text-left px-4 py-2">Laboratório — Tipologia</th><th class="text-left px-4 py-2">Preço</th></tr></thead>
+          <tbody>
+            <tr><td class="px-4 py-2">Bioquímica</td><td class="px-4 py-2">120 €</td></tr>
+            <tr><td class="px-4 py-2">Endocrinologia</td><td class="px-4 py-2">120 €</td></tr>
+            <tr><td class="px-4 py-2">Hematologia</td><td class="px-4 py-2">120 €</td></tr>
+            <tr><td class="px-4 py-2">Imunologia e serologia</td><td class="px-4 py-2">120 €</td></tr>
+            <tr><td class="px-4 py-2">Microbiologia</td><td class="px-4 py-2">120 €</td></tr>
+            <tr><td class="px-4 py-2">Toxicologia</td><td class="px-4 py-2">120 €</td></tr>
+            <tr><td class="px-4 py-2">Molecular</td><td class="px-4 py-2">120 €</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Eventos -->
+      <div class="card overflow-x-auto">
+        <table id="tbl_eventos" class="min-w-full text-sm">
+          <thead><tr><th class="text-left px-4 py-2">Eventos — Tipologia</th><th class="text-left px-4 py-2">Preço</th></tr></thead>
+        <tbody>
+          <tr><td class="px-4 py-2">Ambulância</td><td class="px-4 py-2">550 €</td></tr>
+          <tr><td class="px-4 py-2">Operacionais</td><td class="px-4 py-2">400 €/h</td></tr>
+        </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    document.getElementById('btnPrint')?.addEventListener('click',()=>window.print());
+    document.getElementById('btnCSV')?.addEventListener('click', ()=>{
+      const tables=[...document.querySelectorAll('table')];
+      const csv=[];
+      tables.forEach((tbl,i)=>{
+        const rows=[...tbl.querySelectorAll('tr')].map(tr=>[...tr.children].map(td=>`"${td.innerText.replace(/"/g,'\\"')}"`).join(',')).join('\n');
+        csv.push(`Tabela_${i+1}\n`+rows);
+      });
+      const blob=new Blob([csv.join('\n\n')],{type:'text/csv;charset=utf-8;'});
+      const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='precos.csv'; a.click(); URL.revokeObjectURL(url);
+    });
+  </script>
+</body>
+</html>
