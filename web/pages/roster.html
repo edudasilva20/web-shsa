@@ -200,6 +200,15 @@ const drawerClose = document.getElementById('drawerClose');
 
 const tabBtns = document.querySelectorAll('.tab-btn');
 const tabPanes = document.querySelectorAll('.tab-pane');
+// Determinar utilizador atual e se é Administração
+const logged = JSON.parse(sessionStorage.getItem('usuarioLogado') || 'null');
+const currentUser = logged ? DATA.find(p => p.ident === logged.ident) : null;
+const isAdmin = !!(currentUser && currentUser.categoria === 'Administração');
+
+// Helper refs para a Tab "Documentos"
+const documentosBtn = document.querySelector('[data-tab="documentos"]');
+const documentosPane = document.getElementById('tab-documentos');
+
 
 function renderRoster(data) {
   rosterGrid.innerHTML = '';
@@ -297,6 +306,47 @@ if (cartaEl) {
 if (cvEl) {
   if (p.cv) { cvEl.href = p.cv; cvEl.parentElement.classList.remove('hidden'); }
   else { cvEl.parentElement.classList.add('hidden'); }
+}
+
+// Apenas Administração pode ver Documentos dos OUTROS.
+// Quem não é Administração só vê os PRÓPRIOS documentos.
+const canSeeDocs = isAdmin || (currentUser && currentUser.ident === p.ident);
+
+if (canSeeDocs) {
+  // Mostra a tab Documentos
+  documentosBtn?.classList.remove('hidden');
+  documentosPane?.classList.remove('hidden');
+
+  // Atualiza/valida links (se existirem)
+  const safeSet = (el, href) => {
+    if (!el) return;
+    if (href) {
+      el.href = href;
+      el.removeAttribute('aria-disabled');
+      el.classList.remove('pointer-events-none', 'opacity-50');
+    } else {
+      // Se não houver documento, desativa o link
+      el.href = '#';
+      el.setAttribute('aria-disabled', 'true');
+      el.classList.add('pointer-events-none', 'opacity-50');
+    }
+  };
+
+  safeSet(ccEl, p.cc);
+  safeSet(cartaEl, p.carta);
+  safeSet(cvEl, p.cv);
+
+} else {
+  // Esconde a tab Documentos para este perfil
+  documentosBtn?.classList.add('hidden');
+  documentosPane?.classList.add('hidden');
+
+  // Garante que não fica “ativa” por engano
+  if (documentosBtn?.classList.contains('active')) {
+    documentosBtn.classList.remove('active');
+    document.querySelector('[data-tab="perfil"]')?.classList.add('active');
+    document.getElementById('tab-perfil')?.classList.remove('hidden');
+  }
 }
 
 
