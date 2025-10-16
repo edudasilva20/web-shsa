@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Serviços Hospitalares de San Andreas — Hospital Pillbox</title>
+  <meta name="description" content="Intranet institucional do Hospital Pillbox — recursos, tabelas e procedimentos (FiveM Hard RP)." />
+
+  <!-- Tailwind via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Lucide Icons (opcional) -->
+  <script defer src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+  <!-- Fonte -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    html { font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; }
+    body { background: #ffffff; color: #0f172a; }
+    .container { max-width: 1200px; }
+    .card { background: #fff; border: 1px solid #e2e8f0; border-radius: 16px; }
+
+    /* Paleta geral (azul clarinho/branco) */
+    :root{
+      --blue-50:#f0f9ff; --blue-100:#e0f2fe; --blue-200:#bae6fd;
+      --gray-50:#f8fafc; --gray-100:#f1f5f9; --gray-200:#e2e8f0;
+      --green-50:#e0fce0; --yellow-50:#fef9c3; --pink-50:#fdf2f8;
+      --lilac-50:#f3e8ff; --orange-50:#ffedd5; --aqua-50:#d1fae5; --steel-50:#edf2f7;
+    }
+
+    /* Tabs (links) */
+    .tabs a {
+      border: 1px solid var(--gray-200);
+      background: var(--gray-50);
+      padding: .375rem .75rem;
+      border-radius: .5rem;
+      font-size: .875rem;
+      color:#0f172a;
+      text-decoration:none;
+    }
+    .tabs a:hover { background: var(--gray-100); }
+
+    /* Conteúdo das abas — CSS :target (sem JS) */
+    .pill-content{
+  display:none;
+  padding: 16px;
+  border-radius: 14px;
+  border:1px solid var(--gray-200);
+}
+.pill-content:target{ display:block; }
+
+
+    /* Aba padrão visível ao entrar (Roster) */
+    #pill-roster{ background: var(--blue-50); }
+
+    /* Cores por categoria (fundo suave) */
+    #pill-precos{ background: var(--green-50); }
+    #pill-fardamento{ background: var(--gray-50); }
+    #pill-veiculos{ background: var(--steel-50); }
+    #pill-documentos{ background: var(--yellow-50); }
+    #pill-farmacos{ background: var(--pink-50); }
+    #pill-informacoes{ background: var(--lilac-50); }
+    #pill-codigos{ background: var(--orange-50); }
+    #pill-guia{ background: var(--aqua-50); }
+    #pill-exames{ background: var(--gray-50); }
+
+
+    /* Tabelas / Links */
+    table thead { background: var(--gray-100); color: #475569; }
+    table tr { border-top: 1px solid var(--gray-200); }
+    a.link { color: #0369a1; text-decoration: underline; text-underline-offset: 2px; }
+
+    .embed {
+    width: 100%;
+    height: 800px;           /* ajusta à tua necessidade */
+    border: 1px solid #e2e8f0;
+    background: #fff;
+    border-radius: 12px;
+  }
+
+  </style>
+</head>
+<body>
+  <!-- Header -->
+
+
+  <header class="border-b border-slate-200">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+
+      <div class="flex items-center gap-3">
+  <img src="img/logo.png" alt="Logo Hospital" class="h-24 w-auto rounded-lg">
+  <div>
+    <div class="font-semibold leading-tight tracking-tight">
+      Serviços Hospitalares de San Andreas — Hospital Pillbox
+    </div>
+  </div>
+</div>
+
+      <nav class="hidden md:flex items-center gap-2">
+      </nav>
+          <span id="nomeUsuario" class="hidden md:inline text-sm text-slate-600 mr-3"></span>
+
+      <button id="btnMenu" class="md:hidden p-2 rounded-lg border border-slate-300" aria-label="Menu">
+        <i data-lucide="menu"></i>
+      </button>
+    </div>
+    <div id="menuMobile" class="md:hidden hidden border-t border-slate-200">
+      <div class="container mx-auto px-4 py-2 grid gap-1">
+        <a class="px-3 py-2 rounded-lg hover:bg-slate-100" href="#servicos">Serviços</a>
+        <a class="px-3 py-2 rounded-lg hover:bg-slate-100" href="#recursos">Recursos</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+
+    <!-- Centro de Recursos -->
+    <section id="recursos" class="container mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <div class="flex items-center justify-between gap-3">
+        <div>
+          <h2 class="text-2xl md:text-3xl font-semibold tracking-tight">Centro de Recursos</h2>
+          <p class="mt-1 text-slate-600">Informação operacional para o Hospital.</p>
+        </div>
+        <div class="flex flex-wrap gap-2 text-sm">
+         
+          
+        </div>
+      </div>
+
+      <!-- Abas (CSS :target) -->
+      <div class="mt-6 flex flex-wrap gap-2 text-sm tabs" aria-label="Abas do Centro de Recursos">
+        <a href="#pill-roster">Roster</a>
+        <a href="#pill-precos">Preçário</a>
+        <a href="#pill-fardamento">Fardamento</a>
+        <a href="#pill-veiculos">Veículos</a>
+        <a href="#pill-documentos">Documentos</a>
+        <a href="#pill-farmacos">Fármacos</a>
+        <a href="#pill-informacoes">Informações</a>
+        <a href="#pill-codigos">Códigos</a>
+        <a href="#pill-guia">Guia</a>
+        <a href="#pill-exames">Exames</a>
+
+      </div>
+
+      <div class="mt-6 space-y-6">
+
+        <!-- ROSTER -->
+<div id="pill-roster" class="pill-content">
+  <div class="flex items-center justify-between mb-3">
+    <h3 class="font-medium">Roster</h3>
+    <a href="pages/roster.html" class="text-sm underline" target="_blank" rel="noopener">Abrir em página inteira</a>
+  </div>
+  <iframe class="embed" src="pages/roster.html" title="Roster" loading="lazy"></iframe>
+</div>
+
+
+        
+        <!-- PREÇÁRIO -->
+<div id="pill-precos" class="pill-content">
+  <div class="flex items-center justify-between mb-3">
+    <h3 class="font-medium">Preçário</h3>
+    <a href="pages/precos.html" class="text-sm underline" target="_blank" rel="noopener">Abrir em página inteira</a>
+  </div>
+  <iframe class="embed" src="pages/precos.html" title="Preçário"></iframe>
+</div>
+
+
+        <!-- FARDAMENTO -->
+        <div id="pill-fardamento" class="pill-content">
+  <div class="flex items-center justify-between mb-3">
+    <h3 class="font-medium">Fardamento</h3>
+    <a href="pages/fardamento.html" class="text-sm underline" target="_blank" rel="noopener">Abrir em página inteira</a>
+  </div>
+  <iframe class="embed" src="pages/fardamento.html" title="Fardamento"></iframe>
+</div>
+
+        <!-- VEÍCULOS -->
+        <div id="pill-veiculos" class="pill-content">
+  <div class="flex items-center justify-between mb-3">
+    <h3 class="font-medium">Veículos</h3>
+    <a href="pages/veiculos.html" class="text-sm underline" target="_blank" rel="noopener">Abrir em página inteira</a>
+  </div>
+  <iframe class="embed" src="pages/veiculos.html" title="Veículos"></iframe>
+</div>
+
+        <!-- DOCUMENTOS -->
+<div id="pill-documentos" class="pill-content">
+  <h3 class="font-medium mb-3">Documentos</h3>
+  <ul class="list-disc ms-5 text-sm space-y-2">
+    <li>
+      <a class="link" href="docs/sutura.html">📄 Manual de Sutura</a>
+    </li>
+    <li>
+      <a class="link" href="docs/sbv.html">📋 Suporte Básico de Vida</a>
+    </li>
+    <li>
+      <a class="link" href="docs/sav.html">🏥 Suporte Avançado de Vida</a>
+    </li>
+    <li>
+      <a class="link" href="docs/regulamento-geral.html">📝 Regulamento Geral</a>
+    </li>
+    <li>
+      <a class="link" href="docs/manual-medico.pdf">📝 Manual Médico</a>
+    </li>
+    <li>
+      <a class="link" href="docs/bloco.html">📝 Guia do Bloco Operatório</a>
+    </li>
+   <li>
+      <a class="link" href="docs/fto.html">📝 Programa FTO</a>
+    </li>
+    <li>
+      <a class="link" href="docs/teivt.pdf">📝 MANUAL TEIVT</a>
+    </li>
+    <li>
+      <a class="link" href="docs/tastat.pdf">📝 MANUAL TAS E TAT</a>
+    </li>
+  </ul>
+</div>
+
+
+
+        <!-- FÁRMACOS -->
+        <div id="pill-farmacos" class="pill-content">
+  <div class="flex items-center justify-between mb-3">
+    <h3 class="font-medium">Fármacos</h3>
+    <a href="pages/farmacos.html" class="text-sm underline" target="_blank" rel="noopener">Abrir em página inteira</a>
+  </div>
+  <iframe class="embed" src="pages/farmacos.html" title="Fármacos"></iframe>
+</div>
+
+        <!-- INFORMAÇÕES -->
+        <div id="pill-informacoes" class="pill-content">
+  <div class="flex items-center justify-between mb-3">
+    <h3 class="font-medium">Informações</h3>
+    <a href="pages/informacoes.html" class="text-sm underline" target="_blank" rel="noopener">Abrir em página inteira</a>
+  </div>
+  <iframe class="embed" src="pages/informacoes.html" title="Informações"></iframe>
+</div>
+
+        <!-- CÓDIGOS -->
+        <div id="pill-codigos" class="pill-content">
+  <div class="flex items-center justify-between mb-3">
+    <h3 class="font-medium">Códigos</h3>
+    <a href="pages/codigos.html" class="text-sm underline" target="_blank" rel="noopener">Abrir em página inteira</a>
+  </div>
+  <iframe class="embed" src="pages/codigos.html" title="Códigos"></iframe>
+</div>
+
+        <!-- GUIA -->
+        <div id="pill-guia" class="pill-content">
+  <div class="flex items-center justify-between mb-3">
+    <h3 class="font-medium">Guia</h3>
+    <a href="pages/guia.html" class="text-sm underline" target="_blank" rel="noopener">Abrir em página inteira</a>
+  </div>
+  <iframe class="embed" src="pages/guia.html" title="Guia"></iframe>
+</div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-slate-200 py-8">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-sm text-slate-500 flex flex-col md:flex-row gap-4 md:items-center md:justify-between">
+      <div class="flex items-center gap-2"><i data-lucide="shield-med"></i><span>Serviços Hospitalares de San Andreas — Hospital Pillbox · <span id="year"></span></span></div>
+      <div class="flex items-center gap-4">
+      </div>
+    </div>
+
+    <!-- EXAMES -->
+<div id="pill-exames" class="pill-content">
+  <div class="flex items-center justify-between mb-3">
+    <h3 class="font-medium">Exames</h3>
+  </div>
+
+  <div class="space-y-6">
+    <!-- Exame 1 -->
+    <div>
+      <h4 class="font-medium mb-2">Exame Psicotécnico Licença de Caça</h4>
+      <a href="pages/psico-caça.html" class="text-sm underline" target="_blank" rel="noopener">Abrir em página inteira</a>
+      <iframe class="embed mt-2" src="pages/psico-caça.html" title="Exame Psicotécnico - Licencça de Caça " loading="lazy"></iframe>
+    </div>
+
+    <!-- Exame 2 -->
+    <div>
+      <h4 class="font-medium mb-2">Exame Psicotécnico Uso e Porte de Arma</h4>
+      <a href="pages/psico-arma.html" class="text-sm underline" target="_blank" rel="noopener">Abrir em página inteira</a>
+      <iframe class="embed mt-2" src="pages/psico-arma.html" title="Exame Psicotécnico - Uso e Porte de Arma" loading="lazy"></iframe>
+    </div>
+  </div>
+</div>
+
+
+  </footer>
+
+  
+  <script>
+  // Icons (falha segura)
+  try { if (window.lucide) lucide.createIcons(); } catch(e) {}
+
+  // Ano no rodapé
+  (function(){ var y=document.getElementById('year'); if(y) y.textContent=new Date().getFullYear(); })();
+
+  // Menu mobile
+  (function(){ var b=document.getElementById('btnMenu'), m=document.getElementById('menuMobile'); if(b&&m){ b.addEventListener('click',()=>m.classList.toggle('hidden')); }})();
+
+  (function(){
+    // Se entrares na página sem #hash, abre a aba Roster
+    if (!location.hash) {
+      location.hash = '#pill-roster';
+    }
+  })();
+
+  // Pesquisa (Roster, Fármacos, Códigos)
+  function attachFilter(inputId, rowsSelector){
+    var input = document.getElementById(inputId);
+    if(!input) return;
+    input.addEventListener('input', function(){
+      var q = input.value.toLowerCase();
+      document.querySelectorAll(rowsSelector).forEach(function(tr){
+        tr.style.display = tr.innerText.toLowerCase().includes(q) ? '' : 'none';
+      });
+    });
+  }
+  attachFilter('searchRoster', '#pill-roster tbody tr');
+  attachFilter('searchFarmacos', '#pill-farmacos tbody tr');
+  attachFilter('searchCodigos', '#pill-codigos tbody tr');
+
+  // Export CSV (todas as tabelas dentro de #recursos)
+  document.getElementById('btnExportarCSV')?.addEventListener('click', function(){
+    var tables = document.querySelectorAll('section#recursos table');
+    var csv = [];
+    tables.forEach(function(tbl, idx){
+      var rows = Array.from(tbl.querySelectorAll('tr')).map(function(tr){
+        return Array.from(tr.children).map(function(td){
+          return '"' + td.innerText.replace(/"/g,'\\"') + '"';
+        }).join(',');
+      });
+      csv.push('Tabela_' + (idx+1));
+      csv.push(rows.join('\n'));
+    });
+    var blob = new Blob([csv.join('\n\n')], {type:'text/csv;charset=utf-8;'});
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a'); a.href = url; a.download = 'pillbox-recursos.csv'; a.click(); URL.revokeObjectURL(url);
+  });
+
+  // Imprimir/PDF
+  document.getElementById('btnImprimir')?.addEventListener('click', function(){ window.print(); });
+
+  // ---- Autenticação / Nome do utilizador ----
+  document.addEventListener('DOMContentLoaded', function(){
+    console.log('[Auth] DOM pronto — iniciar verificação de sessão');
+
+    let usuario = null;
+    try {
+      const raw = sessionStorage.getItem('usuarioLogado');
+      console.log('[Auth] sessionStorage.getItem:', raw);
+      if (raw) usuario = JSON.parse(raw);
+    } catch (e) {
+      console.warn('[Auth] Sessão inválida — limpando', e);
+      sessionStorage.removeItem('usuarioLogado');
+    }
+
+    if (!usuario) {
+      console.warn('[Auth] Sem sessão — redirecionando para index.html');
+      window.location.href = 'index.html';
+      return;
+    }
+
+    const span = document.getElementById('nomeUsuario');
+    const texto = `Bem-vindo, ${usuario.nome}${usuario.patente ? ' · ' + usuario.patente : ''}`;
+    if (span) {
+      span.textContent = texto;
+      span.classList.remove('hidden');
+    } else {
+      // fallback: cria um badge no header
+      const headerContainer = document.querySelector('header .container');
+      if (headerContainer) {
+        const badge = document.createElement('div');
+        badge.className = 'flex items-center gap-2 text-sm bg-blue-50 border border-blue-200 text-blue-800 px-3 py-1 rounded-lg';
+        badge.textContent = texto;
+        headerContainer.appendChild(badge);
+      }
+    }
+
+    console.log('[Auth] OK —', texto);
+    try { if (window.lucide) lucide.createIcons(); } catch(e) {}
+  });
+</script>
+
+</body>
+</html>

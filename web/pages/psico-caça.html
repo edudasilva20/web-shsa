@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Prova Psicotécnica IC — Licença de Caça (Ajustada)</title>
+  <style>
+    :root {
+      --bg: #f4f6f9; --bg-accent: #e9eef5; --card: #ffffff; --muted: #51607a; --text: #0b1220; --accent: #22c55e; --danger: #ef4444; --warn: #f59e0b; --primary: #2563eb; --ink: #0b1220; --radius: 14px; --border: rgba(2, 6, 23, .08); --soft: rgba(2, 6, 23, .04)
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,"Noto Sans",sans-serif;background:radial-gradient(1100px 520px at 100% -10%,var(--bg-accent) 0%,var(--bg) 60%);color:var(--text);min-height:100vh}
+    .wrap{max-width:980px;margin:0 auto;padding:24px 16px 56px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
+    header h1{font-size:clamp(22px,5vw,32px);margin:0;letter-spacing:.3px}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px;box-shadow:0 8px 24px rgba(2,6,23,.06)}
+    .pill{padding:6px 10px;border-radius:999px;background:var(--soft);font-size:12px;color:var(--muted)}
+    button{background:var(--primary);color:#fff;border:none;padding:12px 16px;border-radius:12px;font-weight:700;cursor:pointer;transition:transform .06s ease,opacity .2s,box-shadow .2s;box-shadow:0 6px 16px rgba(37,99,235,.25)}
+    button:hover{transform:translateY(-1px)}
+    button:disabled{opacity:.45;cursor:not-allowed;box-shadow:none}
+    .btn-secondary{background:#e2e8f0;color:#0b1220;border:1px solid var(--border)}
+    .muted{color:var(--muted);font-size:14px}
+    .hidden{display:none!important}
+    .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+    .progress{height:10px;background:#dbeafe;border-radius:999px;overflow:hidden;border:1px solid var(--border)}
+    .progress>div{height:100%;width:0;background:linear-gradient(90deg,var(--primary),#34d399);transition:width .35s ease}
+    .q{padding:14px;border:1px solid var(--border);border-radius:12px;margin:10px 0;background:#fbfdff}
+    .q h3{margin:.2rem 0 .5rem;font-size:16px}
+    .opt{display:flex;gap:10px;align-items:flex-start;margin:6px 0;padding:8px;border-radius:10px;cursor:pointer;border:1px solid transparent}
+    .opt:hover{background:#f1f5f9}
+    .opt input{margin-top:3px}
+    textarea,input[type="text"]{width:100%;padding:10px;border-radius:10px;border:1px solid var(--border);background:#fff;color:var(--ink)}
+    input[type="number"], select{padding:8px 10px;border-radius:10px;border:1px solid var(--border);background:#fff;color:var(--ink)}
+    .badge{display:inline-flex;align-items:center;gap:8px;background:var(--soft);padding:8px 12px;border-radius:10px;font-size:13px;color:#334155}
+    .badge .dot{width:8px;height:8px;border-radius:50%}
+    .dot.green{background:var(--accent)} .dot.red{background:var(--danger)}
+    .footer{opacity:.8;font-size:12px;margin-top:14px}
+    .result-pass{color:var(--accent)} .result-fail{color:var(--danger)}
+    .table{width:100%;border-collapse:collapse}
+    .table th,.table td{padding:8px 10px;border-bottom:1px solid var(--border);text-align:left}
+    .table th{color:var(--muted);font-weight:600}
+    .inline-note{font-size:12px;color:#475569;margin-left:6px}
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <h1>Psicotécnico Licença de Caça</h1>
+    </header>
+
+    <div class="card" id="intro">
+      <p class="muted">Este exame avalia conhecimentos e comportamento como caçador. Cada prova tem <strong>múltipla escolha</strong> e <strong>respostas abertas</strong>. As abertas são sempre <em>minoria</em> e são <strong>pontuadas de 0 a 5 pelo profissional</strong> antes de avançar para a próxima pergunta.</p>
+      <div class="row">
+        <button id="btnStart">Iniciar Avaliação</button>
+        <button class="btn-secondary" id="btnConfig">Configurações</button>
+      </div>
+    </div>
+
+    <div class="card hidden" id="config">
+      <p><strong>Configurações rápidas</strong></p>
+      <div class="row" style="justify-content:space-between;align-items:flex-end">
+        <div>
+          <div class="muted" style="margin-bottom:6px">Formato da prova (MC - Abertas)</div>
+          <label class="row"><input type="radio" name="fmt" id="fmt_15_5" checked> 15 - 5 <span class="inline-note">(20 perguntas)</span></label>
+          <label class="row"><input type="radio" name="fmt" id="fmt_20_10"> 20 - 10 <span class="inline-note">(30 perguntas)</span></label>
+        </div>
+        <label>Tempo por pergunta (s, 0=sem)
+          <input id="cfgTimer" type="number" min="0" max="180" value="40" style="width:140px;">
+        </label>
+      </div>
+      <div class="row" style="margin-top:10px">
+        <button id="btnSaveCfg">Guardar</button>
+        <button class="btn-secondary" id="btnCloseCfg">Fechar</button>
+      </div>
+    </div>
+
+    <div class="card hidden" id="exam">
+      <div class="row" style="justify-content:space-between;align-items:center;margin-bottom:10px">
+        <div class="badge"><span class="dot green"></span> <span id="stageName">Questionário IC</span></div>
+        <div style="min-width:200px;width:40%" class="progress" aria-label="Progresso">
+          <div id="progressBar"></div>
+        </div>
+        <div class="row"><span class="pill">Pergunta <span id="qIdx">1</span>/<span id="qTotal">—</span></span><span class="pill">Tempo: <span id="hudTime">—</span></span></div>
+      </div>
+
+      <div id="qArea"></div>
+
+      <div class="row" style="justify-content:space-between;margin-top:10px">
+        <button class="btn-secondary" id="btnPrev" disabled>Anterior</button>
+        <div class="row">
+          <button class="btn-secondary" id="btnClear">Limpar</button>
+          <button id="btnNext" disabled>Próximo</button>
+        </div>
+      </div>
+      <p class="footer">IC: o fiscal observa o teu comportamento e pode fazer perguntas adicionais fora do formulário.</p>
+    </div>
+
+    <div class="card hidden" id="result">
+      <h2>Relatório Final</h2>
+      <p class="muted">Múltipla escolha corrigida automaticamente; abertas pontuadas manualmente (0–5) pelo avaliador, no momento de cada pergunta.</p>
+      <div id="report"></div>
+      <div class="row" style="margin-top:10px">
+        <button class="btn-secondary" id="btnCopyJSON">Copiar JSON</button>
+        <button id="btnRestart">Reiniciar</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ===================== CONFIG =====================
+    const CONFIG = {
+      TIME_PER_Q: 40,        // segundos por pergunta (0 = sem limite)
+      PASS_THRESHOLD: 75,    // nota mínima (0–100)
+      FORMAT: { mc: 15, open: 5 } // por omissão 15-5; alternativo: {mc:20, open:10}
+    };
+
+    // ====== Banco de Perguntas ======
+    // (Conteúdo igual ao original encurtado) — manter integral do ficheiro original
+    const BANK = [
+      // --- Segurança ---
+      { type: 'mc', cat: 'Segurança', q: 'Qual é a regra N.º 1 de segurança no manuseio de armas?', opts: ['Tratar todas as armas como se estivessem carregadas', 'Apontar para o alvo desejado', 'Manter o dedo no gatilho', 'Confiar na segurança mecânica'], correct: 0, diff: 1 },
+      { type: 'mc', cat: 'Segurança', q: 'Quando deve colocar o dedo no gatilho?', opts: ['Assim que levantar a arma', 'Apenas quando tiver o alvo identificado e a decisão de disparar', 'Para testar a sensibilidade', 'Sempre que a segurança estiver acionada'], correct: 1, diff: 1 },
+      { type: 'mc', cat: 'Segurança', q: 'Direção segura do cano significa:', opts: ['Apontar para o céu', 'Apontar para o chão à frente dos pés', 'Apontar para uma direção onde um disparo acidental não cause danos', 'Apontar para o alvo mesmo sem intenção de disparar'], correct: 2, diff: 1 },
+      { type: 'mc', cat: 'Segurança', q: 'Ao passar uma cerca com a arma:', opts: ['Saltas com a arma ao ombro', 'Entregas a arma descarregada ao parceiro ou descarregas e passas primeiro', 'Manténs a arma carregada para rapidez', 'Não há procedimentos específicos'], correct: 1, diff: 2 },
+      { type: 'mc', cat: 'Segurança', q: 'Qual o EPI mais crítico ao disparar?', opts: ['Capacete', 'Colete refletor', 'Proteção auditiva e ocular', 'Luvas'], correct: 2, diff: 1 },
+      { type: 'mc', cat: 'Segurança', q: 'Ângulo seguro (zona de tiro) em batidas geralmente é:', opts: ['360°', 'Apenas à frente', 'Entre 0° e 30° à frente conforme instruções', 'Qualquer direção se conheceres a zona'], correct: 2, diff: 2 },
+      { type: 'mc', cat: 'Segurança', q: 'Ao tropeçar com a arma na mão, deves:', opts: ['Apertar o gatilho para travar', 'Largar a arma mantendo o cano para direção segura', 'Apontar para o próprio corpo', 'Nada, confia na segurança'], correct: 1, diff: 2 },
+
+      // --- Legislação (PT genérica/roleplay) ---
+      { type: 'mc', cat: 'Legislação', q: 'Para caçar legalmente é obrigatório:', opts: ['Licença de caça válida e seguro', 'Apenas licença de arma', 'Apenas associação a um clube', 'Nada se for em propriedade privada'], correct: 0, diff: 1 },
+      { type: 'mc', cat: 'Legislação', q: 'O calendário venatório define:', opts: ['Preços das armas', 'Espécies, épocas e condições de caça', 'Rotas obrigatórias', 'Cores do equipamento'], correct: 1, diff: 1 },
+      { type: 'mc', cat: 'Legislação', q: 'Caçar em propriedade privada sem autorização é:', opts: ['Permitido desde que não se danifique nada', 'Infração/Crime conforme lei', 'Aceitável em época alta', 'Regra local do proprietário'], correct: 1, diff: 1 },
+      { type: 'mc', cat: 'Legislação', q: 'Transporte de arma em veículo deve ser:', opts: ['Municiada e visível', 'Descarregada, acondicionada e separada da munição', 'Ao colo do passageiro', 'Sem regras'], correct: 1, diff: 1 },
+      { type: 'mc', cat: 'Legislação', q: 'Uso de silenciadores:', opts: ['Sempre livre', 'Depende de autorização/lei', 'Proibido em todo o lado', 'Obrigatório'], correct: 1, diff: 2 },
+      { type: 'mc', cat: 'Legislação', q: 'Caça noturna a espécies não autorizadas é:', opts: ['Aceitável com lanterna', 'Permitida se estiver sozinho', 'Ilegal salvo exceções legais', 'Obrigatória para controlo'], correct: 2, diff: 2 },
+
+      // --- Ética ---
+      { type: 'mc', cat: 'Ética', q: 'Se avistas um caçador em comportamento inseguro:', opts: ['Confrontas agressivamente', 'Ignoras para evitar conflito', 'Alertas com respeito e informas o chefe de batida', 'Filmas e publicas de imediato'], correct: 2, diff: 1 },
+      { type: 'mc', cat: 'Ética', q: 'Disparar sobre animais parados junto a habitações/estradas:', opts: ['Permitido com cuidado', 'Proibido/inseguro', 'Permitido se o vento for favorável', 'Recomendado para eficácia'], correct: 1, diff: 1 },
+      { type: 'mc', cat: 'Ética', q: 'Tiro além da tua capacidade:', opts: ['Aceitável para treinar em campo', 'Deve ser evitado; prioriza disparos limpos', 'Apenas com munição mais potente', 'Sem impacto'], correct: 1, diff: 1 },
+
+      // --- Armas & Manutenção ---
+      { type: 'mc', cat: 'Armas', q: 'A munição adequada deve considerar:', opts: ['Calibre e câmara da arma', 'A cor do cartucho', 'Marca do fabricante apenas', 'Preço mais baixo'], correct: 0, diff: 1 },
+      { type: 'mc', cat: 'Armas', q: 'Choke e tiro a aves migratórias:', opts: ['Choke muito fechado é sempre melhor', 'Escolha depende da distância e chumbo permitido', 'Sem influência', 'Choke aberto é proibido'], correct: 1, diff: 2 },
+      { type: 'mc', cat: 'Armas', q: 'Depois de chuva intensa, a arma deve:', opts: ['Secar ao ar e guardar', 'Ser limpa, seca e lubrificada levemente', 'Guardar molhada para não ressecar', 'Levar óleo em excesso no cano'], correct: 1, diff: 1 },
+      { type: 'mc', cat: 'Armas', q: 'Cartuchos de chumbo em zonas húmidas/protegidas:', opts: ['Podem ser proibidos', 'São sempre obrigatórios', 'Sem regras', 'Não existem alternativas'], correct: 0, diff: 2 },
+
+      // --- Primeiros Socorros ---
+      { type: 'mc', cat: 'Primeiros Socorros', q: 'Em hemorragia externa severa:', opts: ['Aplicar pressão direta e acionar serviços', 'Retirar objeto cravado', 'Dar bebida alcoólica', 'Aguardar para ver se pára'], correct: 0, diff: 1 },
+      { type: 'mc', cat: 'Primeiros Socorros', q: 'Em hipotermia ligeira:', opts: ['Aquecimento gradual, roupa seca e abrigo', 'Banho quente imediato', 'Massagem vigorosa', 'Bebidas alcoólicas'], correct: 0, diff: 1 },
+      { type: 'mc', cat: 'Primeiros Socorros', q: 'Lesão ocular por recochete:', opts: ['Esfregar e lavar com pressão', 'Cobrir, evitar pressão e procurar assistência', 'Retirar corpo estranho com pinça', 'Ignorar se dor passar'], correct: 1, diff: 2 },
+
+      // --- Ambiente ---
+      { type: 'mc', cat: 'Ambiente', q: 'Cartuchos vazios devem:', opts: ['Ficar no terreno', 'Ser recolhidos e descartados corretamente', 'Ser queimados', 'Enterrados discretamente'], correct: 1, diff: 1 },
+      { type: 'mc', cat: 'Ambiente', q: 'Ao identificar espécie protegida:', opts: ['Aproximar para foto', 'Evitar a zona e sinalizar', 'Tentar capturar', 'Ignorar'], correct: 1, diff: 1 },
+
+      // --- Procedimentos de Campo ---
+      { type: 'mc', cat: 'Campo', q: 'Antes da batida, o chefe informa:', opts: ['Apenas a hora de almoço', 'Postos, ângulos de tiro, saídas de emergência e comunicação', 'Quem vai filmar', 'Nada, cada um decide'], correct: 1, diff: 1 },
+      { type: 'mc', cat: 'Campo', q: 'Que vento é preferível para abordar a peça?', opts: ['A favor do vento', 'Contra o vento (vento na cara)', 'Sem importância', 'Sempre lateral'], correct: 1, diff: 2 },
+      { type: 'mc', cat: 'Campo', q: 'Em terreno desconhecido:', opts: ['Avanças rápido para cobrir área', 'Planeias rotas, marcas pontos e partilhas localização', 'Despesas não importam', 'Desligas comunicação'], correct: 1, diff: 1 },
+      { type: 'mc', cat: 'Campo', q: 'Se a peça cai e volta a levantar:', opts: ['Disparas sem identificar fundo', 'Segues com cautela mantendo segurança', 'Corres de arma em riste', 'Atiras para o ar'], correct: 1, diff: 2 },
+
+      // --- Balística/Noções ---
+      { type: 'mc', cat: 'Balística', q: 'O alcance perigoso de uma bala de espingarda pode chegar a:', opts: ['200 m', '500 m', 'Mais de 2 km', '50 m'], correct: 2, diff: 2 },
+      { type: 'mc', cat: 'Balística', q: 'O recuo aumenta com:', opts: ['Maior massa da arma', 'Munição mais energética e postura errada', 'Menor carga de pólvora', 'Uso de óculos'], correct: 1, diff: 1 },
+
+      // --- Situações Específicas ---
+      { type: 'mc', cat: 'Situação', q: 'Encontras um trilho público atrás do alvo:', opts: ['Disparas se não vês pessoas', 'Cancelas o disparo: fundo inseguro', 'Gritas aviso e disparas', 'Disparas mais alto'], correct: 1, diff: 1 },
+      { type: 'mc', cat: 'Situação', q: 'Companheiro alcoolizado quer participar:', opts: ['Permites se for pouco', 'Impedes e informas o responsável', 'Ignoras para evitar conflito', 'Dás um café e resolves'], correct: 1, diff: 1 },
+      { type: 'mc', cat: 'Situação', q: 'Animal ferido entra em propriedade privada:', opts: ['Avanças sem pedir', 'Contactas proprietário/autoridade e aguardas autorização', 'Ignoras', 'Atiras de fora para terminar'], correct: 1, diff: 2 },
+      { type: 'mc', cat: 'Situação', q: 'Ouves tiros além do setor definido:', opts: ['Imitas para não perder a peça', 'Manténs posição e reportas', 'Mudaste de posto sem avisar', 'Corres para lá armado'], correct: 1, diff: 2 },
+
+      // --- Navegação & Comunicação ---
+      { type: 'mc', cat: 'Comms', q: 'Rádio em batida deve ser usado para:', opts: ['Conversas paralelas', 'Comunicação objetiva de segurança/posição', 'Música', 'Pedir dicas de tiro'], correct: 1, diff: 1 },
+      { type: 'mc', cat: 'Comms', q: 'Bateria do rádio acaba:', opts: ['Continuas sem comunicar', 'Informas antecipadamente e combinas plano B', 'Gritas quando precisares', 'Nada muda'], correct: 1, diff: 1 },
+
+      // --- Mais Segurança detalhada ---
+      { type: 'mc', cat: 'Segurança', q: 'Subir/Descer de veículo com arma:', opts: ['Com arma municiada para prontidão', 'Arma descarregada e segura', 'Arma ao ombro com dedo no gatilho', 'Sem regras'], correct: 1, diff: 1 },
+      { type: 'mc', cat: 'Segurança', q: 'Ao atravessar curso de água:', opts: ['Manténs arma carregada para rapidez', 'Descarregas e garantes proteção contra água', 'Arremessas a arma', 'Sem cuidados'], correct: 1, diff: 2 },
+      { type: 'mc', cat: 'Segurança', q: 'Falha de ignição (misfire):', opts: ['Apontar para direção segura e aguardar alguns segundos antes de abrir a câmara', 'Abrir imediatamente a culatra', 'Apontar para verificar', 'Puxar o gatilho outra vez'], correct: 0, diff: 2 },
+
+      // --- Identificação de Espécies (RP) ---
+      { type: 'mc', cat: 'Espécies', q: 'Antes de disparar, deves identificar:', opts: ['Apenas se mexe', 'Espécie, sexo (se aplicável) e se é legal naquele dia/zona', 'Se é grande', 'Se está perto'], correct: 1, diff: 2 },
+      { type: 'mc', cat: 'Espécies', q: 'Tiros a aves em voo devem considerar:', opts: ['Ângulo e fundo seguros, distância e chumbo permitido', 'Apenas velocidade da ave', 'Cor das penas', 'Marca da arma'], correct: 0, diff: 2 },
+
+      // --- Conduta IC ---
+      { type: 'mc', cat: 'Conduta', q: 'Discussões IC durante a prova:', opts: ['São normais mas não interrompem a segurança', 'Justificam quebrar protocolos', 'Permitem apontar arma para o alto', 'Substituem ordens do chefe'], correct: 0, diff: 1 },
+
+      // (Adicionar mais 20 MC)
+      { type: 'mc', cat: 'Segurança', q: 'Ao limpar a arma, a primeira ação é:', opts: ['Verificar se está descarregada', 'Lubrificar o gatilho', 'Guardar munições no cano', 'Acionar segurança'], correct: 0, diff: 1 },
+      { type: 'mc', cat: 'Legislação', q: 'A caça de espécies fora da lista do dia é:', opts: ['Permitida com guia do clube', 'Ilegal', 'Aceitável se for para consumo próprio', 'Tradicional'], correct: 1, diff: 1 },
+      { type: 'mc', cat: 'Armas', q: 'Misturar munições de calibres diferentes:', opts: ['Pode causar acidentes graves', 'Aumenta performance', 'Sem problema', 'Recomendado'], correct: 0, diff: 1 },
+      { type: 'mc', cat: 'Ambiente', q: 'Ao abrir uma clareira para posto:', opts: ['Cortar tudo', 'Minimizar impacto e cumprir regras', 'Deixar lixo', 'Usar fogo'], correct: 1, diff: 1 },
+      { type: 'mc', cat: 'Campo', q: 'Quem define início/fim de tiros na batida?', opts: ['Cada caçador', 'Chefe de batida', 'O último a chegar', 'O guarda do parque sozinho'], correct: 1, diff: 1 },
+      { type: 'mc', cat: 'Primeiros Socorros', q: 'Em fratura suspeita:', opts: ['Mobilizar agressivamente', 'Imobilizar e procurar assistência', 'Forçar alinhamento', 'Ignorar'], correct: 1, diff: 1 },
+      { type: 'mc', cat: 'Situação', q: 'Aproximação a estrada nacional não visível:', opts: ['Tiro possível se alvo está alto', 'Proibido: fundo inseguro', 'Atirar antes que atravesse', 'Esperar e disparar de costas'], correct: 1, diff: 1 },
+      { type: 'mc', cat: 'Segurança', q: 'Arma caiu ao chão:', opts: ['Pegar e apontar para verificar', 'Verificar cano obstruído antes de usar', 'Disparar de teste', 'Ignorar'], correct: 1, diff: 2 },
+      { type: 'mc', cat: 'Armas', q: 'Guarda-mato gelado/obstruído:', opts: ['Disparo normal', 'Limpar antes de usar', 'Bater para soltar', 'Ignorar'], correct: 1, diff: 2 },
+      { type: 'mc', cat: 'Espécies', q: 'Ética no tiro a fêmeas com crias:', opts: ['Evitar, salvo gestão imprescindível', 'Preferir pois são mais fáceis', 'Sem consideração', 'Obrigatório'], correct: 0, diff: 2 },
+      { type: 'mc', cat: 'Balística', q: 'Ricochetes são mais prováveis em:', opts: ['Terra fofa', 'Água e superfícies duras/planas', 'Relva alta', 'Ar'], correct: 1, diff: 2 },
+      { type: 'mc', cat: 'Comms', q: 'Check de rádio deve ser feito:', opts: ['Durante a batida', 'Antes de iniciar', 'Nunca', 'Quando alguém cair'], correct: 1, diff: 1 },
+      { type: 'mc', cat: 'Segurança', q: 'Ao armazenar armas em casa no RP:', opts: ['Acesso livre a todos', 'Conforme regras: trancadas e separadas da munição', 'Carregadas em exposição', 'Junto de fontes de calor'], correct: 1, diff: 1 },
+      { type: 'mc', cat: 'Ambiente', q: 'Lixo orgânico de peças evisceradas:', opts: ['Deixar junto a cursos de água', 'Gerir conforme regras locais, evitando contaminação', 'Espalhar em trilhos', 'Levar para área urbana'], correct: 1, diff: 2 },
+      { type: 'mc', cat: 'Campo', q: 'Ao mudar de posto:', opts: ['Avisas via rádio e só então te deslocas', 'Vais em silêncio para surpreender', 'Corres com arma montada', 'Não avisas'], correct: 0, diff: 2 },
+      { type: 'mc', cat: 'Situação', q: 'Companheiro tem descarga acidental:', opts: ['Minimizar para não criar confusão', 'Parar atividade, avaliar segurança e reportar', 'Rir e continuar', 'Esconder o caso'], correct: 1, diff: 2 },
+      { type: 'mc', cat: 'Segurança', q: 'Em subida íngreme:', opts: ['Arma à frente do corpo, cano para direção segura', 'Arma às costas, cano para trás de colegas', 'Dedo no gatilho para firmar', 'Sem cuidados'], correct: 0, diff: 2 },
+      { type: 'mc', cat: 'Armas', q: 'Uso de bipé/apoio:', opts: ['Aumenta precisão quando usado corretamente', 'É proibido', 'Diminui precisão', 'Só para snipers'], correct: 0, diff: 1 },
+      { type: 'mc', cat: 'Primeiros Socorros', q: 'Choque (estado de):', opts: ['Pele fria/pálida, confusão; deitar e aquecer', 'Sempre febre alta', 'Sinal de hidratação perfeita', 'Sem risco'], correct: 0, diff: 2 },
+      { type: 'mc', cat: 'Legislação', q: 'Seguro de caça serve para:', opts: ['Descontos em lojas', 'Cobertura de responsabilidade civil/ acidentes', 'Nada', 'Licenciar arma'], correct: 1, diff: 1 },
+
+      // --- Abertas (c. 12) ---
+      { type: 'open', cat: 'Segurança', q: 'Explica as 4 regras fundamentais de segurança no manuseio de armas.', keywords: ['tratar', 'carregada', 'dedo', 'gatilho', 'direção', 'segura', 'alvo', 'identificar'], diff: 3 },
+      { type: 'open', cat: 'Legislação', q: 'Que autorizações/documentos são obrigatórios para participar numa batida legal?', keywords: ['licença', 'caça', 'seguro', 'arma', 'manifesto', 'identificação', 'calendário'], diff: 2 },
+      { type: 'open', cat: 'Ética', q: 'Como procedes para garantir um disparo limpo e ético?', keywords: ['distância', 'capacidade', 'alvo', 'fundo', 'colocação', 'tiro', 'seguir', 'sangue'], diff: 2 },
+      { type: 'open', cat: 'Ambiente', q: 'Boas práticas para reduzir o impacto ambiental durante a caça.', keywords: ['resíduos', 'cartuchos', 'ninho', 'protegida', 'zonas', 'húmidas', 'respeito'], diff: 1 },
+      { type: 'open', cat: 'Primeiros Socorros', q: 'Descreve a conduta em caso de hemorragia grave no terreno.', keywords: ['pressão', 'direta', 'torniquete', '112', 'socorro', 'proteger'], diff: 2 },
+      { type: 'open', cat: 'Campo', q: 'Como organizas comunicação e segurança antes de uma batida?', keywords: ['postos', 'ângulos', 'saídas', 'emergência', 'rádio', 'check'], diff: 2 },
+      { type: 'open', cat: 'Situação', q: 'Relata o procedimento ao ferir uma peça que entra em propriedade privada.', keywords: ['autorizar', 'proprietário', 'comunicar', 'aguardar', 'segurança'], diff: 3 },
+      { type: 'open', cat: 'Armas', q: 'Checklist de manutenção após jornada de chuva.', keywords: ['secar', 'limpar', 'lubrificar', 'cano', 'câmara', 'verificar', 'ferrugem'], diff: 2 },
+      { type: 'open', cat: 'Balística', q: 'Riscos de ricochete e como os evitas.', keywords: ['fundo', 'duro', 'água', 'ângulo', 'distância', 'evitar'], diff: 2 },
+      { type: 'open', cat: 'Comportamento', q: 'Como geres um conflito entre caçadores sem comprometer a segurança?', keywords: ['comunicação', 'respeito', 'interromper', 'segurança', 'chefe', 'reportar'], diff: 2 },
+      { type: 'open', cat: 'Espécies', q: 'Quais critérios usas para identificar legalidade de disparo numa espécie?', keywords: ['espécie', 'sexo', 'época', 'calendário', 'zona', 'proteção'], diff: 2 },
+      { type: 'open', cat: 'Navegação', q: 'Táticas básicas para não te perderes e seres facilmente encontrado.', keywords: ['rota', 'pontos', 'gps', 'mapa', 'comunicar', 'planear'], diff: 1 },
+    ];
+
+    // ====== Estado ======
+    const state = { order: [], answers: {}, timers: [], started: false, idx: 0 };
+
+    // ====== Util ======
+    const $ = s => document.querySelector(s);
+    const shuffle = a => { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+    function clearTimers() { state.timers.forEach(clearInterval); state.timers = []; }
+    function setProgress() { const p = ((state.idx) / state.order.length) * 100; $('#progressBar').style.width = p + '%'; }
+
+    // ====== UI construção ======
+    function renderQuestion() {
+      const qArea = $('#qArea'); qArea.innerHTML = '';
+      const q = state.order[state.idx];
+      $('#qIdx').textContent = state.idx + 1; $('#qTotal').textContent = state.order.length;
+
+      const box = document.createElement('div'); box.className = 'q';
+      const h = document.createElement('h3'); h.innerHTML = `<span class="muted">[${q.cat}]</span> ${q.q}`; box.appendChild(h);
+
+      if (q.type === 'mc') {
+        const group = document.createElement('div');
+        const opts = q.opts.map((t, i) => ({ t, i })); shuffle(opts);
+        opts.forEach(({ t, i }) => {
+          const label = document.createElement('label'); label.className = 'opt';
+          const input = document.createElement('input'); input.type = 'radio'; input.name = 'opt'; input.value = i;
+          const saved = state.answers[q.id]?.choice;
+          if (typeof saved === 'number' && q.opts[saved] === t) input.checked = true;
+          const span = document.createElement('span'); span.textContent = t;
+          label.append(input, span); group.appendChild(label);
+          input.addEventListener('change', () => {
+            const originalIndex = q.opts.indexOf(t);
+            state.answers[q.id] = { type: 'mc', choice: originalIndex };
+            validateNext();
+          });
+        });
+        box.appendChild(group);
+      } else {
+        const ta = document.createElement('textarea'); ta.rows = 5; ta.placeholder = 'Resposta (IC)'; ta.value = state.answers[q.id]?.text || '';
+        ta.addEventListener('input', () => { state.answers[q.id] = { ...(state.answers[q.id]||{}), type: 'open', text: ta.value }; validateNext(); });
+        box.appendChild(ta);
+
+        const row = document.createElement('div'); row.className = 'row'; row.style.marginTop = '8px';
+        const lab = document.createElement('label'); lab.textContent = 'Pontuação (0–5) pelo profissional:'; lab.style.fontWeight = '600';
+        const sel = document.createElement('select'); sel.style.minWidth = '120px'; sel.setAttribute('aria-label','Pontuação 0–5');
+        ;['','0','0.5','1','1.5','2','2.5','3','3.5','4','4.5','5'].forEach(v=>{ const o=document.createElement('option'); o.value=v; o.textContent=v===''? '—': v; sel.appendChild(o); });
+        const prev = state.answers[q.id]?.manualScore; if (typeof prev === 'number') sel.value = String(prev);
+        sel.addEventListener('change', ()=>{ const val = sel.value === '' ? undefined : parseFloat(sel.value); state.answers[q.id] = { ...(state.answers[q.id]||{}), type:'open', manualScore: val }; validateNext(); });
+        row.append(lab, sel);
+        box.appendChild(row);
+
+        const tip = document.createElement('p'); tip.className = 'muted'; tip.textContent = 'Nota: a pergunta aberta só permite avançar após atribuição de pontuação (0–5).'; box.appendChild(tip);
+      }
+
+      qArea.appendChild(box);
+      setProgress(); startTimer();
+      validateNext();
+    }
+
+    function validateNext(){
+      const q = state.order[state.idx];
+      let ok = true;
+      if (q.type === 'mc') {
+        ok = typeof state.answers[q.id]?.choice === 'number';
+      } else {
+        ok = typeof state.answers[q.id]?.manualScore === 'number';
+      }
+      $('#btnNext').disabled = !ok;
+    }
+
+    function startTimer() {
+      clearTimers();
+      const secs = CONFIG.TIME_PER_Q;
+      if (secs <= 0) { $('#hudTime').textContent = '—'; return; }
+      const end = Date.now() + secs * 1000; const id = setInterval(() => {
+        const left = Math.max(0, Math.ceil((end - Date.now()) / 1000));
+        $('#hudTime').textContent = left + 's';
+        if (left <= 0) { clearInterval(id); state.timers = state.timers.filter(x => x !== id); next(); }
+      }, 250);
+      state.timers.push(id);
+    }
+
+    function prev(){ if (state.idx <= 0) return; state.idx--; renderQuestion(); updateNav(); }
+    function next(){ if (state.idx >= state.order.length - 1) { finish(); return; } state.idx++; renderQuestion(); updateNav(); }
+    function updateNav(){ $('#btnPrev').disabled = state.idx === 0; $('#btnNext').textContent = state.idx === state.order.length - 1 ? 'Concluir' : 'Próximo'; }
+
+    // ====== Correção ======
+    function computeMcPct(){
+      let mcTotal = 0, mcHits = 0;
+      for (const q of state.order) {
+        if (q.type !== 'mc') continue;
+        const ans = state.answers[q.id];
+        mcTotal++;
+        if (ans && typeof ans.choice === 'number' && ans.choice === q.correct) mcHits++;
+      }
+      const mcPct = mcTotal ? Math.round((mcHits / mcTotal) * 100) : 0;
+      return { mcPct, mcHits, mcTotal };
+    }
+
+    function scoreFinal(){
+      const { mcPct, mcHits, mcTotal } = computeMcPct();
+      // abertas — média 0–5 -> %
+      let openCount = 0, openSum = 0; const openDetails = [];
+      for (const q of state.order) {
+        if (q.type !== 'open') continue; openCount++;
+        const sc = typeof state.answers[q.id]?.manualScore === 'number' ? state.answers[q.id].manualScore : 0;
+        openSum += sc; openDetails.push({ id: q.id, score0to5: sc });
+      }
+      const openAvg = openCount ? (openSum / openCount) : 0; // 0–5
+      const openPct = Math.round((openAvg / 5) * 100); // 0–100
+
+      // média ponderada por quantidade (garante que abertas são minoria na ponderação)
+      const totalItems = mcTotal + openCount;
+      const finalScore = totalItems ? Math.round((mcPct * mcTotal + openPct * openCount) / totalItems) : 0;
+      const passed = finalScore >= CONFIG.PASS_THRESHOLD;
+      return { mcPct, mcHits, mcTotal, openAvg, openPct, finalScore, passed, openDetails, openCount };
+    }
+
+    function finish(){
+      const s = scoreFinal();
+      const payload = {
+        schema: 'fivem-psicotecnico-qna-v4',
+        cfg: { format: CONFIG.FORMAT, timePerQ: CONFIG.TIME_PER_Q, passThreshold: CONFIG.PASS_THRESHOLD },
+        scores: { mcPct: s.mcPct, openAvg0to5: s.openAvg, openPct: s.openPct, final: s.finalScore, passed: s.passed },
+        detail: { mc: { hits: s.mcHits, total: s.mcTotal }, open: s.openDetails },
+        answers: state.answers,
+        timestamp: new Date().toISOString()
+      };
+
+      const rep = $('#report'); rep.innerHTML = '';
+      const head = document.createElement('div'); head.className = 'row'; head.style.justifyContent = 'space-between'; head.innerHTML = `<div class="badge"><span class="dot ${s.passed ? 'green' : 'red'}"></span> ${s.passed ? 'APROVADO' : 'REPROVADO'}</div><div style="min-width:180px;width:40%" class="progress"><div style="width:${s.finalScore}%;"></div></div>`; rep.appendChild(head);
+
+      const mkRow = (l, v, cls = '') => { const d = document.createElement('div'); d.className = 'row'; d.style.justifyContent = 'space-between'; d.style.padding = '10px 12px'; d.style.border = '1px solid var(--border)'; d.style.borderRadius = '12px'; d.style.marginTop = '8px'; d.innerHTML = `<span class="muted">${l}</span><strong class="${cls}">${v}</strong>`; return d; };
+      rep.appendChild(mkRow('Múltipla escolha', `${s.mcPct}% (${s.mcHits}/${s.mcTotal})`));
+      rep.appendChild(mkRow('Abertas (média 0–5)', `${s.openAvg.toFixed(2)} / 5 (${s.openPct}%) — ${s.openCount} perguntas`));
+      rep.appendChild(mkRow('Pontuação Final (ponderação por quantidade)', `${s.finalScore} / 100`, s.passed ? 'result-pass' : 'result-fail'));
+      const note = document.createElement('p'); note.className = 'muted'; note.innerHTML = 'Cada resposta aberta foi pontuada (0–5) antes de avançar para a pergunta seguinte.'; rep.appendChild(note);
+
+      const pre = document.createElement('pre'); pre.style.background = '#ffffff'; pre.style.border = '1px solid var(--border)'; pre.style.padding = '12px'; pre.style.borderRadius = '12px'; pre.textContent = JSON.stringify(payload, null, 2); rep.appendChild(pre);
+
+      $('#btnCopyJSON').onclick = async () => { try { await navigator.clipboard.writeText(JSON.stringify(payload)); } catch (e) { alert('Não foi possível copiar automaticamente.'); } };
+      $('#btnRestart').onclick = () => { show($('#intro')); };
+
+      show($('#result'));
+    }
+
+    // ====== Fluxo ======
+    function buildOrder(){
+      // Enforce formatos 15-5 ou 20-10
+      const targetMc = CONFIG.FORMAT.mc; const targetOpen = CONFIG.FORMAT.open;
+
+      // visto anteriormente (para evitar repetição na mesma máquina)
+      const seenKey = 'psico_seen_ids_v2';
+      const seen = JSON.parse(localStorage.getItem(seenKey) || '[]');
+
+      // indexar
+      const indexed = BANK.map((q, idx) => ({ ...q, _idx: idx }));
+      const mcPool = shuffle(indexed.filter(x => x.type === 'mc' && !seen.includes(x._idx)));
+      const openPool = shuffle(indexed.filter(x => x.type === 'open' && !seen.includes(x._idx)));
+
+      const chosenMc = mcPool.slice(0, Math.min(targetMc, mcPool.length));
+      const chosenOpen = openPool.slice(0, Math.min(targetOpen, openPool.length));
+
+      // fallback mínimo se faltar stock
+      if (chosenMc.length < targetMc || chosenOpen.length < targetOpen){
+        // completar com itens já vistos se necessário
+        const mcRest = shuffle(indexed.filter(x=>x.type==='mc' && !chosenMc.includes(x))).slice(0, targetMc - chosenMc.length);
+        const openRest = shuffle(indexed.filter(x=>x.type==='open' && !chosenOpen.includes(x))).slice(0, targetOpen - chosenOpen.length);
+        chosenMc.push(...mcRest); chosenOpen.push(...openRest);
+      }
+
+      const chosen = [...chosenMc, ...chosenOpen];
+      const newSeen = [...seen, ...chosen.map(c => c._idx)].slice(-2 * (targetMc + targetOpen));
+      localStorage.setItem(seenKey, JSON.stringify(newSeen));
+
+      const order = shuffle(chosen).map((q, i) => ({ ...q, id: 'q' + i }));
+      return order;
+    }
+
+    function show(el){ for (const sec of [$('#intro'), $('#config'), $('#exam'), $('#result')]) sec.classList.add('hidden'); el.classList.remove('hidden'); }
+
+    // ====== Botões ======
+    $('#btnStart').onclick = () => { state.order = buildOrder(); state.idx = 0; state.answers = {}; show($('#exam')); renderQuestion(); updateNav(); };
+    $('#btnPrev').onclick = prev;
+    $('#btnNext').onclick = next;
+    $('#btnClear').onclick = () => { const q = state.order[state.idx]; delete state.answers[q.id]; renderQuestion(); };
+    $('#btnConfig').onclick = () => { $('#config').classList.toggle('hidden'); };
+    $('#btnCloseCfg').onclick = () => { $('#config').classList.add('hidden'); };
+    $('#btnSaveCfg').onclick = () => {
+      CONFIG.TIME_PER_Q = Math.max(0, Math.min(180, parseInt($('#cfgTimer').value, 10) || CONFIG.TIME_PER_Q));
+      CONFIG.FORMAT = $('#fmt_20_10').checked ? { mc: 20, open: 10 } : { mc: 15, open: 5 };
+      $('#config').classList.add('hidden');
+    };
+
+    // ====== Acessibilidade ======
+    window.addEventListener('keydown', (e) => { if (e.code === 'Enter') { e.preventDefault(); if (!$('#btnNext').disabled) $('#btnNext').click(); } if (e.code === 'Backspace') { e.preventDefault(); $('#btnPrev').click(); } });
+  </script>
+</body>
+</html>

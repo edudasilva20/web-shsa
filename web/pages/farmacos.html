@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Guia de Fármacos — SHSA</title>
+  <meta name="description" content="Guia de Fármacos dos Serviços Hospitalares de San Andreas (SHSA) — versão HTML limpa, responsiva, com índice navegável e pronta para impressão." />
+  <style>
+    :root{
+      --bg: #fbfbfd;
+      --panel: #ffffff;
+      --ink: #1f2937;
+      --muted: #6b7280;
+      --brand: #2563eb;
+      --accent: #e5e7eb;
+      --ring: rgba(37, 99, 235, .2);
+    }
+    @media (prefers-color-scheme: light){:root{--bg:#fbfbfd}}
+    html{font-size:16px}
+    body{margin:0; background:var(--bg); color:var(--ink); font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; line-height:1.6}
+    .container{max-width: 1100px; margin: 4rem auto; padding: 0 1.25rem}
+    header{background: linear-gradient(180deg, #f7faff 0%, #fff 60%); border-bottom:1px solid var(--accent)}
+    header .container{margin:0 auto; padding:3rem 1.25rem}
+    h1{font-size: clamp(1.8rem, 2.6vw, 2.4rem); line-height:1.2; margin:0 0 .5rem 0; letter-spacing: -.02em}
+    .subtitle{color:var(--muted); margin:0}
+    .meta{display:flex; gap:.75rem; align-items:center; margin-top:.75rem; color:var(--muted); font-size:.95rem}
+    .tag{border:1px solid var(--accent); background:#fafafa; padding:.15rem .5rem; border-radius:999px}
+    nav.toc{background:var(--panel); border: 1px solid var(--accent); border-radius: 14px; padding: 1rem 1.25rem; box-shadow: 0 1px 2px rgba(0,0,0,.04)}
+    nav.toc h2{font-size:1rem; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); margin:.25rem 0 .75rem}
+    nav.toc ol{margin:0; padding-left:1.1rem}
+    nav.toc a{color:var(--brand); text-decoration:none}
+    nav.toc a:hover{text-decoration:underline}
+    section{background:var(--panel); border:1px solid var(--accent); border-radius:16px; padding:1.25rem 1.25rem 1.35rem; margin: 1.25rem 0; box-shadow:0 1px 2px rgba(0,0,0,.04)}
+    section h2{margin-top:.25rem; letter-spacing:-.01em}
+    h2{font-size:1.35rem}
+    h3{font-size:1.05rem; color:var(--muted); text-transform:uppercase; letter-spacing:.06em}
+    .small{font-size:.95rem}
+    .muted{color:var(--muted)}
+    .callout{border-left:4px solid var(--brand); padding: .5rem 1rem; background: #f8fbff; border-radius:8px}
+    a.anchor{color:inherit; text-decoration:none}
+    a.anchor:hover{text-decoration:underline}
+    hr{border:0; border-top:1px solid var(--accent); margin:2rem 0}
+    /* Tabelas */
+    .table-wrap{overflow:auto; -webkit-overflow-scrolling:touch}
+    table{width:100%; border-collapse:collapse; margin:.75rem 0 0}
+    th, td{border:1px solid var(--accent); padding:.6rem .7rem; text-align:left; vertical-align:top}
+    th{background:#f8fafc; font-weight:600}
+    tbody tr:nth-child(even){background:#fcfdff}
+    .pill{display:inline-block; padding:.1rem .45rem; border-radius:999px; border:1px solid var(--accent); background:#f9fafb; font-size:.85em}
+    /* Print */
+    @media print{
+      header, nav.toc {box-shadow:none}
+      section{break-inside: avoid}
+      a{color: inherit !important; text-decoration: none}
+      .container{margin:1rem auto}
+      body{background:#fff}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Guia de Fármacos</h1>
+      <div class="meta">
+        <span class="tag">Uso institucional</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <nav class="toc" aria-label="Índice">
+      <h2>Índice</h2>
+      <ol>
+        <li><a href="#intro">Introdução & Aviso</a></li>
+        <li><a href="#analgesicos">Analgésicos</a></li>
+        <li><a href="#anti-inflamatorios">Anti-inflamatórios</a></li>
+        <li><a href="#antibioticos">Antibióticos</a></li>
+        <li><a href="#profilaxia">Antibióticos profiláticos</a></li>
+        <li><a href="#anestesicos">Anestésicos</a></li>
+        <li><a href="#pomadas">Pomadas</a></li>
+        <li><a href="#vasopressores">Vasopressores/Inotrópicos</a></li>
+        <li><a href="#hemostaticos">Agentes hemostáticos</a></li>
+        <li><a href="#notas">Notas — Vias, Quantidades e Tempo</a></li>
+      </ol>
+    </nav>
+
+    <section id="intro">
+      <h2>Introdução & Aviso</h2>
+      <div class="callout small">
+        <strong>Referência rápida.</strong> As doses abaixo são orientativas e podem variar conforme condição clínica, idade, função renal/hepática e protocolos internos. <strong>Sempre confirmar no protocolo institucional e nas bulas oficiais</strong> antes de administrar.
+      </div>
+    </section>
+
+    <section id="analgesicos">
+      <h2>Analgésicos</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Sintomas/Causas</th>
+              <th>Via</th>
+              <th>Dosagem/Tempo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Paracetamol</td>
+              <td>Dor leve, febre</td>
+              <td>VO / IV</td>
+              <td>500–1000&nbsp;mg a cada 6–8&nbsp;h (máx. 3–4&nbsp;g/dia)</td>
+            </tr>
+            <tr>
+              <td>Ibuprofeno</td>
+              <td>Dor, inflamação, febre</td>
+              <td>VO</td>
+              <td>200–400&nbsp;mg a cada 6–8&nbsp;h (máx. 1,2–1,6&nbsp;g/dia)</td>
+            </tr>
+            <tr>
+              <td>Tramadol</td>
+              <td>Dor moderada a severa</td>
+              <td>VO / IV</td>
+              <td>50–100&nbsp;mg a cada 6–8&nbsp;h (máx. 400&nbsp;mg/dia)</td>
+            </tr>
+            <tr>
+              <td>Morfina</td>
+              <td>Dor severa</td>
+              <td>IV / IM / SC</td>
+              <td>2–4&nbsp;mg IV a cada 5–10&nbsp;min (ajustar) • VO conforme titulação</td>
+            </tr>
+            <tr>
+              <td>Fentanil</td>
+              <td>Dor severa, anestesia, sedação</td>
+              <td>TD / IV</td>
+              <td>TD 12–100&nbsp;mcg/h (titulável) • IV em bolus/infusão conforme protocolo</td>
+            </tr>
+            <tr>
+              <td>Oxicodona</td>
+              <td>Dor moderada a severa</td>
+              <td>VO</td>
+              <td>5–10&nbsp;mg a cada 4–6&nbsp;h (ajustar)</td>
+            </tr>
+            <tr>
+              <td>Metadona</td>
+              <td>Dor crónica; dessensibilização a opioides</td>
+              <td>VO / IV</td>
+              <td>2,5–10&nbsp;mg a cada 8–12&nbsp;h (especialista)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="anti-inflamatorios">
+      <h2>Anti-inflamatórios</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Nome</th><th>Sintomas/Causas</th><th>Via</th><th>Dosagem/Tempo</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Diclofenac</td><td>Dor, inflamação</td><td>VO / T / IM</td><td>50&nbsp;mg a cada 8–12&nbsp;h • Gel tópico 3–4x/dia</td></tr>
+            <tr><td>Naproxeno</td><td>Dor inflamatória, dismenorreia</td><td>VO</td><td>250–500&nbsp;mg a cada 12&nbsp;h</td></tr>
+            <tr><td>Cetoprofeno</td><td>Dor, artrite</td><td>VO / T</td><td>50–100&nbsp;mg a cada 8–12&nbsp;h • Gel tópico 2–3x/dia</td></tr>
+            <tr><td>Meloxicam</td><td>Artrite, osteoartrose</td><td>VO / IM</td><td>7,5–15&nbsp;mg 1x/dia</td></tr>
+            <tr><td>Indometacina</td><td>Dor aguda, artrite gotosa</td><td>VO</td><td>25–50&nbsp;mg a cada 8–12&nbsp;h</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="antibioticos">
+      <h2>Antibióticos</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Nome</th><th>Sintomas/Causas</th><th>Via</th><th>Dosagem/Tempo</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Amoxicilina</td><td>Infecções bacterianas (otite, faringite, pneumonia)</td><td>VO</td><td>500&nbsp;mg a cada 8&nbsp;h ou 875&nbsp;mg a cada 12&nbsp;h</td></tr>
+            <tr><td>Ciprofloxacina</td><td>ITU, infeções respiratórias/pele</td><td>VO / IV</td><td>250–750&nbsp;mg a cada 12&nbsp;h • IV conforme protocolo</td></tr>
+            <tr><td>Azitromicina</td><td>Respiratórias, pele, IST</td><td>VO / IV</td><td>500&nbsp;mg 1x/dia (3–5 dias) ou 1&nbsp;g dose única em IST</td></tr>
+            <tr><td>Ceftriaxona</td><td>Infeções graves (meningite, abdominal, pielonefrite)</td><td>IV / IM</td><td>1–2&nbsp;g 1x/dia (até 4&nbsp;g em casos selecionados)</td></tr>
+            <tr><td>Clindamicina</td><td>Infecções anaeróbias, pele, osso</td><td>VO / IV</td><td>150–450&nbsp;mg a cada 6–8&nbsp;h</td></tr>
+            <tr><td>Vancomicina</td><td>MRSA, infeções graves</td><td>IV</td><td>15–20&nbsp;mg/kg a cada 8–12&nbsp;h (ajustar por T<sub>val</sub>)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="profilaxia">
+      <h2>Antibióticos profiláticos</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Nome</th><th>Indicação</th><th>Via</th><th>Dosagem/Tempo</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Cefazolina (Ancef)</td><td>Profilaxia cirúrgica geral</td><td>IV</td><td>1–2&nbsp;g entre 30–60&nbsp;min antes da incisão; repetir conforme tempo cirúrgico</td></tr>
+            <tr><td>Vancomicina</td><td>Risco de MRSA / alergia a β‑lactâmicos</td><td>IV</td><td>15&nbsp;mg/kg finalizando 60–120&nbsp;min antes da incisão</td></tr>
+            <tr><td>Ciprofloxacina</td><td>Procedimentos urológicos</td><td>VO</td><td>500&nbsp;mg 1–2&nbsp;h antes (conforme protocolo)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="anestesicos">
+      <h2>Anestésicos</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Nome</th><th>Sintomas/Causas</th><th>Via</th><th>Dosagem/Tempo</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Lidocaína</td><td>Anestesia local, arritmias</td><td>T / I / IV</td><td>Máx. ~300&nbsp;mg (sem vasoconstritor). <span class="pill">Ajustar por área/peso</span></td></tr>
+            <tr><td>Bupivacaína</td><td>Anestesia local/raquidiana</td><td>IV / I / N</td><td>Infiltração 1–2,5&nbsp;mg/kg (máx. orientado por protocolo)</td></tr>
+            <tr><td>Ropivacaína</td><td>Bloqueios periféricos</td><td>I / N</td><td>Conforme técnica regional</td></tr>
+            <tr><td>Midazolam</td><td>Sedação, indução de anestesia</td><td>IV / IM</td><td>1–2&nbsp;mg IV lento; titular até efeito</td></tr>
+            <tr><td>Quetamina</td><td>Anestesia geral, sedação</td><td>IV / IM</td><td>1–2&nbsp;mg/kg IV para indução; 4–6&nbsp;mg/kg IM</td></tr>
+            <tr><td>Desflurano / Sevoflurano</td><td>Anestesia geral inalatória</td><td>VN</td><td>Conforme vaporizador/protocolo</td></tr>
+            <tr><td>Óxido nitroso (N<sub>2</sub>O)</td><td>Analgesia/anestesia inalatória</td><td>VN</td><td>25%–75% (ajustável)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="pomadas">
+      <h2>Pomadas</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Nome (características)</th><th>Sintomas/Causas</th><th>Via</th><th>Tempo</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Arnica (anti-inflamatória)</td><td>Contusões, entorses, mialgias</td><td>T</td><td>2–3x/dia</td></tr>
+            <tr><td>Lidocaína (tópica)</td><td>Analgésico local</td><td>T</td><td>Conforme necessidade (máx. área permitida)</td></tr>
+            <tr><td>Bepanthene</td><td>Queimaduras leves, cicatrização</td><td>T</td><td>1–3x/dia</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="vasopressores">
+      <h2>Vasopressores/Inotrópicos</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Nome</th><th>Situações</th><th>Via</th><th>Dosagem/Tempo</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Noradrenalina</td><td>Choque séptico, hypotensão refratária</td><td>IV — contínua</td><td>0,01–3&nbsp;mcg/kg/min (titulável)</td></tr>
+            <tr><td>Adrenalina</td><td>Anafilaxia, paragem cardiorrespiratória</td><td>IM / IV / SC</td><td>IM 0,3–0,5&nbsp;mg (1:1000) • IV conforme ACLS</td></tr>
+            <tr><td>Dopamina</td><td>Choque com bradicardia/baixo débito</td><td>IV — contínua</td><td>2–20&nbsp;mcg/kg/min (titulável)</td></tr>
+            <tr><td>Vasopressina</td><td>Choque séptico refratário</td><td>IV — contínua</td><td>0,01–0,04&nbsp;U/min (fixo, conforme protocolo)</td></tr>
+            <tr><td>Fenilefrina</td><td>Hipotensão (vasoplegia)</td><td>IV</td><td>Bólus 50–200&nbsp;mcg; ou infusão titulada</td></tr>
+            <tr><td>Dobutamina</td><td>Choque cardiogénico com baixo débito</td><td>IV — contínua</td><td>2,5–20&nbsp;mcg/kg/min</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="hemostaticos">
+      <h2>Agentes hemostáticos</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Nome</th><th>Indicação</th><th>Via</th><th>Dosagem/Tempo</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Ácido tranexâmico (Cyklokapron)</td><td>Hemorragia cirúrgica/trauma</td><td>IV / VO</td><td>1&nbsp;g IV na indução (trauma: 1&nbsp;g em 10&nbsp;min + 1&nbsp;g em 8&nbsp;h)</td></tr>
+            <tr><td>Vitamina K (fitomenadiona)</td><td>Reversão de varfarina/INR elevado</td><td>IV / VO</td><td>1–10&nbsp;mg conforme INR e urgência</td></tr>
+            <tr><td>Selantes de fibrina</td><td>Hemostasia local em cirurgia</td><td>Aplicação local</td><td>Conforme produto</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="notas">
+      <h2>Notas — Vias, Quantidades e Tempo</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Vias</th><th>Quantidades</th><th>Tempo</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <div>VO — Via oral</div>
+                <div>IV — Intravenosa</div>
+                <div>IV Contínua — Infusão venosa contínua</div>
+                <div>SC — Subcutânea</div>
+                <div>IM — Intramuscular</div>
+                <div>T — Tópica (pomadas)</div>
+                <div>I — Injetável (infiltração/bloqueio)</div>
+                <div>VN — Via nasal / inalatória</div>
+                <div>TD — Transdérmica</div>
+              </td>
+              <td>
+                <div>mcg — Microgramas</div>
+                <div>mg — Miligramas</div>
+                <div>g — Gramas</div>
+                <div>kg — Quilogramas</div>
+                <div>% — Concentração</div>
+                <div><span class="pill">Bólus</span> — Dose única</div>
+              </td>
+              <td>
+                <div>seg — Segundos</div>
+                <div>min — Minutos</div>
+                <div>h — Horas</div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="small muted" style="margin-top:.5rem">Materiais úteis: Thrombocid (pisaduras), Bepanthene (queimaduras/cicatrização), Pomada antibiótica (pós-cirúrgico), Saco de soro (reanimação), Desfibrilhador (PCR), N<sub>2</sub>O (analgesia), Pomada de lidocaína (analgesia local), Ebastina (anti-histamínico), Dulcolax (laxante em intoxicações selecionadas).</div>
+    </section>
+
+    <footer class="container">
+      <hr>
+      <p class="small">© Serviços Hospitalares de San Andreas — Guia de Fármacos. Este documento não substitui protocolos clínicos.</p>
+    </footer>
+  </main>
+</body>
+</html>

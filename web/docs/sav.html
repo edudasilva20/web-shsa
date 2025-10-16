@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Manual de Suporte Avançado de Vida (SAV)</title>
+  <meta name="description" content="Versão HTML limpa, clara e profissional do Manual de SAV: monitorização, protocolos, PCR, via aérea, trauma torácico e emergências." />
+  <style>
+    :root{
+      --bg:#fbfbfd; --panel:#ffffff; --ink:#111827; --muted:#6b7280; --brand:#2563eb; --line:#e5e7eb; --ring: rgba(37,99,235,.18);
+    }
+    html{font-size:16px}
+    body{margin:0; background:var(--bg); color:var(--ink); font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; line-height:1.65}
+    .container{max-width:1040px; margin:0 auto; padding:0 1.25rem}
+    header{background:linear-gradient(180deg, #f6faff 0%, #fff 70%); border-bottom:1px solid var(--line)}
+    header .wrap{padding:3rem 0}
+    h1{margin:0 0 .4rem; font-size:clamp(1.8rem, 3vw, 2.6rem); letter-spacing:-.02em}
+    .subtitle{margin:0; color:var(--muted)}
+    .meta{display:flex; flex-wrap:wrap; gap:.5rem; align-items:center; margin-top:.85rem; color:var(--muted); font-size:.95rem}
+    .tag{border:1px solid var(--line); background:#fafafa; padding:.15rem .55rem; border-radius:999px}
+
+    nav.toc{background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:1rem 1.25rem; box-shadow:0 1px 2px rgba(0,0,0,.04); margin:1.25rem 0 1.5rem}
+    nav.toc h2{font-size:1rem; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); margin:.25rem 0 .75rem}
+    nav.toc ol{margin:0; padding-left:1.15rem}
+    nav.toc a{color:var(--brand); text-decoration:none}
+    nav.toc a:hover{text-decoration:underline}
+
+    main{padding:2rem 0 3rem}
+    section{background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:1.25rem 1.25rem 1.35rem; margin: 1.25rem 0; box-shadow:0 1px 2px rgba(0,0,0,.04)}
+    h2{font-size:1.35rem; letter-spacing:-.01em; margin:.15rem 0 .35rem}
+    h3{font-size:1.05rem; color:var(--muted); text-transform:uppercase; letter-spacing:.06em; margin-top:1rem}
+    ul, ol{padding-left:1.25rem}
+
+    .grid{display:grid; grid-template-columns: 1fr; gap:.9rem}
+    @media(min-width:900px){.grid{grid-template-columns: repeat(2, minmax(0,1fr))}}
+
+    .callout{border-left:4px solid var(--brand); background:#f8fbff; padding:.65rem 1rem; border-radius:8px; margin:.75rem 0}
+    .kpi{display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:.75rem; margin:.5rem 0}
+    .kpi .box{border:1px solid var(--line); border-radius:12px; padding:.75rem 1rem; background:#fff}
+    .small{font-size:.95rem}
+
+    footer{color:var(--muted); padding:2rem 0 4rem}
+
+    /* Print */
+    @media print{
+      header, nav.toc, section{box-shadow:none}
+      section{break-inside:avoid}
+      a{color:inherit !important; text-decoration:none}
+      body{background:#fff}
+      .container{max-width:760px}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container wrap">
+      <h1>Manual de Suporte Avançado de Vida (SAV)</h1>
+      <p class="subtitle">Guia prático: monitorização, protocolos, PCR, via aérea, trauma torácico, pneumotórax, EAP e desencarceramento.</p>
+      <div class="meta">
+        <span class="tag">Monitor MP</span>
+        <span class="tag">RCP • DAE • Fármacos</span>
+        <span class="tag">Trauma & Via Aérea</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <nav class="toc" aria-label="Índice">
+      <h2>Índice</h2>
+      <ol>
+        <li><a href="#intro">Introdução</a></li>
+        <li><a href="#chegada">Chegada ao local: prioridades</a></li>
+        <li><a href="#sec1">Secção 1 — Início</a>
+          <ol>
+            <li><a href="#monitor">Monitor multiparamétrico</a></li>
+            <li><a href="#glicosimetro">Glicosímetro</a></li>
+            <li><a href="#dor">Controlo da dor (0–10)</a></li>
+            <li><a href="#medicamentos">Medicamentos</a></li>
+          </ol>
+        </li>
+        <li><a href="#sec2">Secção 2 — Paragem Cardiorrespiratória</a>
+          <ol>
+            <li><a href="#rcp">RCP/CPR</a></li>
+            <li><a href="#passos">Passos e fármacos</a></li>
+            <li><a href="#toracica">Vítima com possíveis danos torácicos</a></li>
+          </ol>
+        </li>
+        <li><a href="#sec3">Secção 3 — Desobstrução da Via Aérea</a></li>
+        <li><a href="#sec4">Secção 4 — Protocolos (Monitor MP e Glicosímetro)</a></li>
+        <li><a href="#sec5">Secção 5 — Baleamento/Esfaqueamento</a></li>
+        <li><a href="#sec6">Secção 6 — Pneumotórax</a></li>
+        <li><a href="#sec7">Secção 7 — Edema Agudo Pulmonar (EAP)</a></li>
+        <li><a href="#extra">Secção Extra — Salvamento e Desencarceramento</a></li>
+      </ol>
+    </nav>
+
+    <section id="intro">
+      <h2>Introdução</h2>
+      <p><strong>SAV — Suporte Avançado de Vida</strong> complementa o SBV com intervenções avançadas de via aérea, monitorização, farmacologia e decisão clínica, iniciando-se <em>após</em> o SBV e visando reverter emergências graves.</p>
+      <div class="kpi small">
+        <div class="box"><strong>Objetivos</strong><br>Reconhecer PCR; gerir via aérea/ventilação; aplicar monitorização e fármacos; decidir rapidamente.</div>
+        <div class="box"><strong>Quando aplicar</strong><br>Sempre depois do SBV, conforme protocolo e recursos disponíveis.</div>
+      </div>
+    </section>
+
+    <section id="chegada">
+      <h2>Chegada ao local: prioridades</h2>
+      <ol>
+        <li><strong>Segurança da cena</strong> (trânsito, fogo, eletricidade, substâncias perigosas).</li>
+        <li><strong>Controlar curiosos</strong> e solicitar apoio policial se necessário.</li>
+        <li><strong>EPI</strong>: luvas etc., evitar exposição a fluidos.</li>
+        <li><strong>Monitorização</strong>: sinais vitais (FC, FR, Temp.), SpO₂, PA.</li>
+        <li><strong>Glicemia capilar</strong> com glicosímetro.</li>
+        <li><strong>Observação</strong>: hemorragia, convulsões, crise epiléptica, alteração de cor.</li>
+      </ol>
+    </section>
+
+    <section id="sec1">
+      <h2>Secção 1 — Início</h2>
+      <div class="grid">
+        <div>
+          <h3 id="monitor">Monitor multiparamétrico</h3>
+          <ul>
+            <li><strong>FC</strong>: 60–100 bpm (normal); &lt;60 bradicardia; &gt;100 taquicardia.</li>
+            <li><strong>FR</strong>: 12–20 rpm (normal); &lt;12 bradipneia; &gt;20 taquipneia.</li>
+            <li><strong>Temperatura</strong>: 36,1–37,2 °C; &lt;35 hipotermia; &gt;37,5 febre; &gt;41 hiperpirexia.</li>
+            <li><strong>SpO₂</strong>: 95–100% normal; &lt;90% hipoxemia; &gt;100% hiperóxia.</li>
+            <li><strong>PA</strong>: 120/80 mmHg (ref.); &lt;90 hipotensão; &gt;140/90 hipertensão.</li>
+          </ul>
+        </div>
+        <div>
+          <h3 id="glicosimetro">Glicosímetro</h3>
+          <p class="small"><strong>Índice glicémico (IG)</strong>: 0–55 baixo; 56–69 médio; ≥70 alto.</p>
+          <h3 id="dor">Controlo da dor (0–10)</h3>
+          <ul class="small">
+            <li>Baixa (1–3) → Paracetamol 650 mg IV</li>
+            <li>Moderada (4–6) → Tramadol 100 mg IV</li>
+            <li>Alta (7–9) → Fentanil 0,002–0,01 mg IV</li>
+            <li>Severa (10) → Fentanil 0,02 mg IV</li>
+          </ul>
+          <h3 id="medicamentos">Medicamentos</h3>
+          <ul class="small">
+            <li>Analgésico — dor</li>
+            <li>Anti-inflamatório — inflamação</li>
+            <li>Antibiótico — infeções bacterianas</li>
+          </ul>
+          <div class="callout small"><strong>Nota Hemotórax:</strong> considerar toracocentese (drenagem pleural) para aliviar compressão pulmonar, conforme protocolo.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="sec2">
+      <h2>Secção 2 — Paragem Cardiorrespiratória</h2>
+      <h3 id="rcp">RCP / CPR</h3>
+      <ul>
+        <li>Recordar SBV: rácio 30:2, ciclos contínuos até ajuda/retorno de sinais de vida/exaustão.</li>
+        <li>Perda de sobrevivência estimada ~10% por minuto sem intervenção.</li>
+      </ul>
+      <h3 id="passos">Passos e fármacos</h3>
+      <ol>
+        <li>Acesso IV após antissepsia (veia cubital/basílica mediana) e <em>debitar soro</em>.</li>
+        <li>Adrenalina 1 mg IV a cada 3–5 min se sem pulso.</li>
+        <li>Transporte imediato se possível, mantendo CPR/DAE/fármacos em curso.</li>
+      </ol>
+      <div class="callout small"><strong>Notas farmacológicas:</strong> Amiodarona (ritmos chocáveis persistentes: 300 mg, depois 150 mg); Atropina (bradicardia severa; não indicada em paragem); Bicarbonato (situações específicas: acidose grave, hipercaliemia, intoxicação TCA).</div>
+
+      <h3 id="toracica">Vítima com possíveis danos na zona torácica</h3>
+      <ul>
+        <li>Ausculta: avaliar diminuição/ausência/ruídos (pneumotórax/hemotórax).</li>
+        <li>Pneumotórax: descompressão com agulha quando indicado.</li>
+        <li>Hemotórax: sinais — dispneia, hipotensão/taquicardia, distensão jugular; transporte emergente.</li>
+      </ul>
+    </section>
+
+    <section id="sec3">
+      <h2>Secção 3 — Desobstrução da Via Aérea</h2>
+      <h3>Obstrução: classificação</h3>
+      <ul>
+        <li>Ligeira — tosse eficaz, reage.</li>
+        <li>Grave — incapaz de falar/tossir, estridor, sinal universal (mãos no pescoço).</li>
+      </ul>
+      <h3>Vítima consciente</h3>
+      <ol>
+        <li>Estimular tosse se eficaz.</li>
+        <li>Golpes interescapulares (até 5).</li>
+        <li>Compressões abdominais (Heimlich); em grávidas/obesos, compressões torácicas.</li>
+        <li>Reavaliar após cada ciclo.</li>
+      </ol>
+      <h3>Vítima inconsciente</h3>
+      <ol>
+        <li>Ativar SEM/112; iniciar CPR e DAE.</li>
+      </ol>
+      <div class="callout small">Se sem sucesso após ~6 min (5 ciclos CPR e 2–3 de DAE), transportar imediatamente; monitorizar e estabelecer acesso IV.</div>
+    </section>
+
+    <section id="sec4">
+      <h2>Secção 4 — Protocolos (Monitor MP e Glicosímetro)</h2>
+      <div class="grid">
+        <div>
+          <h3>Frequência Cardíaca (FC)</h3>
+          <p><strong>Bradicardia (&lt;60)</strong>: O₂ se hipóxia; atropina 0,5 mg IV cada 3–5 min (máx. 3 mg); (H) pacemaker transcutâneo se refratária.</p>
+          <p><strong>Taquicardia (&gt;100)</strong>: avaliar estabilidade; O₂; manobra vagal (técnica da seringa modificada); adenosina 6 mg IV, depois 12 mg se necessário; (H) amiodarona/procainamida para TV estável; cardioversão sincronizada se instável.</p>
+        </div>
+        <div>
+          <h3>Frequência Respiratória (FR)</h3>
+          <p><strong>Bradipneia (&lt;12)</strong>: abrir via aérea; O₂; BVM se preciso; tratar causa (ex.: naloxona em opioides); (H) intubação se ventilação inadequada.</p>
+          <p><strong>Taquipneia (&gt;20)</strong>: O₂; tratar causa (ansiedade, infeção, etc.); (H) ventilação assistida se necessário.</p>
+        </div>
+        <div>
+          <h3>Temperatura</h3>
+          <p><strong>Hipotermia (&lt;35 °C)</strong>: aquecimento passivo/ativo; (PH/H) CPR se PCR associada.</p>
+          <p><strong>Febre (&gt;37,5 °C)</strong>: antipiréticos; hidratação; (H) arrefecimento físico em hipertermia grave.</p>
+          <p><strong>Hiperpirexia (&gt;41 °C)</strong>: medidas agressivas de arrefecimento; suporte vital.</p>
+        </div>
+        <div>
+          <h3>SpO₂</h3>
+          <p><strong>Hipoxemia (&lt;90%)</strong>: O₂; monitorização; considerar ventilação mecânica; tratar causa (broncodilatadores, antibióticos, anticoagulação).</p>
+          <p><strong>Hiperóxia (&gt;100%)</strong>: reduzir O₂ e monitorizar.</p>
+        </div>
+        <div>
+          <h3>Pressão Arterial (PA)</h3>
+          <p><strong>Hipotensão (&lt;90/60)</strong>: fluidos IV; (H) vasopressores (noradrenalina/dopamina/epinefrina); pernas elevadas; tratar causa (hemorragia, infeção, IC).</p>
+          <p><strong>Hipertensão (&gt;140/90)</strong>: anti-hipertensivos (captopril, furosemida, beta-bloqueador); (H) vigilância; emergência (&gt;180/120) → considerar internamento.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="sec5">
+      <h2>Secção 5 — Baleamento/Esfaqueamento</h2>
+      <h3>Pré-hospitalar — membros</h3>
+      <ol>
+        <li>EPI e avaliação inicial (SBV).</li>
+        <li>Verificar pulso e via aérea.</li>
+        <li>Localizar entrada/saída do projétil.</li>
+        <li>Controlar hemorragia: compressão direta; torniquete 5 cm acima; após torniquete, compressão direta.</li>
+        <li>Curativo estéril; preparar punção IV (torniquete no membro <em>não</em> ferido).</li>
+        <li>Acesso IV, soro; opióides se necessário.</li>
+        <li>Se perda sanguínea importante: avaliar PA; considerar transfusão de emergência O−.</li>
+        <li>Imobilização, plano duro, transporte urgente.</li>
+      </ol>
+      <h3>Pré-hospitalar — tórax/costas</h3>
+      <ol>
+        <li>SBV/EPI; pulso e via aérea.</li>
+        <li>Controlar hemorragia: compressão direta; spray hemostático conforme protocolo; curativo estéril.</li>
+        <li>Acesso IV, soro; analgesia.</li>
+        <li>Imobilização e transporte.</li>
+      </ol>
+      <h3>Hospital — projétil alojado</h3>
+      <ol>
+        <li>Estabilizar; hemorragia; escala de Glasgow (GCS&lt;8 → intubação).</li>
+        <li>Fluidos/monitor MP; exames (RX, eco). Operar no bloco se instável.</li>
+        <li>Anestesia geral para tronco/cabeça/pescoço/peito/costas/barriga; esterilizar; incisão; alargador; sucção.</li>
+        <li>Se órgão afetado: sutura com fio absorvível.</li>
+        <li>Se osso fraturado: osteotomia/placas/parafusos; cola óssea no tronco quando indicado.</li>
+        <li>Esterilização; sutura/agrafos; pomada; penso inadine.</li>
+      </ol>
+      <h3>Hospital — projétil atravessado</h3>
+      <ol>
+        <li>Estabilizar; GCS; soro/monitor.</li>
+        <li>RX + eco; anestesia geral conforme localização.</li>
+        <li>Esterilizar ambos os lados; sutura ponto a ponto com fio absorvível; penso inadine bilateral.</li>
+      </ol>
+    </section>
+
+    <section id="sec6">
+      <h2>Secção 6 — Pneumotórax</h2>
+      <h3>Definição</h3>
+      <p>Presença de ar no espaço pleural com colapso pulmonar parcial/total.</p>
+      <h3>Sintomas</h3>
+      <ul>
+        <li>Dor súbita que piora à inspiração; dispneia; cianose; taquicardia; tosse persistente.</li>
+      </ul>
+      <h3>Tratamento (PH)</h3>
+      <ol>
+        <li>Descompressão com agulha quando indicado.</li>
+        <li>Ausculta para lateralização.</li>
+        <li>Ponto de punção típico: 2º–3º espaço intercostal.</li>
+      </ol>
+      <h3>Tratamento (H — sem cirurgia)</h3>
+      <ol>
+        <li>RX diagnóstico e extensão.</li>
+        <li>Oxigénio se hipoxemia.</li>
+        <li><strong>Pequeno e assintomático</strong>: observação + O₂; RX de reavaliação em 24–48 h.</li>
+        <li><strong>Maior/sintomático</strong>: aspiração simples (agulha/cateter) e RX seriados.</li>
+        <li><strong>Grande/Recorrente/Tenso</strong>: drenagem torácica (5º–6º EIC, linha axilar/média) com selo de água; monitorizar; sucção se necessário.</li>
+        <li>Cuidados pós-dreno: RX de controlo; vigiar fuga aérea; retirar dreno após reexpansão.</li>
+        <li>Evitar mergulho/avião/exercício intenso na recuperação.</li>
+      </ol>
+      <h3>Tratamento (H — com cirurgia)</h3>
+      <p>Indicado em recorrência, fístula broncopleural persistente ou falha da drenagem. Pleurodese química/mecânica e/ou resseção de bolhas (frequentemente por toracoscopia).</p>
+    </section>
+
+    <section id="sec7">
+      <h2>Secção 7 — Edema Agudo Pulmonar (EAP)</h2>
+      <h3>Definição</h3>
+      <p>Acumulação rápida de líquido nos pulmões por falência cardíaca ou outras causas, levando a hipoxemia e dispneia grave.</p>
+      <h3>Pré-hospitalar</h3>
+      <ol>
+        <li>SBV; O₂ para manter SpO₂ adequada.</li>
+        <li>Acesso IV; adrenalina 1 mg a cada ~3 min se indicado por protocolo.</li>
+        <li>Intubação/alto débito de O₂ se insuficiência respiratória.</li>
+        <li>Se PCR, seguir protocolo de paragem.</li>
+      </ol>
+      <h3>Hospitalar</h3>
+      <ol>
+        <li>Avaliação rápida: sintomas, sinais vitais, exame físico; monitorização.</li>
+        <li>Posição semi-sentada (Fowler).</li>
+        <li>O₂; VNI (CPAP/BiPAP) se refratário; intubação se falência iminente.</li>
+        <li>Fármacos: diuréticos (furosemida 20–40 mg IV), vasodilatadores (nitroglicerina IV), morfina (uso reservado), inotrópicos (dobutamina) se choque/IC grave.</li>
+        <li>Tratar a causa (cardiogénica vs. não cardiogénica) e monitorização contínua.</li>
+      </ol>
+    </section>
+
+    <section id="extra">
+      <h2>Secção Extra — Salvamento e Desencarceramento</h2>
+      <h3>Normal</h3>
+      <ol>
+        <li>EPI; orientar a vítima.</li>
+        <li>Abrir porta; estancar hemorragias; talas se fratura suspeita.</li>
+        <li>Colar cervical; colete imobilizador com ajuste por cintos; fixação da cabeça.</li>
+        <li>Plano duro por trás; retirar vítima com movimentos controlados; evitar movimentos bruscos.</li>
+      </ol>
+      <h3>Rapidez</h3>
+      <ol>
+        <li>EPI; instruir a vítima; libertar/cortar cinto.</li>
+        <li>Técnica de Rauteck: controlo do maxilar/cervical, rotação e extração para zona segura.</li>
+        <li>Transferir para plano duro mantendo alinhamento cefalo-caudal.</li>
+      </ol>
+    </section>
+
+    <footer class="container">
+      <hr>
+      <p class="small">© Serviços Hospitalares de San Andreas — Guia de Suporte Avançado de Vida. Este documento não substitui protocolos clínicos.</p>
+    </footer>
+  </main>
+</body>
+</html>

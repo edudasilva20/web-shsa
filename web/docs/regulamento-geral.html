@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Regulamento Geral – SHSA</title>
+  <meta name="description" content="Regulamento Geral dos Serviços Hospitalares de San Andreas (SHSA)" />
+  <style>
+    :root{
+      --bg: #fbfbfd;
+      --panel: #ffffff;
+      --ink: #1f2937;
+      --muted: #6b7280;
+      --brand: #2563eb;
+      --accent: #e5e7eb;
+      --ring: rgba(37, 99, 235, .2);
+    }
+    @media (prefers-color-scheme: light){:root{--bg:#fbfbfd}}
+    html{font-size:16px}
+    body{
+      margin:0; background:var(--bg); color:var(--ink);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      line-height:1.6;
+    }
+    .container{max-width: 980px; margin: 4rem auto; padding: 0 1.25rem}
+    header{
+      background: linear-gradient(180deg, #f7faff 0%, #fff 60%);
+      border-bottom:1px solid var(--accent);
+    }
+    header .container{margin:0 auto; padding:3rem 1.25rem}
+    h1{
+      font-size: clamp(1.8rem, 2.6vw, 2.4rem);
+      line-height:1.2; margin:0 0 .5rem 0;
+      letter-spacing: -.02em;
+    }
+    .subtitle{color:var(--muted); margin:0}
+    .meta{display:flex; gap:.75rem; align-items:center; margin-top:.75rem; color:var(--muted); font-size:.95rem}
+    .tag{border:1px solid var(--accent); background:#fafafa; padding:.15rem .5rem; border-radius:999px}
+    nav.toc{
+      background:var(--panel);
+      border: 1px solid var(--accent);
+      border-radius: 14px;
+      padding: 1rem 1.25rem;
+      box-shadow: 0 1px 2px rgba(0,0,0,.04);
+    }
+    nav.toc h2{font-size:1rem; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); margin:.25rem 0 .75rem}
+    nav.toc ol{margin:0; padding-left:1.1rem}
+    nav.toc a{color:var(--brand); text-decoration:none}
+    nav.toc a:hover{text-decoration:underline}
+    section{background:var(--panel); border:1px solid var(--accent); border-radius:16px; padding:1.25rem 1.25rem 1.35rem; margin: 1.25rem 0; box-shadow:0 1px 2px rgba(0,0,0,.04)}
+    section h2{margin-top:.25rem; letter-spacing:-.01em}
+    h2{font-size:1.35rem}
+    h3{font-size:1.05rem; color:var(--muted); text-transform:uppercase; letter-spacing:.06em}
+    ul, ol{padding-left:1.25rem}
+    table{width:100%; border-collapse:collapse; margin:.5rem 0 0}
+    th, td{border:1px solid var(--accent); padding:.6rem .7rem; text-align:left; vertical-align:top}
+    th{background:#f8fafc; font-weight:600}
+    .callout{border-left:4px solid var(--brand); padding: .5rem 1rem; background: #f8fbff; border-radius:8px}
+    .small{font-size:.95rem}
+    .muted{color:var(--muted)}
+    footer{color:var(--muted); padding:2rem 0 4rem}
+    a.anchor{color:inherit; text-decoration:none}
+    a.anchor:hover{text-decoration:underline}
+    hr{border:0; border-top:1px solid var(--accent); margin:2rem 0}
+    /* Print */
+    @media print{
+      header, nav.toc {box-shadow:none}
+      section{break-inside: avoid}
+      a{color: inherit !important; text-decoration: none}
+      .container{margin:1rem auto}
+      body{background:#fff}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Regulamento Geral – SHSA</h1>
+      <p class="subtitle">Serviços Hospitalares de San Andreas.</p>
+      <div class="meta">
+        <span class="tag">Departamento Administrativo</span>
+        <span>Vigência: 01/01/2025 – 31/12/2030</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <nav class="toc" aria-label="Índice">
+      <h2>Índice</h2>
+      <ol>
+        <li><a href="#intro">Introdução</a></li>
+        <li><a href="#normas-gerais">Normas Gerais</a>
+          <ol>
+            <li><a href="#cuidados-paciente">Cuidados com o Paciente</a></li>
+            <li><a href="#conduta-profissional">Conduta Profissional</a></li>
+            <li><a href="#normas-operacionais">Normas Operacionais e Administrativas</a></li>
+            <li><a href="#biosseguranca">Biossegurança e Controlo de Infeções</a></li>
+            <li><a href="#gestao-crises">Gestão de Crises e Emergências</a></li>
+            <li><a href="#relacao-pacientes">Relação com Pacientes e Familiares</a></li>
+            <li><a href="#melhoria-continua">Melhoria Contínua</a></li>
+          </ol>
+        </li>
+        <li><a href="#estrutura">Estrutura Organizacional e Códigos Funcionais</a></li>
+        <li><a href="#disciplina">Procedimentos Disciplinares</a></li>
+        <li><a href="#finais">Considerações Finais</a></li>
+      </ol>
+    </nav>
+
+    <section id="intro">
+      <h2>Introdução</h2>
+      <p>O presente regulamento tem por finalidade estabelecer as diretrizes gerais de conduta, operação e ética profissional aplicáveis a todos os membros dos <strong>Serviços Hospitalares de San Andreas (SHSA)</strong>. Estas normas visam garantir um ambiente seguro, humanizado e altamente eficiente, promovendo a excelência na prestação de cuidados de saúde à comunidade.</p>
+      <p>Todos os profissionais vinculados ao SHSA deverão seguir rigorosamente as disposições aqui estabelecidas, assegurando a integridade institucional, a qualidade dos serviços e o bem-estar de pacientes, colaboradores e visitantes.</p>
+    </section>
+
+    <section id="normas-gerais">
+      <h2>Normas Gerais</h2>
+
+      <h3 id="cuidados-paciente">2.1 Cuidados com o Paciente</h3>
+      <ol>
+        <li><strong>Direitos e Privacidade</strong>
+          <ul>
+            <li>Garantir a confidencialidade das informações do paciente;</li>
+            <li>Obter consentimento informado antes de qualquer procedimento;</li>
+            <li>Informar de forma clara sobre diagnósticos, tratamentos e prognósticos.</li>
+          </ul>
+        </li>
+        <li><strong>Qualidade Assistencial</strong>
+          <ul>
+            <li>Assegurar a prestação de cuidados baseados em evidências e boas práticas;</li>
+            <li>Monitorar constantemente os desfechos clínicos;</li>
+            <li>Realizar avaliações contínuas para aprimoramento da qualidade assistencial.</li>
+          </ul>
+        </li>
+        <li><strong>Segurança do Paciente</strong>
+          <ul>
+            <li>Seguir protocolos para prevenção de erros, infeções e eventos adversos;</li>
+            <li>Promover auditorias e simulações periódicas de segurança.</li>
+          </ul>
+        </li>
+      </ol>
+
+      <h3 id="conduta-profissional">2.2 Conduta Profissional</h3>
+      <ol>
+        <li><strong>Ética e Postura</strong>
+          <ul>
+            <li>Agir com integridade, respeito e imparcialidade em todas as interações;</li>
+            <li>Manter limites profissionais adequados;</li>
+            <li>Evitar qualquer conflito de interesse.</li>
+          </ul>
+        </li>
+        <li><strong>Competência Técnica</strong>
+          <ul>
+            <li>Possuir formação adequada e atualizada para o exercício da função;</li>
+            <li>Participar de forma contínua em programas de capacitação e reciclagem.</li>
+          </ul>
+        </li>
+        <li><strong>Comunicação e Colaboração</strong>
+          <ul>
+            <li>Garantir uma comunicação clara e eficiente entre os setores;</li>
+            <li>Manter-se na frequência de rádio institucional durante o serviço;</li>
+            <li>Atuar de forma colaborativa, promovendo o trabalho em equipa.</li>
+          </ul>
+        </li>
+      </ol>
+
+      <h3 id="normas-operacionais">2.3 Normas Operacionais e Administrativas</h3>
+      <ol>
+        <li><strong>Registos e Documentação</strong>
+          <ul>
+            <li>Manter registos clínicos e administrativos precisos e atualizados;</li>
+            <li>Garantir a segurança e confidencialidade de todos os dados sensíveis.</li>
+          </ul>
+        </li>
+        <li><strong>Gestão de Recursos</strong>
+          <ul>
+            <li>Utilizar os recursos hospitalares de forma responsável e sustentável;</li>
+            <li>É vedado o uso ou comercialização de consumíveis hospitalares sem justificação e autorização expressa da Direção.</li>
+          </ul>
+        </li>
+        <li><strong>Conformidade Legal</strong>
+          <ul>
+            <li>Cumprir integralmente as normas de saúde vigentes em âmbito local;</li>
+            <li>Manter a conformidade institucional com as legislações aplicáveis.</li>
+          </ul>
+        </li>
+      </ol>
+
+      <h3 id="biosseguranca">2.4 Biossegurança e Controlo de Infeções</h3>
+      <ul>
+        <li>Cumprir rotinas rigorosas de higienização pessoal e do ambiente;</li>
+        <li>Adotar protocolos de isolamento de pacientes infectocontagiosos;</li>
+        <li>Realizar treinos periódicos sobre prevenção e controlo de infeções.</li>
+      </ul>
+
+      <h3 id="gestao-crises">2.5 Gestão de Crises e Emergências</h3>
+      <ul>
+        <li>Ter pleno conhecimento do plano institucional de resposta a emergências;</li>
+        <li>Participar nos treinos e simulacros obrigatórios;</li>
+        <li>Garantir a prontidão para atuação em desastres naturais ou provocados.</li>
+      </ul>
+
+      <h3 id="relacao-pacientes">2.6 Relação com Pacientes e Familiares</h3>
+      <ul>
+        <li>Tratar todos os indivíduos com empatia, respeito e dignidade;</li>
+        <li>Acolher as diversidades culturais, sociais e religiosas;</li>
+        <li>Incentivar o envolvimento familiar no processo de cuidados, quando pertinente.</li>
+      </ul>
+
+      <h3 id="melhoria-continua">2.7 Melhoria Contínua</h3>
+      <ul>
+        <li>Estimular e acolher sugestões, críticas e denúncias através dos canais apropriados;</li>
+        <li>Utilizar o feedback como ferramenta de aprimoramento institucional;</li>
+        <li>Promover revisões periódicas de protocolos e políticas com base em evidências atualizadas.</li>
+      </ul>
+    </section>
+
+    <section id="estrutura">
+      <h2>Estrutura Organizacional e Códigos Funcionais</h2>
+      <div class="small muted">Faixas de códigos e responsabilidades principais por cargo.</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Cargo</th>
+            <th>Faixa de Códigos</th>
+            <th>Responsabilidades principais</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Direção e Chefias</td>
+            <td>401–409</td>
+            <td>Gestão estratégica, administrativa e financeira; formação de equipas; articulação interinstitucional.</td>
+          </tr>
+          <tr>
+            <td>Médicos</td>
+            <td>410–429</td>
+            <td>Diagnóstico, tratamento, coordenação de cuidados e documentação clínica.</td>
+          </tr>
+          <tr>
+            <td>Psicólogos/Enfermeiros</td>
+            <td>430–439</td>
+            <td>Apoio psicológico e assistência integral ao paciente.</td>
+          </tr>
+          <tr>
+            <td>Estagiários</td>
+            <td>440–449</td>
+            <td>Apoio administrativo e operacional, sob supervisão.</td>
+          </tr>
+          <tr>
+            <td>Segurança</td>
+            <td>450–459</td>
+            <td>Controlo de acesso, segurança patrimonial e resposta a emergências.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="disciplina">
+      <h2>Procedimentos Disciplinares</h2>
+
+      <h3>Investigação</h3>
+      <ul>
+        <li>Toda infração será apurada de forma justa e confidencial pela Direção;</li>
+        <li>O profissional terá direito à defesa e será ouvido formalmente;</li>
+        <li>Os fatos serão documentados e arquivados em relatório oficial.</li>
+      </ul>
+
+      <h3>Medidas</h3>
+      <ul>
+        <li>Sanções poderão incluir advertência e suspensão;</li>
+        <li>O comunicado será formal, fundamentado e entregue por escrito ao servidor.</li>
+      </ul>
+
+      <h3>Suspensões</h3>
+      <ul>
+        <li>Serão aplicadas em casos de gravidade ou durante investigações;</li>
+        <li>A duração será definida conforme o caso e comunicada oficialmente;</li>
+        <li>A reintegração dependerá da análise final do caso pela Direção.</li>
+      </ul>
+
+      <div class="callout small" role="note">
+        <strong>Nota:</strong> Procedimentos disciplinares obedecem à legislação aplicável e às políticas internas vigentes.
+      </div>
+    </section>
+
+    <section id="finais">
+      <h2>Considerações Finais</h2>
+      <p>Este regulamento deverá ser lido, compreendido e respeitado por todos os membros do SHSA. Dúvidas, sugestões ou pedidos de revisão devem ser encaminhados ao Departamento Administrativo.</p>
+    </section>
+
+    <footer class="container">
+      <hr>
+      <p class="small">© Serviços Hospitalares de San Andreas — Regulamento Geral. Vigência: 2025–2030.</p>
+    </footer>
+  </main>
+</body>
+</html>

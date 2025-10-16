@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Guia Institucional — Bloco Operatório — Serviços Hospitalares de San Andreas</title>
+  <meta name="description" content="Guia institucional em português de Portugal para o Bloco Operatório: pinças, materiais cirúrgicos, compatibilidade sanguínea e equipamentos/estrutura do bloco. Leve, responsivo e pronto para impressão." />
+  <style>
+    :root{
+      --bg: #fbfbfd;
+      --panel: #ffffff;
+      --ink: #1f2937;
+      --muted: #6b7280;
+      --brand: #2563eb;
+      --accent: #e5e7eb;
+      --ring: rgba(37, 99, 235, .2);
+    }
+    html{font-size:16px}
+    body{margin:0; background:var(--bg); color:var(--ink); font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; line-height:1.6}
+    .container{max-width: 1100px; margin: 4rem auto; padding: 0 1.25rem}
+    header{background: linear-gradient(180deg, #f7faff 0%, #fff 60%); border-bottom:1px solid var(--accent)}
+    header .container{margin:0 auto; padding:3rem 1.25rem}
+    h1{font-size: clamp(1.8rem, 2.6vw, 2.4rem); line-height:1.2; margin:0 0 .5rem 0; letter-spacing: -.02em}
+    .subtitle{color:var(--muted); margin:0}
+    .meta{display:flex; gap:.75rem; align-items:center; margin-top:.75rem; color:var(--muted); font-size:.95rem}
+    .tag{border:1px solid var(--accent); background:#fafafa; padding:.15rem .5rem; border-radius:999px}
+    nav.toc{background:var(--panel); border: 1px solid var(--accent); border-radius: 14px; padding: 1rem 1.25rem; box-shadow: 0 1px 2px rgba(0,0,0,.04)}
+    nav.toc h2{font-size:1rem; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); margin:.25rem 0 .75rem}
+    nav.toc ol{margin:0; padding-left:1.1rem}
+    nav.toc a{color:var(--brand); text-decoration:none}
+    nav.toc a:hover{text-decoration:underline}
+    section{background:var(--panel); border:1px solid var(--accent); border-radius:16px; padding:1.25rem 1.25rem 1.35rem; margin: 1.25rem 0; box-shadow:0 1px 2px rgba(0,0,0,.04)}
+    section h2{margin-top:.25rem; letter-spacing:-.01em}
+    h2{font-size:1.35rem}
+    h3{font-size:1.05rem; color:var(--ink); letter-spacing:-.01em}
+    .small{font-size:.95rem}
+    .muted{color:var(--muted)}
+    .callout{border-left:4px solid var(--brand); padding: .5rem 1rem; background: #f8fbff; border-radius:8px}
+    a.anchor{color:inherit; text-decoration:none}
+    a.anchor:hover{text-decoration:underline}
+    hr{border:0; border-top:1px solid var(--accent); margin:2rem 0}
+    /* Cards & grids */
+    .grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1rem}
+    .card{border:1px solid var(--accent); border-radius:14px; padding:1rem; background:#fff}
+    .card h3{margin:.25rem 0 .35rem}
+    .pill{display:inline-block; padding:.12rem .5rem; border-radius:999px; border:1px solid var(--accent); background:#f9fafb; font-size:.8rem; margin:.15rem .25rem .15rem 0}
+    .list{margin:.35rem 0 0 .9rem}
+    .list li{margin:.15rem 0}
+    /* Tabelas */
+    .table-wrap{overflow:auto; -webkit-overflow-scrolling:touch}
+    table{width:100%; border-collapse:collapse; margin:.75rem 0 0}
+    th, td{border:1px solid var(--accent); padding:.6rem .7rem; text-align:center; vertical-align:top}
+    th{background:#f8fafc; font-weight:600}
+    tbody tr:nth-child(even){background:#fcfdff}
+    /* Print */
+    @media print{
+      header, nav.toc {box-shadow:none}
+      section{break-inside: avoid}
+      a{color: inherit !important; text-decoration: none}
+      .container{margin:1rem auto}
+      body{background:#fff}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Guia do Bloco Operatório</h1>
+      <p class="subtitle">Pinças, Materiais, Tipos Sanguíneos, Equipamentos & Estrutura</p>
+      <div class="meta">
+        <span class="tag">Uso interno</span>
+        
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <nav class="toc" aria-label="Índice">
+      <h2>Índice</h2>
+      <ol>
+        <li><a href="#intro">Introdução & Aviso</a></li>
+        <li><a href="#pincas">Pinças cirúrgicas</a></li>
+        <li><a href="#sangue">Tipos sanguíneos — Compatibilidade</a></li>
+        <li><a href="#materiais">Materiais cirúrgicos</a></li>
+        <li><a href="#equipamentos">Equipamentos e Estrutura do Bloco Operatório</a></li>
+        <li><a href="#notas">Notas & Boas práticas</a></li>
+      </ol>
+    </nav>
+
+    <section id="intro">
+      <h2>Introdução & Aviso</h2>
+      <div class="callout small">
+       Esta guia resume instrumentos, equipamentos e conceitos úteis no bloco operatório. Não substitui protocolos institucionais, ordens médicas, nem normas de controlo de infeção/esterilização.
+      </div>
+    </section>
+
+    <section id="pincas">
+      <h2>Pinças cirúrgicas</h2>
+      <div class="grid">
+        <article class="card" id="adson">
+          <h3><a class="anchor" href="#adson">Pinça Adson</a></h3>
+          <p>Pequena e precisa para <em>tecidos delicados</em> (plástica, dermatologia, oftalmologia, estomatologia). Pontas frequentemente dentadas para maior aderência.</p>
+          <div><span class="pill">preensão</span><span class="pill">delicada</span></div>
+        </article>
+        <article class="card" id="allis">
+          <h3><a class="anchor" href="#allis">Pinça Allis</a></h3>
+          <p>Segura tecidos mais robustos/lesionados; muito usada em abdómen e intestino. Mordida firme graças aos dentes.</p>
+          <div><span class="pill">preensão</span><span class="pill">tecido robusto</span></div>
+        </article>
+        <article class="card" id="doyen">
+          <h3><a class="anchor" href="#doyen">Pinça Doyen</a></h3>
+          <p>Indicada em exames ginecológicos/retais e para remoção de tecidos (biópsias). Geometria favorável ao trabalho em cavidade.</p>
+          <div><span class="pill">especial</span><span class="pill">ginecológica/rectal</span></div>
+        </article>
+        <article class="card" id="bulldog">
+          <h3><a class="anchor" href="#bulldog">Pinça Bulldog</a></h3>
+          <p>Robusta, para <em>reposição e fixação</em> de tecidos densos (músculo, gordura). Comum em ortopedia e cirurgia plástica.</p>
+          <div><span class="pill">preensão forte</span><span class="pill">ortopedia</span></div>
+        </article>
+        <article class="card" id="halstead">
+          <h3><a class="anchor" href="#halstead">Pinça Halstead (Mosquito)</a></h3>
+          <p>Hemostática fina para clampear vasos pequenos e aceder a áreas de difícil alcance com precisão.</p>
+          <div><span class="pill">hemostática</span><span class="pill">fina</span></div>
+        </article>
+        <article class="card" id="kocher">
+          <h3><a class="anchor" href="#kocher">Pinça Kocher</a></h3>
+          <p>Hemostática dentada clássica, criada por Emil Theodor Kocher. Excelente para pinçar, grampear e controlar hemorragias.</p>
+          <div><span class="pill">hemostática</span><span class="pill">com dentes</span></div>
+        </article>
+      </div>
+      <p class="small muted" style="margin-top:.75rem">
+        Dica: <strong>retas</strong> dão maior controlo superficial; <strong>curvas</strong> alcançam regiões profundas. <strong>Traumáticas</strong> (dentadas) fixam com firmeza; <strong>atraumáticas</strong> (ranhuradas) protegem vísceras/vasos.
+      </p>
+    </section>
+
+    <section id="sangue">
+      <h2>Tipos sanguíneos — compatibilidade</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Tipo</th>
+              <th>Recebe de</th>
+              <th>Doa para</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>A+</td><td>A+, A-, O+, O-</td><td>A+, AB+</td></tr>
+            <tr><td>A-</td><td>A-, O-</td><td>A+, A-, AB+, AB-</td></tr>
+            <tr><td>B+</td><td>B+, B-, O+, O-</td><td>B+, AB+</td></tr>
+            <tr><td>B-</td><td>B-, O-</td><td>B+, B-, AB+, AB-</td></tr>
+            <tr><td>AB+</td><td>Todos</td><td>AB+</td></tr>
+            <tr><td>AB-</td><td>A-, B-, AB-, O-</td><td>AB+, AB-</td></tr>
+            <tr><td>O+</td><td>O+, O-</td><td>A+, B+, AB+, O+</td></tr>
+            <tr><td>O-</td><td>O-</td><td>Todos</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="materiais">
+      <h2>Materiais cirúrgicos</h2>
+      <div class="grid">
+        <article class="card" id="tesouras">
+          <h3>Tesouras cirúrgicas</h3>
+          <p><strong>Metzenbaum</strong>: finas, para tecidos delicados/ dissecção. <br>
+             <strong>Mayo</strong>: robustas, para tecidos densos/ fáscias. <br>
+             <strong>Íris</strong>: pequenas, de precisão (oftálmica/dermato).</p>
+          <div><span class="pill">dissecção</span><span class="pill">tecido delicado</span><span class="pill">tecido denso</span></div>
+        </article>
+
+        <article class="card" id="bisturis">
+          <h3>Bisturis & lâminas</h3>
+          <p><strong>Cabos</strong>: nº3 (lâminas 10/11/12/15), nº4 (lâminas 20/21/22/23/24). <br>
+             <strong>Lâmina 10</strong>: incisão de pele/tecidos moles. <br>
+             <strong>11</strong>: punção/ drenagem. <br>
+             <strong>15</strong>: cortes curtos/ precisão. <br>
+             <strong>20–24</strong>: cortes mais extensos/ robustos.</p>
+          <div><span class="pill">incisão</span><span class="pill">precisão</span><span class="pill">punção</span></div>
+        </article>
+
+        <article class="card" id="campos">
+          <h3>Campos, compressas e gazes</h3>
+          <p><strong>Campos estéreis</strong> para isolamento do campo operatório. <br>
+             <strong>Compressas</strong> com marcador radiopaco; contagem rigorosa. <br>
+             <strong>Gazes</strong> para absorção/ limpeza; evitar fibras soltas em cavidade.</p>
+          <div><span class="pill">assepsia</span><span class="pill">hemostasia</span><span class="pill">segurança</span></div>
+        </article>
+
+        <article class="card" id="aspiracao">
+          <h3>Dispositivos de aspiração</h3>
+          <p><strong>Yankauer</strong>: universal, ponta bulbosa. <br>
+             <strong>Poole</strong>: múltiplos orifícios, ideal em cavidade abdominal. <br>
+             <strong>Frazier</strong>: fino, neuro/ORL; atenção à pressão negativa.</p>
+          <div><span class="pill">aspiração</span><span class="pill">ORL/neuro</span><span class="pill">abdominal</span></div>
+        </article>
+
+        <article class="card" id="porta-agulhas">
+          <h3>Porta-agulhas</h3>
+          <p>Instrumentos para <strong>manter e guiar a agulha</strong> durante a sutura (p.ex., Mayo-Hegar, Crile-Wood). Manutenção: cremalheira íntegra, faces de apreensão alinhadas.</p>
+          <div><span class="pill">suturas</span><span class="pill">controlo</span></div>
+        </article>
+
+        <article class="card" id="afastadores">
+          <h3>Afastadores</h3>
+          <p><strong>Farabeuf</strong>: manual, versátil em tecidos superficiais. <br>
+             <strong>Weitlaner</strong>: autoestático, usado em tecidos superficiais; dentes finos. <br>
+             <strong>Richardson</strong>: cavidade abdominal; lâmina profunda. <br>
+             <strong>Senn-Miller</strong>: dupla ponta (gancho/espátula) para pequenas incisões.</p>
+          <div><span class="pill">exposição</span><span class="pill">autoestático</span><span class="pill">profundidade</span></div>
+        </article>
+
+        <article class="card" id="pinças-campo">
+          <h3>Pinças de campo</h3>
+          <p><strong>Backhaus</strong> e semelhantes para fixação de campos/ panos cirúrgicos. Evitar perfuração excessiva da pele; aplicar sobre campo.</p>
+          <div><span class="pill">fixação de campo</span><span class="pill">assepsia</span></div>
+        </article>
+
+        <article class="card" id="medicao">
+          <h3>Medida & sondagem</h3>
+          <p><strong>Sondas</strong> e <strong>palpadores</strong> para explorar trajetos, medir profundidade e avaliar cavidades/ fístulas; uso gentil para evitar iatrogenia.</p>
+          <div><span class="pill">avaliação</span><span class="pill">exploração</span></div>
+        </article>
+
+        <article class="card" id="eletrocirurgia-nota">
+          <h3>Eletrocirurgia (nota rápida)</h3>
+          <p><strong>Monopolar</strong> para corte/ coagulação; <strong>bipolar</strong> para hemostasia precisa. Verificar posição da placa neutra, pele íntegra e parâmetros conforme protocolo.</p>
+          <div><span class="pill">corte</span><span class="pill">coagulação</span><span class="pill">segurança</span></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="equipamentos">
+      <h2>Equipamentos e Estrutura do Bloco Operatório</h2>
+
+      <div class="grid">
+        <article class="card" id="aspiracao-sistema">
+          <h3>🧼 Aspiração / Sucção</h3>
+          <ul class="list">
+            <li>Sistema de aspiração central (rede hospitalar) e aspiradores móveis de reserva.</li>
+            <li>Frascos de aspiração (vidro/plástico autoclavável) com <strong>filtros antibacterianos/antivírus</strong>.</li>
+            <li>Cânulas: <em>Yankauer</em> (universal), <em>Poole</em> (cavidades), <em>Frazier</em> (neuro/ORL) e tubos estéreis.</li>
+          </ul>
+          <p class="small muted">Checklist: testar pressão negativa; substituir filtros/linhas conforme protocolo; etiquetar e registar volumes.</p>
+          <div><span class="pill">aspiração</span><span class="pill">controlo de infeção</span></div>
+        </article>
+
+        <article class="card" id="eletrocirurgia">
+          <h3>⚡ Eletrocirurgia</h3>
+          <ul class="list">
+            <li>Gerador com modos <strong>monopolar</strong> e <strong>bipolar</strong>; canetas, pedais e pinças bipolares.</li>
+            <li>Placa neutra (elétrodo dispersivo) e sistema de evacuação de fumos.</li>
+            <li>Cabos íntegros, potência/mode verificados, alarmes audíveis.</li>
+          </ul>
+          <p class="small muted">Segurança: pele seca/íntegra para placa; evitar áreas ósseas/proeminências; inspeção elétrica periódica.</p>
+          <div><span class="pill">corte</span><span class="pill">coagulação</span><span class="pill">segurança</span></div>
+        </article>
+
+        <article class="card" id="anestesia-monitorizacao">
+          <h3>🌡 Anestesia & Monitorização</h3>
+          <ul class="list">
+            <li>Máquina de anestesia (gases, ventilador, vaporizadores) com teste diário.</li>
+            <li>Monitor multiparamétrico: ECG, SpO₂, PNI, ETCO₂, temperatura, capnografia.</li>
+            <li>Bombas de perfusão e seringas; aquecimento ativo (mantas/fluídos).</li>
+            <li>Aspirador dedicado à anestesia; reserva de O₂ e consumíveis.</li>
+          </ul>
+          <p class="small muted">Procedimentos: lista de verificação pré-indução; alarmes ativados; stocks de emergência.</p>
+          <div><span class="pill">anestesia</span><span class="pill">monitorização</span></div>
+        </article>
+
+        <article class="card" id="equip-auxiliares">
+          <h3>🧰 Equipamentos auxiliares</h3>
+          <ul class="list">
+            <li>Mesas: <strong>Mayo</strong> (sobre o campo), <strong>instrumentos</strong>, <strong>anestesia</strong>.</li>
+            <li>Carro de urgência (reanimação) com desfibrilhador e medicação ACLS.</li>
+            <li>Carros de apoio: suturas, compressas, próteses, reposição.</li>
+            <li>Aquecedor de fluidos e aquecedor de ar forçado.</li>
+            <li>Contentores e depósitos segregados: cortantes, infecciosos, comuns.</li>
+          </ul>
+          <div><span class="pill">apoio</span><span class="pill">reanimação</span></div>
+        </article>
+
+        <article class="card" id="iluminacao-visualizacao">
+          <h3>💡 Iluminação & Visualização</h3>
+          <ul class="list">
+            <li>Foco cirúrgico de teto (ajustável) e foco auxiliar móvel.</li>
+            <li>Torres de endoscopia/laparoscopia: coluna de vídeo, fonte de luz, insuflador CO₂, óticas, monitores.</li>
+            <li>Instrumental laparoscópico essencial: trocartes, pinças, tesouras, clipadoras, cabos.</li>
+          </ul>
+          <p class="small muted">Verificação: intensidade e posicionamento do foco; CO₂ disponível; óticas limpas e funcionais.</p>
+          <div><span class="pill">iluminação</span><span class="pill">laparoscopia</span></div>
+        </article>
+
+        <article class="card" id="emergencia">
+          <h3>🚨 Equipamento de emergência</h3>
+          <ul class="list">
+            <li>Carro de emergência completo: desfibrilhador, via aérea, fármacos, check diário.</li>
+            <li>Ventilador de transporte; aspiração de reserva; oxímetro portátil.</li>
+            <li>Malas de via aérea difícil; extintor, manta corta-fogo, lava-olhos (conforme norma).</li>
+          </ul>
+          <div><span class="pill">suporte avançado</span><span class="pill">segurança</span></div>
+        </article>
+
+        <article class="card" id="estrutura-fisica">
+          <h3>🏗️ Estrutura física & circuitos</h3>
+          <ul class="list">
+            <li><strong>Zonas de circulação</strong>: <em>limpa</em>, <em>semi-suja</em>, <em>suja</em>; controlo de acessos e barreiras físicas.</li>
+            <li><strong>Zonas de lavagem/escovagem</strong>: pias com mistura termostática, escovas, dispensadores, temporização.</li>
+            <li><strong>Salas de indução/recobro (RR)</strong>: monitorização contínua, critérios de alta de RR.</li>
+            <li><strong>Vestiários</strong> e <strong>áreas de paramentação</strong> (circulação unidirecional).</li>
+            <li><strong>Central de Material Esterilizado (CME)</strong>: receção suja → limpeza → acondicionamento → esterilização → armazenagem estéril.</li>
+            <li><strong>Fluxos</strong>: trajetos diferenciados para doentes, pessoal, materiais limpos, materiais sujos e resíduos (evitar cruzamentos).</li>
+            <li><strong>HVAC/ambiente</strong>: pressão positiva em salas, filtros HEPA, renovação de ar e temperatura/HR conforme norma.</li>
+          </ul>
+          <p class="small muted">Objetivo: reduzir infeção, otimizar fluxos e garantir segurança do doente e equipa.</p>
+          <div><span class="pill">circuitos</span><span class="pill">controlo de infeção</span></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="notas">
+      <h2>Notas & Boas práticas</h2>
+      <ul>
+        <li><strong>Esterilização e controlo de infeção:</strong> cumprir normas da CME/SSI, barreiras estéreis e contagens.</li>
+        <li><strong>Traumático vs. atraumático:</strong> privilegiar atraumático em vísceras/vasos; usar traumático apenas quando necessário para fixação.</li>
+        <li><strong>Seleção do instrumento:</strong> dimensionar pelo tecido/ profundidade e objetivo (preensão, hemostasia, dissecção).</li>
+        <li><strong>Check-list de sala:</strong> integridade mecânica, alinhamento, cremalheiras, isolamentos, cabos e conexões (aspiração/ eletro/ laparoscopia).</li>
+        <li><strong>Transfusão:</strong> confirmar ABO/Rh e provas cruzadas segundo protocolo transfusional do SHSA.</li>
+        <li><strong>Registo & rastreabilidade:</strong> lotes, ciclos de esterilização, consumos de sala, incidentes e manutenção.</li>
+      </ul>
+    </section>
+
+    <footer class="container">
+      <hr>
+      <p class="small">© Serviços Hospitalares de San Andreas — Guia do Bloco Operatório. Este documento não substitui protocolos clínicos ou ordens médicas.</p>
+    </footer>
+  </main>
+</body>
+</html>

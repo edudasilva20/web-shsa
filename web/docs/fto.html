@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FTO — Relatório de Avaliação do Formando | Hospital de Pillbox</title>
+  <style>
+    :root{
+      --ink:#1f2d3a;
+      --muted:#6b7b8c;
+      --bg:#f6f8fb;
+      --panel:#ffffff;
+      --accent:#0ea5e9;
+      --accent-ink:#083344;
+      --danger:#ef4444;
+      --ok:#10b981;
+      --warn:#f59e0b;
+      --grid:#e5e7eb;
+      --heading:#0b3452;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,"Helvetica Neue",Arial,"Noto Sans",sans-serif;
+      color:var(--ink);
+      background:var(--bg);
+      line-height:1.55;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .page{
+      max-width: 1100px;
+      margin: 24px auto;
+      background: var(--panel);
+      box-shadow: 0 10px 30px rgba(0,0,0,.06);
+      border: 1px solid var(--grid);
+    }
+    header{
+      padding: 24px 28px 12px 28px;
+      border-bottom: 2px solid var(--grid);
+      display:flex; align-items:center; justify-content:space-between; gap:24px;
+    }
+    .brand{display:flex; align-items:center; gap:16px}
+    .brand .logo{
+      width:74px; height:74px; border-radius:12px;
+      border:1px solid var(--grid);
+      display:block;
+      object-fit:contain;
+      background:#fff;
+      padding:8px;
+    }
+    .brand h1{margin:0; font-size:22px; letter-spacing:.5px; color: var(--heading)}
+    .brand .sub{margin-top:2px; color:var(--muted); font-size:12px}
+    .badge{
+      border: 2px solid var(--accent);
+      color: var(--accent);
+      padding: 6px 10px;
+      font-weight: 800;
+      letter-spacing:1px;
+      border-radius: 8px;
+      text-transform: uppercase;
+      font-size: 12px;
+      white-space:nowrap;
+    }
+    .wrap{padding: 18px 28px 32px 28px}
+    h2.sec{
+      margin: 18px 0 10px 0;
+      padding: 10px 12px;
+      background: #f0f9ff;
+      color: var(--accent-ink);
+      border: 1px solid #bae6fd;
+      border-radius: 10px;
+      font-size: 15px;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+    }
+    .card{
+      border:1px solid var(--grid);
+      border-radius:12px;
+      padding:14px 16px;
+      background:#fff;
+      margin-bottom:12px;
+    }
+    label{font-size:12px; color:var(--muted); display:block; margin-bottom:4px; text-transform:uppercase; letter-spacing:.6px}
+    input[type="text"], input[type="datetime-local"], input[type="time"], input[type="date"], textarea, select{
+      width:100%;
+      border:1px solid var(--grid);
+      border-radius:8px;
+      padding:8px 10px;
+      font: inherit;
+      color:var(--ink);
+      background:#fff;
+      outline:none;
+    }
+    textarea{min-height:110px; resize:vertical}
+    table{width:100%; border-collapse: collapse; border:1px solid var(--grid); border-radius:12px; overflow:hidden}
+    th, td{border-bottom:1px solid var(--grid); padding:10px 12px; vertical-align: top; font-size:14px}
+    thead th{background:#f8fafc; text-transform:uppercase; letter-spacing:.5px; font-size:12px; color:var(--muted)}
+    tr:nth-child(even) td{background:#fcfdff}
+    .muted{color:var(--muted)}
+    .pill{display:inline-block; padding:4px 8px; border-radius:999px; font-size:12px; border:1px solid var(--grid); background:#f8fafc; color:#334155}
+    .score{font-weight:800}
+    .meter{height:10px; background:#eef2ff; border-radius:999px; overflow:hidden}
+    .meter > div{height:100%; width:0%; background:linear-gradient(90deg, #60a5fa, #22c55e); transition: width .25s ease}
+    .grid{display:grid; grid-template-columns: repeat(12, 1fr); gap: 12px}
+    .col-3{grid-column: span 3}
+    .col-4{grid-column: span 4}
+    .col-6{grid-column: span 6}
+    .col-12{grid-column: span 12}
+    .checks{display:flex; gap:10px; flex-wrap:wrap}
+    .chip{display:inline-flex; align-items:center; gap:8px; border:1px solid var(--grid); border-radius:999px; padding:6px 10px; font-size:12px}
+    .note{border-left:4px solid var(--warn); background:#fff8e6; padding:10px 12px; border-radius:8px; font-size:12px; color:#7a5a00; margin: 8px 0}
+    .ok{border-left:4px solid var(--ok); background:#effdf6; color:#135a48}
+    .danger{border-left:4px solid var(--danger); background:#fff1f1; color:#7a1b1b}
+    .tools{display:flex; gap:8px; flex-wrap:wrap}
+    .btn{border:1px solid var(--grid); background:#0ea5e9; color:#fff; padding:8px 12px; border-radius:10px; font-weight:700; cursor:pointer}
+    .btn.secondary{background:#fff; color:#0b3452}
+    .status{font-weight:900; letter-spacing:.6px}
+    footer{padding:12px 28px 24px 28px; display:flex; justify-content:space-between; align-items:center; color:var(--muted); font-size:12px}
+    @media print{
+      body{background:#fff}
+      .page{box-shadow:none; border:none; margin:0; max-width:unset}
+      .btn,.tools,.no-print{display:none!important}
+      h2.sec{background:#e6f4ff!important}
+    }
+  </style>
+  <script>
+  // Igual ao fallback de veiculos.html: tenta múltiplos caminhos para as imagens
+  function fallbackImg(el, name){
+    var tries = ["img/", "../img/", "../../img/", "./img/"];
+    var i = Number(el.dataset.i||0);
+    if(i >= tries.length){ return; }
+    el.src = tries[i] + name + ".png";
+    el.dataset.i = i + 1;
+  }
+  </script>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="brand">
+        <img class="logo" src="img/logo.png" alt="Hospital de Pillbox — logótipo" onerror="fallbackImg(this,'logo')" />
+        <div>
+          <h1>Serviços Hospitalares de San Andreas — Hospital de Pillbox</h1>
+          <div class="sub">FTO — Relatório de Avaliação do Formando</div>
+        </div>
+      </div>
+      <div class="badge">Documento Interno</div>
+    </header>
+
+    <div class="wrap">
+      <div class="tools no-print">
+        <button class="btn" onclick="window.print()">🖨️ Imprimir / Guardar PDF</button>
+        <button class="btn secondary" onclick="resetForm()">↺ Limpar Formulário</button>
+      </div>
+
+      <h2 class="sec">1. Identificação</h2>
+      <div class="grid">
+        <div class="card col-4">
+          <label>Nome do Formando</label>
+          <input type="text" id="nomeFormando" placeholder="—">
+        </div>
+        <div class="card col-4">
+          <label>FTO Responsável</label>
+          <input type="text" id="fto" placeholder="—">
+        </div>
+        <div class="card col-4">
+          <label>Data</label>
+          <input type="date" id="data">
+        </div>
+        <div class="card col-4">
+          <label>Turno</label>
+          <select id="turno">
+            <option>Manhã</option>
+            <option>Tarde</option>
+            <option>Noite</option>
+          </select>
+        </div>
+        <div class="card col-4">
+          <label>Horas Observadas</label>
+          <input type="text" id="horas" placeholder="Ex.: 4h">
+        </div>
+        <div class="card col-4">
+          <label>Serviço / Setor</label>
+          <input type="text" id="setor" placeholder="">
+        </div>
+      </div>
+
+      <h2 class="sec">2. Competências Avaliadas (0–4)</h2>
+      <div class="card">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:220px">Domínio</th>
+              <th>Critérios Observáveis</th>
+              <th style="width:220px">Classificação</th>
+            </tr>
+          </thead>
+          <tbody id="tbody-competencias">
+            <!-- Rows injected by JS -->
+          </tbody>
+        </table>
+        <div class="meter" title="Progresso Geral">
+          <div id="meter"></div>
+        </div>
+        <div style="display:flex; gap:18px; align-items:center; margin-top:8px">
+          <div>Total Pontos: <span class="score" id="total">0</span> / <span id="max">0</span></div>
+          <div>Média: <span class="score" id="media">0.0</span></div>
+          <div>Estado: <span class="status" id="status">—</span></div>
+        </div>
+        <div class="note ok"><strong>Escala:</strong> 0=Não demonstrado · 1=Insuficiente · 2=Parcial · 3=Atingido · 4=Excede</div>
+      </div>
+
+      <h2 class="sec">3. Feedback Qualitativo</h2>
+      <div class="grid">
+        <div class="card col-6">
+          <label>Pontos Fortes</label>
+          <textarea id="fortes" placeholder="Ex.: Comunicação clara; cumpre protocolos..."></textarea>
+        </div>
+        <div class="card col-6">
+          <label>Oportunidades de Melhoria</label>
+          <textarea id="melhorias" placeholder="Ex.: Aprofundar conhecimentos; reforçar relatórios..."></textarea>
+        </div>
+      </div>
+
+      <h2 class="sec">4. Registos Específicos</h2>
+      <div class="grid">
+        <div class="card col-12">
+          <label>Ocorrências Relevantes (positivas/negativas)</label>
+          <textarea id="ocorrencias" placeholder="Ex.: Atuação exemplar em reanimação; atraso em registos..."></textarea>
+        </div>
+        <div class="card col-12">
+          <label>Plano de Melhoria (SMART)</label>
+          <textarea id="plano" placeholder="Ex.: Em duas semanas, realizar 3 triagens completas sob supervisão, com checklist validado pelo FTO."></textarea>
+        </div>
+      </div>
+
+      <h2 class="sec">5. Decisão</h2>
+      <div class="card">
+        <div class="checks">
+          <label class="chip"><input type="radio" name="decisao" value="Aprovado"> Aprovado</label>
+          <label class="chip"><input type="radio" name="decisao" value="Reforço de Formação"> Reforço de Formação</label>
+          <label class="chip"><input type="radio" name="decisao" value="Reprovado"> Reprovado</label>
+        </div>
+        <div style="margin-top:8px">
+          <label>Observações da Decisão</label>
+          <textarea id="obsDecisao" placeholder="Justificar a decisão com base nos critérios e evidências."></textarea>
+        </div>
+      </div>
+
+      <h2 class="sec">6. Assinaturas</h2>
+      <div class="grid">
+        <div class="card col-6">
+          
+        <div class="card col-6">
+          <label>FTO Responsável</label>
+          <input type="text" placeholder="Nome (assinatura à mão após imprimir)">
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div>Hospital de Pillbox — Programa FTO</div>
+      <div class="muted"></div>
+    </footer>
+  </div>
+
+  <script>
+    const competencias = [
+      {
+        dominio: "Conduta Profissional",
+        criterios: [
+          "Pontualidade, apresentação e postura adequadas",
+          "Cumprimento de regras e protocolos institucionais",
+          "Atitude responsável e autocontrolo em stress"
+        ]
+      },
+      {
+        dominio: "Comunicação & Rádio",
+        criterios: [
+          "Mensagens claras e objetivas; uso correto do canal",
+          "Transmissão estruturada de casos (ex.: SBAR/AMPLA)",
+          "Escuta ativa e confirmação de mensagens críticas"
+        ]
+      },
+      {
+        dominio: "Conhecimento de Protocolos",
+        criterios: [
+          "Aplica procedimentos padrão corretamente",
+          "Conhece fluxos (triagem, encaminhamento, isolamento)",
+          "Procura validação quando necessário"
+        ]
+      },
+      {
+        dominio: "Técnica Assistencial",
+        criterios: [
+          "Execução de tarefas básicas com segurança",
+          "Monitorização e reavaliação após intervenção",
+          "Registo adequado de parâmetros essenciais"
+        ]
+      },
+      {
+        dominio: "Segurança do Paciente",
+        criterios: [
+          "Identifica riscos e usa EPI",
+          "Prevenção de erros e confirmações de segurança",
+          "Prioriza estabilização e dignidade do paciente"
+        ]
+      },
+      {
+        dominio: "Gestão Operacional / Tempo",
+        criterios: [
+          "Organiza prioridades conforme gravidade",
+          "Cumpre prazos e mantém fluxo do serviço",
+          "Adapta-se a mudanças e solicita apoio quando preciso"
+        ]
+      },
+      {
+        dominio: "Trabalho em Equipa",
+        criterios: [
+          "Coopera com colegas e segue instruções",
+          "Contribui para ambiente respeitoso",
+          "Partilha informação relevante oportunamente"
+        ]
+      },
+      {
+        dominio: "Documentação & Registo",
+        criterios: [
+          "Registos completos, legíveis e oportunos",
+          "Uso correto de formulários/sistemas",
+          "Confidencialidade e sigilo mantidos"
+        ]
+      }
+    ];
+
+    const tbody = document.getElementById('tbody-competencias');
+    const maxSpan = document.getElementById('max');
+    const totalSpan = document.getElementById('total');
+    const mediaSpan = document.getElementById('media');
+    const statusSpan = document.getElementById('status');
+    const meterBar = document.getElementById('meter');
+
+    function buildRows(){
+      competencias.forEach((c, idx) => {
+        const tr = document.createElement('tr');
+        const tdDom = document.createElement('td');
+        tdDom.innerHTML = `<strong>${c.dominio}</strong>`;
+
+        const tdCrit = document.createElement('td');
+        const list = document.createElement('ul');
+        list.style.margin = "0 0 0 18px";
+        c.criterios.forEach(cr => {
+          const li = document.createElement('li'); li.textContent = cr; list.appendChild(li);
+        });
+        tdCrit.appendChild(list);
+
+        const tdRate = document.createElement('td');
+        tdRate.innerHTML = `
+          <div class="checks" role="radiogroup" aria-label="Classificação">
+            ${[0,1,2,3,4].map(v => `
+              <label class="chip"><input type="radio" name="rate-${idx}" value="${v}" onchange="recalc()"> ${v}</label>
+            `).join('')}
+          </div>
+          <div class="muted" style="margin-top:6px">0=Não dem. · 1=Insuf. · 2=Parcial · 3=Atingido · 4=Excede</div>
+        `;
+
+        tr.appendChild(tdDom);
+        tr.appendChild(tdCrit);
+        tr.appendChild(tdRate);
+        tbody.appendChild(tr);
+      });
+      maxSpan.textContent = (competencias.length * 4).toString();
+    }
+
+    function recalc(){
+      let total = 0;
+      let count = 0;
+      competencias.forEach((c, idx) => {
+        const checked = document.querySelector(`input[name="rate-${idx}"]:checked`);
+        if(checked){
+          total += parseInt(checked.value);
+          count++;
+        }
+      });
+      const max = competencias.length * 4;
+      const media = count ? (total / count) : 0;
+      totalSpan.textContent = total.toString();
+      mediaSpan.textContent = media.toFixed(2);
+      const pct = (total / max) * 100;
+      meterBar.style.width = pct + "%";
+
+      let status = "—";
+      if(count === competencias.length){
+        if(media >= 3.2) { status = "APTO (Excelente)"; statusSpan.style.color = "#16a34a"; }
+        else if(media >= 2.5) { status = "APTO (Atingido)"; statusSpan.style.color = "#0ea5e9"; }
+        else if(media >= 2.0) { status = "NECESSITA REFORÇO"; statusSpan.style.color = "#f59e0b"; }
+        else { status = "NÃO APTO"; statusSpan.style.color = "#ef4444"; }
+      } else {
+        status = "INCOMPLETO (falta avaliar domínios)";
+        statusSpan.style.color = "#6b7280";
+      }
+      statusSpan.textContent = status;
+    }
+
+    function resetForm(){
+      document.querySelectorAll('input[type="text"], input[type="date"], textarea').forEach(el => el.value = '');
+      document.querySelectorAll('input[type="radio"]').forEach(el => el.checked = false);
+      document.querySelectorAll('select').forEach(el => el.selectedIndex = 0);
+      recalc();
+    }
+
+    buildRows();
+    recalc();
+  </script>
+</body>
+</html>

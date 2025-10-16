@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fardamento — Hospital Pillbox</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    html { font-family: Inter, ui-sans-serif, system-ui; }
+    body { background:#fff; color:#0f172a; }
+    .container { max-width: 1200px; }
+    .card { background:#fff; border:1px solid #e2e8f0; border-radius:16px; }
+    .grid-2 { display:grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    @media (max-width: 1024px){ .grid-2 { grid-template-columns: 1fr; } }
+    table thead { background:#f1f5f9; color:#475569; }
+    table tr { border-top: 1px solid #e2e8f0; }
+    img.role { border-radius:12px; border:1px solid #e2e8f0; width:100%; height:auto; object-fit:cover; }
+    .anchor a { padding:.35rem .6rem; border:1px solid #e2e8f0; border-radius:.5rem; background:#f8fafc; font-size:.875rem; }
+    .anchor a:hover { background:#f1f5f9; }
+    details { border:1px solid #e2e8f0; border-radius:16px; background:#f8fafc; }
+    details summary { cursor:pointer; list-style:none; padding: .9rem 1rem; font-weight:600; }
+    details[open] > summary { border-bottom:1px solid #e2e8f0; background:#f0f9ff; }
+  </style>
+</head>
+<body>
+  <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
+    <div class="flex items-center justify-between mb-4">
+      <h1 class="text-xl font-semibold">Fardamento</h1>
+    </div>
+
+  
+
+    <!-- Navegação rápida -->
+    <div class="anchor flex flex-wrap gap-2 mb-6">
+      <a href="#estagiarios">Estagiários</a>
+      <a href="#cirurgia">Cirurgia</a>
+      <a href="#medicos-psicologos">Médicos | Psicólogos</a>
+      <a href="#medicos-transporte">Médicos (Transporte)</a>
+      <a href="#paramedicos">Paramédicos</a>
+      <a href="#piloto">Piloto</a>
+      <a href="#segurancas">Seguranças</a>
+    </div>
+
+    <!-- TEMPLATE DE FUNÇÃO (reutilizado abaixo) -->
+    <!-- Estagiários -->
+    <details id="estagiarios" class="mb-4" open>
+      <summary>Estagiários</summary>
+      <div class="p-4">
+        <div class="grid-2">
+          <img src="../assets/fardamento-estagiarios.jpg" alt="Estagiários" class="role">
+          <div class="flex items-center justify-end">
+          </div>
+        </div>
+        <div class="grid-2 mt-4">
+          <article class="card p-3">
+            <h3 class="font-medium">Feminino</h3>
+            <table id="tbl-estagiarios-fem" class="min-w-full text-sm mt-2">
+              <thead><tr><th class="text-left px-2 py-1">Peça</th><th class="text-left px-2 py-1">Valor</th><th class="text-left px-2 py-1">Sec.</th></tr></thead>
+              <tbody>
+                <tr><td class="px-2 py-1">Máscara</td><td></td><td></td></tr>
+                <tr><td>Cachecol</td><td></td><td></td></tr>
+                <tr><td>Casaco</td><td></td><td></td></tr>
+                <tr><td>Camisola</td><td></td><td></td></tr>
+                <tr><td>Colete</td><td></td><td></td></tr>
+                <tr><td>Sacos</td><td></td><td></td></tr>
+                <tr><td>Mãos</td><td></td><td></td></tr>
+                <tr><td>Pernas</td><td></td><td></td></tr>
+                <tr><td>Sapatos</td><td></td><td></td></tr>
+                <tr><td>Decalques</td><td></td><td></td></tr>
+                <tr><td>Chapéu</td><td></td><td></td></tr>
+              </tbody>
+            </table>
+          </article>
+
+          <article class="card p-3">
+            <h3 class="font-medium">Masculino</h3>
+            <table id="tbl-estagiarios-mas" class="min-w-full text-sm mt-2">
+              <thead><tr><th class="text-left px-2 py-1">Peça</th><th class="text-left px-2 py-1">Valor</th><th class="text-left px-2 py-1">Sec.</th></tr></thead>
+              <tbody>
+                <tr><td class="px-2 py-1">Máscara</td><td></td><td></td></tr>
+                <tr><td>Cachecol</td><td></td><td></td></tr>
+                <tr><td>Casaco</td><td></td><td></td></tr>
+                <tr><td>Camisola</td><td></td><td></td></tr>
+                <tr><td>Colete</td><td></td><td></td></tr>
+                <tr><td>Sacos</td><td></td><td></td></tr>
+                <tr><td>Mãos</td><td></td><td></td></tr>
+                <tr><td>Pernas</td><td></td><td></td></tr>
+                <tr><td>Sapatos</td><td></td><td></td></tr>
+                <tr><td>Decalques</td><td></td><td></td></tr>
+                <tr><td>Chapéu</td><td></td><td></td></tr>
+              </tbody>
+            </table>
+          </article>
+        </div>
+      </div>
+    </details>
+
+    <!-- Cirurgia -->
+    <details id="cirurgia" class="mb-4">
+      <summary>Cirurgia</summary>
+      <div class="p-4">
+        <div class="grid-2">
+          <img src="../assets/fardamento-cirurgia.jpg" alt="Cirurgia" class="role">
+          <div class="flex items-center justify-end">
+          </div>
+        </div>
+        <div class="grid-2 mt-4">
+          <article class="card p-3">
+            <h3 class="font-medium">Feminino</h3>
+            <table id="tbl-cirurgia-fem" class="min-w-full text-sm mt-2">
+              <thead><tr><th class="text-left px-2 py-1">Peça</th><th class="text-left px-2 py-1">Valor</th><th class="text-left px-2 py-1">Sec.</th></tr></thead>
+              <tbody>
+                <tr><td>Máscara</td><td></td><td></td></tr>
+                <tr><td>Cachecol</td><td></td><td></td></tr>
+                <tr><td>Casaco</td><td></td><td></td></tr>
+                <tr><td>Camisola</td><td></td><td></td></tr>
+                <tr><td>Colete</td><td></td><td></td></tr>
+                <tr><td>Sacos</td><td></td><td></td></tr>
+                <tr><td>Mãos</td><td></td><td></td></tr>
+                <tr><td>Pernas</td><td></td><td></td></tr>
+                <tr><td>Sapatos</td><td></td><td></td></tr>
+                <tr><td>Decalques</td><td></td><td></td></tr>
+                <tr><td>Chapéu</td><td></td><td></td></tr>
+              </tbody>
+            </table>
+          </article>
+          <article class="card p-3">
+            <h3 class="font-medium">Masculino</h3>
+            <table id="tbl-cirurgia-mas" class="min-w-full text-sm mt-2">
+              <thead><tr><th class="text-left px-2 py-1">Peça</th><th class="text-left px-2 py-1">Valor</th><th class="text-left px-2 py-1">Sec.</th></tr></thead>
+              <tbody>
+                <tr><td>Máscara</td><td></td><td></td></tr>
+                <tr><td>Cachecol</td><td></td><td></td></tr>
+                <tr><td>Casaco</td><td></td><td></td></tr>
+                <tr><td>Camisola</td><td></td><td></td></tr>
+                <tr><td>Colete</td><td></td><td></td></tr>
+                <tr><td>Sacos</td><td></td><td></td></tr>
+                <tr><td>Mãos</td><td></td><td></td></tr>
+                <tr><td>Pernas</td><td></td><td></td></tr>
+                <tr><td>Sapatos</td><td></td><td></td></tr>
+                <tr><td>Decalques</td><td></td><td></td></tr>
+                <tr><td>Chapéu</td><td></td><td></td></tr>
+              </tbody>
+            </table>
+          </article>
+        </div>
+      </div>
+    </details>
+
+    <!-- Médicos | Psicólogos -->
+    <details id="medicos-psicologos" class="mb-4">
+      <summary>Médicos | Psicólogos</summary>
+      <div class="p-4">
+        <div class="grid-2">
+          <img src="../assets/fardamento-medicos-psicologos.jpg" alt="Médicos e Psicólogos" class="role">
+          <div class="flex items-center justify-end">
+          </div>
+        </div>
+        <div class="grid-2 mt-4">
+          <article class="card p-3">
+            <h3 class="font-medium">Feminino</h3>
+            <table id="tbl-medpsico-fem" class="min-w-full text-sm mt-2">
+              <thead><tr><th class="text-left px-2 py-1">Peça</th><th class="text-left px-2 py-1">Valor</th><th class="text-left px-2 py-1">Sec.</th></tr></thead>
+              <tbody>
+                <tr><td>Máscara</td><td></td><td></td></tr>
+                <tr><td>Cachecol</td><td></td><td></td></tr>
+                <tr><td>Casaco</td><td></td><td></td></tr>
+                <tr><td>Camisola</td><td></td><td></td></tr>
+                <tr><td>Colete</td><td></td><td></td></tr>
+                <tr><td>Sacos</td><td></td><td></td></tr>
+                <tr><td>Mãos</td><td></td><td></td></tr>
+                <tr><td>Pernas</td><td></td><td></td></tr>
+                <tr><td>Sapatos</td><td></td><td></td></tr>
+                <tr><td>Decalques</td><td></td><td></td></tr>
+                <tr><td>Chapéu</td><td></td><td></td></tr>
+              </tbody>
+            </table>
+          </article>
+          <article class="card p-3">
+            <h3 class="font-medium">Masculino</h3>
+            <table id="tbl-medpsico-mas" class="min-w-full text-sm mt-2">
+              <thead><tr><th class="text-left px-2 py-1">Peça</th><th class="text-left px-2 py-1">Valor</th><th class="text-left px-2 py-1">Sec.</th></tr></thead>
+              <tbody>
+                <tr><td>Máscara</td><td></td><td></td></tr>
+                <tr><td>Cachecol</td><td></td><td></td></tr>
+                <tr><td>Casaco</td><td></td><td></td></tr>
+                <tr><td>Camisola</td><td></td><td></td></tr>
+                <tr><td>Colete</td><td></td><td></td></tr>
+                <tr><td>Sacos</td><td></td><td></td></tr>
+                <tr><td>Mãos</td><td></td><td></td></tr>
+                <tr><td>Pernas</td><td></td><td></td></tr>
+                <tr><td>Sapatos</td><td></td><td></td></tr>
+                <tr><td>Decalques</td><td></td><td></td></tr>
+                <tr><td>Chapéu</td><td></td><td></td></tr>
+              </tbody>
+            </table>
+          </article>
+        </div>
+      </div>
+    </details>
+
+    <!-- Médicos (Transporte) -->
+    <details id="medicos-transporte" class="mb-4">
+      <summary>Médicos (Transporte)</summary>
+      <div class="p-4">
+        <div class="grid-2">
+          <img src="../assets/fardamento-transporte.jpg" alt="Médicos Transporte" class="role">
+          <div class="flex items-center justify-end">
+          </div>
+        </div>
+        <div class="grid-2 mt-4">
+          <article class="card p-3">
+            <h3 class="font-medium">Feminino</h3>
+            <table id="tbl-transporte-fem" class="min-w-full text-sm mt-2">
+              <thead><tr><th class="text-left px-2 py-1">Peça</th><th class="text-left px-2 py-1">Valor</th><th class="text-left px-2 py-1">Sec.</th></tr></thead>
+              <tbody>
+                <!-- preenche -->
+                <tr><td>Máscara</td><td></td><td></td></tr>
+                <tr><td>Cachecol</td><td></td><td></td></tr>
+                <tr><td>Casaco</td><td></td><td></td></tr>
+                <tr><td>Camisola</td><td></td><td></td></tr>
+                <tr><td>Colete</td><td></td><td></td></tr>
+                <tr><td>Sacos</td><td></td><td></td></tr>
+                <tr><td>Mãos</td><td></td><td></td></tr>
+                <tr><td>Pernas</td><td></td><td></td></tr>
+                <tr><td>Sapatos</td><td></td><td></td></tr>
+                <tr><td>Decalques</td><td></td><td></td></tr>
+                <tr><td>Chapéu</td><td></td><td></td></tr>
+              </tbody>
+            </table>
+          </article>
+          <article class="card p-3">
+            <h3 class="font-medium">Masculino</h3>
+            <table id="tbl-transporte-mas" class="min-w-full text-sm mt-2">
+              <thead><tr><th class="text-left px-2 py-1">Peça</th><th class="text-left px-2 py-1">Valor</th><th class="text-left px-2 py-1">Sec.</th></tr></thead>
+              <tbody>
+                <!-- preenche -->
+                <tr><td>Máscara</td><td></td><td></td></tr>
+                <tr><td>Cachecol</td><td></td><td></td></tr>
+                <tr><td>Casaco</td><td></td><td></td></tr>
+                <tr><td>Camisola</td><td></td><td></td></tr>
+                <tr><td>Colete</td><td></td><td></td></tr>
+                <tr><td>Sacos</td><td></td><td></td></tr>
+                <tr><td>Mãos</td><td></td><td></td></tr>
+                <tr><td>Pernas</td><td></td><td></td></tr>
+                <tr><td>Sapatos</td><td></td><td></td></tr>
+                <tr><td>Decalques</td><td></td><td></td></tr>
+                <tr><td>Chapéu</td><td></td><td></td></tr>
+              </tbody>
+            </table>
+          </article>
+        </div>
+      </div>
+    </details>
+
+    <!-- Paramedicos -->
+    <details id="paramedicos" class="mb-4">
+      <summary>Paramédicos</summary>
+      <div class="p-4">
+        <div class="grid-2">
+          <img src="../assets/fardamento-paramedicos.jpg" alt="Paramédicos" class="role">
+          <div class="flex items-center justify-end">
+          </div>
+        </div>
+        <div class="grid-2 mt-4">
+          <article class="card p-3">
+            <h3 class="font-medium">Feminino</h3>
+            <table id="tbl-paramedicos-fem" class="min-w-full text-sm mt-2">
+              <thead><tr><th class="text-left px-2 py-1">Peça</th><th class="text-left px-2 py-1">Valor</th><th class="text-left px-2 py-1">Sec.</th></tr></thead>
+              <tbody>
+                <!-- preenche -->
+                <tr><td>Máscara</td><td></td><td></td></tr>
+                <tr><td>Cachecol</td><td></td><td></td></tr>
+                <tr><td>Casaco</td><td></td><td></td></tr>
+                <tr><td>Camisola</td><td></td><td></td></tr>
+                <tr><td>Colete</td><td></td><td></td></tr>
+                <tr><td>Sacos</td><td></td><td></td></tr>
+                <tr><td>Mãos</td><td></td><td></td></tr>
+                <tr><td>Pernas</td><td></td><td></td></tr>
+                <tr><td>Sapatos</td><td></td><td></td></tr>
+                <tr><td>Decalques</td><td></td><td></td></tr>
+                <tr><td>Chapéu</td><td></td><td></td></tr>
+              </tbody>
+            </table>
+          </article>
+          <article class="card p-3">
+            <h3 class="font-medium">Masculino</h3>
+            <table id="tbl-paramedicos-mas" class="min-w-full text-sm mt-2">
+              <thead><tr><th class="text-left px-2 py-1">Peça</th><th class="text-left px-2 py-1">Valor</th><th class="text-left px-2 py-1">Sec.</th></tr></thead>
+              <tbody>
+                <!-- preenche -->
+                <tr><td>Máscara</td><td></td><td></td></tr>
+                <tr><td>Cachecol</td><td></td><td></td></tr>
+                <tr><td>Casaco</td><td></td><td></td></tr>
+                <tr><td>Camisola</td><td></td><td></td></tr>
+                <tr><td>Colete</td><td></td><td></td></tr>
+                <tr><td>Sacos</td><td></td><td></td></tr>
+                <tr><td>Mãos</td><td></td><td></td></tr>
+                <tr><td>Pernas</td><td></td><td></td></tr>
+                <tr><td>Sapatos</td><td></td><td></td></tr>
+                <tr><td>Decalques</td><td></td><td></td></tr>
+                <tr><td>Chapéu</td><td></td><td></td></tr>
+              </tbody>
+            </table>
+          </article>
+        </div>
+      </div>
+    </details>
+
+    <!-- Piloto -->
+    <details id="piloto" class="mb-4">
+      <summary>Piloto</summary>
+      <div class="p-4">
+        <div class="grid-2">
+          <img src="../assets/fardamento-piloto.jpg" alt="Piloto" class="role">
+          <div class="flex items-center justify-end">
+          </div>
+        </div>
+        <div class="grid-2 mt-4">
+          <article class="card p-3">
+            <h3 class="font-medium">Feminino</h3>
+            <table id="tbl-piloto-fem" class="min-w-full text-sm mt-2">
+              <thead><tr><th class="text-left px-2 py-1">Peça</th><th class="text-left px-2 py-1">Valor</th><th class="text-left px-2 py-1">Sec.</th></tr></thead>
+              <tbody>
+                <!-- preenche -->
+                <tr><td>Máscara</td><td></td><td></td></tr>
+                <tr><td>Cachecol</td><td></td><td></td></tr>
+                <tr><td>Casaco</td><td></td><td></td></tr>
+                <tr><td>Camisola</td><td></td><td></td></tr>
+                <tr><td>Colete</td><td></td><td></td></tr>
+                <tr><td>Sacos</td><td></td><td></td></tr>
+                <tr><td>Mãos</td><td></td><td></td></tr>
+                <tr><td>Pernas</td><td></td><td></td></tr>
+                <tr><td>Sapatos</td><td></td><td></td></tr>
+                <tr><td>Decalques</td><td></td><td></td></tr>
+                <tr><td>Chapéu</td><td></td><td></td></tr>
+              </tbody>
+            </table>
+          </article>
+          <article class="card p-3">
+            <h3 class="font-medium">Masculino</h3>
+            <table id="tbl-piloto-mas" class="min-w-full text-sm mt-2">
+              <thead><tr><th class="text-left px-2 py-1">Peça</th><th class="text-left px-2 py-1">Valor</th><th class="text-left px-2 py-1">Sec.</th></tr></thead>
+              <tbody>
+                <!-- preenche -->
+                <tr><td>Máscara</td><td></td><td></td></tr>
+                <tr><td>Cachecol</td><td></td><td></td></tr>
+                <tr><td>Casaco</td><td></td><td></td></tr>
+                <tr><td>Camisola</td><td></td><td></td></tr>
+                <tr><td>Colete</td><td></td><td></td></tr>
+                <tr><td>Sacos</td><td></td><td></td></tr>
+                <tr><td>Mãos</td><td></td><td></td></tr>
+                <tr><td>Pernas</td><td></td><td></td></tr>
+                <tr><td>Sapatos</td><td></td><td></td></tr>
+                <tr><td>Decalques</td><td></td><td></td></tr>
+                <tr><td>Chapéu</td><td></td><td></td></tr>
+              </tbody>
+            </table>
+          </article>
+        </div>
+      </div>
+    </details>
+
+    <!-- Seguranças -->
+    <details id="segurancas" class="mb-8">
+      <summary>Seguranças</summary>
+      <div class="p-4">
+        <div class="grid-2">
+          <img src="../assets/fardamento-segurancas.jpg" alt="Seguranças" class="role">
+          <div class="flex items-center justify-end">
+          </div>
+        </div>
+        <div class="grid-2 mt-4">
+          <article class="card p-3">
+            <h3 class="font-medium">Feminino</h3>
+            <table id="tbl-segurancas-fem" class="min-w-full text-sm mt-2">
+              <thead><tr><th class="text-left px-2 py-1">Peça</th><th class="text-left px-2 py-1">Valor</th><th class="text-left px-2 py-1">Sec.</th></tr></thead>
+              <tbody>
+                <!-- preenche -->
+                <tr><td>Máscara</td><td></td><td></td></tr>
+                <tr><td>Cachecol</td><td></td><td></td></tr>
+                <tr><td>Casaco</td><td></td><td></td></tr>
+                <tr><td>Camisola</td><td></td><td></td></tr>
+                <tr><td>Colete</td><td></td><td></td></tr>
+                <tr><td>Sacos</td><td></td><td></td></tr>
+                <tr><td>Mãos</td><td></td><td></td></tr>
+                <tr><td>Pernas</td><td></td><td></td></tr>
+                <tr><td>Sapatos</td><td></td><td></td></tr>
+                <tr><td>Decalques</td><td></td><td></td></tr>
+                <tr><td>Chapéu</td><td></td><td></td></tr>
+              </tbody>
+            </table>
+          </article>
+          <article class="card p-3">
+            <h3 class="font-medium">Masculino</h3>
+            <table id="tbl-segurancas-mas" class="min-w-full text-sm mt-2">
+              <thead><tr><th class="text-left px-2 py-1">Peça</th><th class="text-left px-2 py-1">Valor</th><th class="text-left px-2 py-1">Sec.</th></tr></thead>
+              <tbody>
+                <!-- preenche -->
+                <tr><td>Máscara</td><td></td><td></td></tr>
+                <tr><td>Cachecol</td><td></td><td></td></tr>
+                <tr><td>Casaco</td><td></td><td></td></tr>
+                <tr><td>Camisola</td><td></td><td></td></tr>
+                <tr><td>Colete</td><td></td><td></td></tr>
+                <tr><td>Sacos</td><td></td><td></td></tr>
+                <tr><td>Mãos</td><td></td><td></td></tr>
+                <tr><td>Pernas</td><td></td><td></td></tr>
+                <tr><td>Sapatos</td><td></td><td></td></tr>
+                <tr><td>Decalques</td><td></td><td></td></tr>
+                <tr><td>Chapéu</td><td></td><td></td></tr>
+              </tbody>
+            </table>
+          </article>
+        </div>
+      </div>
+    </details>
+  </main>
+
+  <script>
+    // Export CSV por função (podes selecionar várias tabelas com vírgula no data-export)
+    document.querySelectorAll('[data-export]').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const sel = btn.getAttribute('data-export').split(',');
+        const tables = sel.map(s=>document.querySelector(s.trim())).filter(Boolean);
+        const csv=[];
+        tables.forEach((tbl, i)=>{
+          const rows=[...tbl.querySelectorAll('tr')].map(tr=>[...tr.children].map(td=>`"${td.innerText.replace(/"/g,'\\"')}"`).join(',')).join('\n');
+          const titulo = btn.textContent.replace('Exportar CSV (','').replace(')','').trim();
+          csv.push(`${titulo} - Tabela ${i+1}\n${rows}`);
+        });
+        const blob=new Blob([csv.join('\n\n')],{type:'text/csv;charset=utf-8;'});
+        const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='fardamento.csv'; a.click(); URL.revokeObjectURL(url);
+      });
+    });
+  </script>
+</body>
+</html>

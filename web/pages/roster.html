@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Roster — SHSA</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {50:'#eef8ff',100:'#d9eeff',200:'#bce1ff',300:'#8fd0ff',400:'#5abaff',500:'#2aa3ff',600:'#0d86e6',700:'#076bb8',800:'#0a548e',900:'#0d4876'}
+          },
+          boxShadow: { soft: '0 1px 2px rgba(16,24,40,.06), 0 1px 3px rgba(16,24,40,.1)' }
+        }
+      }
+    }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    html { font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; }
+    body { background: #f6f8fb; color: #0f172a; }
+    .badge { border-radius: 9999px; padding: .175rem .5rem; font-size: .75rem; line-height: 1rem; }
+    .tab-btn.active { background: #e6f1ff; border-color: #cfe6ff; color: #0a548e; }
+
+    /* Ajuste de fotos */
+    .thumb { aspect-ratio: 3 / 4; overflow: hidden; background: #e5e7eb; }
+    .thumb > img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+
+  .roster-section{padding:2rem 0;border-bottom:1px solid #e2e8f0}
+
+.roster-section:nth-child(odd) {
+  background: #f9fafb;
+}
+
+.roster-title{font-weight:700;letter-spacing:.02em;color:#0f172a;margin:0 0 .75rem 0;text-transform:uppercase}
+
+
+.roster-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+    .avatar-fit {
+      width: 5rem;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      object-position: top;
+      border-radius: 0.5rem;
+      background: #e5e7eb;
+    }
+  </style>
+</head>
+<body class="bg-slate-100 p-4 md:p-6">
+
+  <div class="max-w-7xl mx-auto bg-white rounded-2xl shadow-lg p-6 space-y-5 border border-slate-200">
+    <!-- Header -->
+
+    <!-- Header -->
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+      <div>
+        <h1 class="text-3xl font-semibold tracking-tight">Roster</h1>
+        <p class="text-slate-600 text-sm">Equipa maravilhosa do SHSA</p>
+      </div>
+      <div class="flex gap-2">
+        <input id="searchInput" placeholder="Pesquisar..." class="w-64 rounded-xl border border-slate-300 bg-white px-3 py-2 outline-none focus:ring-2 focus:ring-brand-200">
+        <select id="filterPatente" class="rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-brand-200">
+          <option value="">Todos os Postos</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Galeria -->
+    <div id="rosterGrid"></div>
+
+  </div>
+
+  <!-- Drawer -->
+  <div id="drawer" class="fixed inset-0 z-50 hidden">
+    <div id="drawerBackdrop" class="absolute inset-0 bg-black/30"></div>
+    <aside class="absolute right-0 top-0 h-full w-full sm:w-[480px] bg-white shadow-2xl flex flex-col">
+      <div class="flex items-center justify-between p-4 border-b border-slate-200">
+        <div class="flex items-center gap-3">
+          <img id="drFoto" class="avatar-fit" alt="Foto">
+          <div>
+            <div id="drNome" class="text-lg font-semibold"></div>
+            <div id="drIdent" class="text-xs text-slate-500"></div>
+          </div>
+        </div>
+        <button id="drawerClose" class="p-2 rounded-lg border border-slate-300 hover:bg-slate-50">✕</button>
+      </div>
+
+      <div class="px-4 pt-3 border-b border-slate-200 flex gap-2">
+  <button class="tab-btn px-3 py-2 rounded-lg border border-slate-300 text-sm" data-tab="perfil">Perfil</button>
+  <button class="tab-btn px-3 py-2 rounded-lg border border-slate-300 text-sm" data-tab="contactos">Contactos</button>
+  <!-- começa escondido -->
+  <button class="tab-btn px-3 py-2 rounded-lg border border-slate-300 text-sm hidden" data-tab="documentos">Documentos</button>
+</div>
+
+
+      <div class="p-4 overflow-y-auto space-y-4">
+        <div id="tab-perfil" class="tab-pane">
+          <div class="grid grid-cols-2 gap-4 text-sm">
+            <div><div class="text-slate-500 text-xs">Posto</div><div id="drPatente" class="font-medium"></div></div>
+            <div><div class="text-slate-500 text-xs">Categoria</div><div id="drEsp" class="font-medium"></div></div>
+            <div><div class="text-slate-500 text-xs">Admissão</div><div id="drAdm" class="font-medium"></div></div>
+            <div>
+              <div class="text-slate-500 text-xs">Estado</div>
+              <div class="font-medium"><span id="drEstado" class="badge"></span></div>
+            </div>
+          </div>
+        </div>
+        <div id="tab-contactos" class="tab-pane hidden">
+          <div class="grid gap-3 text-sm">
+            <div><div class="text-slate-500 text-xs">Email</div><div id="drEmail" class="font-medium"></div></div>
+            <div><div class="text-slate-500 text-xs">Conta</div><div id="drConta" class="font-medium"></div></div>
+            <div><div class="text-slate-500 text-xs">Contacto</div><div id="drContacto" class="font-medium"></div></div>
+          </div>
+        </div>
+     <div id="tab-documentos" class="tab-pane hidden">
+  <div class="grid gap-3 text-sm">
+    <div>
+      <div class="text-slate-500 text-xs">Cartão de Cidadão</div>
+      <div><a id="drCC" href="#" class="underline text-blue-600" target="_blank" rel="noopener">Ver Cartão</a></div>
+    </div>
+    <div>
+      <div class="text-slate-500 text-xs">Carta de Condução</div>
+      <div><a id="drCarta" href="#" class="underline text-blue-600" target="_blank" rel="noopener">Ver Carta</a></div>
+    </div>
+    <div>
+      <div class="text-slate-500 text-xs">Curriculum Vitae</div>
+      <div><a id="drCV" href="#" class="underline text-blue-600" target="_blank" rel="noopener">Abrir CV</a></div>
+    </div>
+  </div>
+</div>
+
+
+        
+      </div>
+    </aside>
+  </div>
+
+<script>
+const DATA = [
+  { patente: 'Diretor Regional', ident: '400', nome: 'Enzo Silva', categoria: 'Administração', estado: 'Ativo', email: 'enzo.silva@pillbox.sa', conta: 'SA400400400', contacto: '@Enzo', especialidade: 'Cardioligia', admissao: '12/03/2022', foto: 'enzo.jpg',
+    cc: '../documentos/enzo/cc.png',
+    carta: '../documentos/enzo/carta.png',
+    cv: '../documentos/enzo/cv.pdf'
+  },
+  { patente: 'Diretor Hospitalar', ident: '401', nome: 'Tiago Guimarães', categoria: 'Administração', estado: 'Ausente', email: 'tiago.guimaraes@pillbox.sa', conta: 'SA401401401', contacto: '@Tiago', especialidade: 'Medicina Geral', admissao: '08/07/2022', foto: 'tiago.jpg',
+    cc: '../documentos/tiago/cc.png',
+    carta: '../documentos/tiago/carta.png',
+    cv: '../documentos/tiago/cv.pdf'
+  },
+  { patente: 'Vice-Diretor ', ident: '403', nome: 'Rui Quintas', categoria: 'Administração', estado: 'Ativo', email: 'rui.quintas@pillbox.sa', conta: 'SA403403403', contacto: '@Rui', especialidade: 'Pré-Hospitalar', admissao: '15/01/2023', foto: 'rui.jpg',
+    cc: '../documentos/rui/cc.png',
+    carta: '../documentos/rui/carta.png',
+    cv: '../documentos/rui/cv.pdf'
+  },
+  { patente: 'Médico Chefe', ident: '404', nome: 'Alice Trewinnard', categoria: 'Administração', estado: 'Inativo', email: 'alice.trewinnard@pillbox.sa', conta: 'SA404404404', contacto: '@Alice', especialidade: 'Medicina Interna', admissao: '25/04/2023', foto: 'alice.jpg',
+    cc: '../documentos/alice/cc.png',
+    carta: '../documentos/alice/carta.png',
+    cv: '../documentos/alice/cv.pdf'
+  },
+  { patente: 'Paramédico Chefe', ident: '405', nome: 'Eduardo Guedes', categoria: 'Administração', estado: 'Ativo', email: 'eduardo.guedes@pillbox.sa', conta: 'SA405405405', contacto: '@Edu', especialidade: 'Pré-Hospitalar', admissao: '10/09/2023', foto: 'edu.jpg',
+    cc: '../documentos/eduardo/cc.png',
+    carta: '../documentos/eduardo/carta.png',
+    cv: '../documentos/eduardo/cv.pdf'
+  },
+  { patente: 'Psiquiatra', ident: '410', nome: 'Eva Santos', categoria: 'Psicólogo', estado: 'Ausente', email: 'eva.santos@pillbox.sa', conta: 'SA410410410', contacto: '@Eva', especialidade: 'Psicología', admissao: '03/02/2024', foto: 'eva.jpg',
+    cc: '../documentos/eva/cc.png',
+    carta: '../documentos/eva/carta.png',
+    cv: '../documentos/eva/cv.pdf'
+  },
+  { patente: 'Médico', ident: '412', nome: 'Peter Monteiro', categoria: 'Médico', estado: 'Ativo', email: 'peter.monteiro@pillbox.sa', conta: 'SA412412412', contacto: '@Peter', especialidade: 'Medicina de Trauma', admissao: '14/06/2024', foto: 'peter.png',
+    cc: '../documentos/peter/cc.png',
+    carta: '../documentos/peter/carta.png',
+    cv: '../documentos/peter/cv.pdf'
+  }
+];
+
+
+
+
+const BASE_FOTOS = '../fotos/';
+const rosterGrid = document.getElementById('rosterGrid');
+const searchInput = document.getElementById('searchInput');
+const filterPatente = document.getElementById('filterPatente');
+
+const drawer = document.getElementById('drawer');
+const drawerBackdrop = document.getElementById('drawerBackdrop');
+const drawerClose = document.getElementById('drawerClose');
+
+const tabBtns = document.querySelectorAll('.tab-btn');
+const tabPanes = document.querySelectorAll('.tab-pane');
+// Determinar utilizador atual e se é Administração
+const logged = JSON.parse(sessionStorage.getItem('usuarioLogado') || 'null');
+const currentUser = logged ? DATA.find(p => p.ident === logged.ident) : null;
+const isAdmin = !!(currentUser && currentUser.categoria === 'Administração');
+
+// Helper refs para a Tab "Documentos"
+const documentosBtn = document.querySelector('[data-tab="documentos"]');
+const documentosPane = document.getElementById('tab-documentos');
+
+
+function renderRoster(data) {
+  rosterGrid.innerHTML = '';
+
+  const categorias = [
+    'Administração',
+    'Médico',
+    'Psicólogo',
+    'Paramédico',
+    'Estagiário',
+    'Segurança',
+    'Rececionista'
+  ];
+
+  categorias.forEach(cat => {
+    const items = data.filter(p => p.categoria === cat);
+
+    // Wrapper da secção
+    const section = document.createElement('section');
+    section.className = 'roster-section';
+
+    // Título
+    const title = document.createElement('h2');
+    title.className = 'roster-title';
+    title.textContent = cat;
+    section.appendChild(title);
+
+    if (items.length) {
+      // Fileiras com até 5 por linha (responsivo: 1/2/3/4/5)
+      const row = document.createElement('div');
+      row.className = 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4';
+
+      items.forEach(p => {
+        const card = document.createElement('div');
+        card.className = 'bg-white rounded-xl shadow-soft overflow-hidden hover:shadow-lg transition-shadow';
+        card.innerHTML = `
+          <button class="block w-full thumb">
+            <img src="${BASE_FOTOS + encodeURI(p.foto)}" alt="${p.nome}">
+          </button>
+          <div class="p-3">
+            <div class="font-medium truncate">${p.nome}</div>
+            <div class="text-xs text-slate-500">${p.ident}</div>
+            <div class="mt-2 flex items-center gap-2 text-xs">
+              <span class="badge bg-brand-50 text-brand-800">${p.especialidade}</span>
+              <span class="text-slate-500 truncate">${p.patente}</span>
+            </div>
+          </div>
+        `;
+        card.querySelector('button').addEventListener('click', () => openDrawer(p));
+        row.appendChild(card);
+      });
+
+      section.appendChild(row);
+    } else {
+      const empty = document.createElement('div');
+      empty.className = 'text-sm text-slate-500 italic';
+      empty.textContent = 'Sem elementos nesta categoria.';
+      section.appendChild(empty);
+    }
+
+    rosterGrid.appendChild(section);
+  });
+}
+
+
+
+
+
+function openDrawer(p){
+  document.getElementById('drFoto').src = BASE_FOTOS + p.foto;
+  document.getElementById('drNome').textContent = p.nome;
+  document.getElementById('drIdent').textContent = p.ident;
+  document.getElementById('drPatente').textContent = p.patente;
+  document.getElementById('drEsp').textContent = p.especialidade;
+  document.getElementById('drAdm').textContent = p.admissao;
+  document.getElementById('drEmail').innerHTML = `<a href="mailto:${p.email}" class="underline">${p.email}</a>`;
+  document.getElementById('drConta').textContent = p.conta;
+  document.getElementById('drContacto').textContent = p.contacto;
+
+  // Documentos
+ const cvEl = document.getElementById('drCV');
+const cartaEl = document.getElementById('drCarta');
+const ccEl = document.getElementById('drCC');
+
+if (ccEl) {
+  if (p.cc) { ccEl.href = p.cc; ccEl.parentElement.classList.remove('hidden'); }
+  else { ccEl.parentElement.classList.add('hidden'); }
+}
+
+if (cartaEl) {
+  if (p.carta) { cartaEl.href = p.carta; cartaEl.parentElement.classList.remove('hidden'); }
+  else { cartaEl.parentElement.classList.add('hidden'); }
+}
+
+if (cvEl) {
+  if (p.cv) { cvEl.href = p.cv; cvEl.parentElement.classList.remove('hidden'); }
+  else { cvEl.parentElement.classList.add('hidden'); }
+}
+
+// Apenas Administração pode ver Documentos dos OUTROS.
+// Quem não é Administração só vê os PRÓPRIOS documentos.
+const canSeeDocs = isAdmin || (currentUser && currentUser.ident === p.ident);
+
+if (canSeeDocs) {
+  // Mostra a tab Documentos
+  documentosBtn?.classList.remove('hidden');
+  documentosPane?.classList.remove('hidden');
+
+  // Atualiza/valida links (se existirem)
+  const safeSet = (el, href) => {
+    if (!el) return;
+    if (href) {
+      el.href = href;
+      el.removeAttribute('aria-disabled');
+      el.classList.remove('pointer-events-none', 'opacity-50');
+    } else {
+      // Se não houver documento, desativa o link
+      el.href = '#';
+      el.setAttribute('aria-disabled', 'true');
+      el.classList.add('pointer-events-none', 'opacity-50');
+    }
+  };
+
+  safeSet(ccEl, p.cc);
+  safeSet(cartaEl, p.carta);
+  safeSet(cvEl, p.cv);
+
+} else {
+  // Esconde a tab Documentos para este perfil
+  documentosBtn?.classList.add('hidden');
+  documentosPane?.classList.add('hidden');
+
+  // Garante que não fica “ativa” por engano
+  if (documentosBtn?.classList.contains('active')) {
+    documentosBtn.classList.remove('active');
+    document.querySelector('[data-tab="perfil"]')?.classList.add('active');
+    document.getElementById('tab-perfil')?.classList.remove('hidden');
+  }
+}
+
+
+  // Estado dinâmico
+  const estadoEl = document.getElementById('drEstado');
+  estadoEl.textContent = p.estado;
+  estadoEl.className = 'badge'; // reset
+
+  if (p.estado === 'Ativo') {
+    estadoEl.classList.add('bg-green-50', 'text-green-700');
+  } else if (p.estado === 'Ausente') {
+    estadoEl.classList.add('bg-yellow-50', 'text-yellow-700');
+  } else {
+    estadoEl.classList.add('bg-red-50', 'text-red-700');
+  }
+
+  tabBtns.forEach(b => b.classList.remove('active'));
+  tabPanes.forEach(pane => pane.classList.add('hidden'));
+  document.querySelector('[data-tab="perfil"]').classList.add('active');
+  document.getElementById('tab-perfil').classList.remove('hidden');
+
+  drawer.classList.remove('hidden');
+}
+
+drawerBackdrop.addEventListener('click', ()=> drawer.classList.add('hidden'));
+drawerClose.addEventListener('click', ()=> drawer.classList.add('hidden'));
+
+tabBtns.forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    tabBtns.forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const t = btn.dataset.tab;
+    tabPanes.forEach(p=>p.classList.add('hidden'));
+    document.getElementById('tab-'+t).classList.remove('hidden');
+  });
+});
+
+function applyFilters(){
+  const q = searchInput.value.toLowerCase();
+  const f = filterPatente.value;
+  const filtered = DATA.filter(p=>{
+    const hay = `${p.nome} ${p.ident} ${p.patente} ${p.especialidade}`.toLowerCase();
+    return hay.includes(q) && (!f || p.patente === f);
+  });
+  renderRoster(filtered);
+}
+
+searchInput.addEventListener('input', applyFilters);
+filterPatente.addEventListener('change', applyFilters);
+
+// Popular filtro de patentes
+[...new Set(DATA.map(p=>p.patente))].forEach(pt=>{
+  const opt = document.createElement('option');
+  opt.value = pt;
+  opt.textContent = pt;
+  filterPatente.appendChild(opt);
+});
+
+// Init
+renderRoster(DATA);
+
+// Depois de renderRoster(DATA);
+if (currentUser) {
+  // Se NÃO for administração, abre logo o próprio cartão e mostra Documentos
+  if (!isAdmin) {
+    // Procura o objeto da pessoa logada (já o tens em currentUser)
+    openDrawer(currentUser);
+
+    // Força a tab 'Documentos' a ficar ativa (se tiver permissões)
+    const btnDocs = document.querySelector('[data-tab="documentos"]');
+    const paneDocs = document.getElementById('tab-documentos');
+    if (btnDocs && !btnDocs.classList.contains('hidden')) {
+      // Desativa tabs ativas
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-pane').forEach(p => p.classList.add('hidden'));
+      // Ativa Documentos
+      btnDocs.classList.add('active');
+      paneDocs.classList.remove('hidden');
+    }
+  }
+}
+
+
+</script>
+
+</body>
+</html>
