@@ -2,7 +2,8 @@ name: Deploy static site to Pages
 
 on:
   push:
-    branches: [ main ]  # ou o branch que usas
+    branches: [ main ]   # ajusta se o teu branch for outro
+  workflow_dispatch:      # permite disparar manualmente
 
 permissions:
   contents: read
@@ -20,11 +21,21 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # Se for site estático puro (HTML/CSS/JS), não há build — só fazemos upload da pasta web
+      - name: Verificar se existe index.html dentro de ./web
+        run: |
+          ls -la
+          ls -la web || (echo "Pasta ./web não existe" && exit 1)
+          test -f web/index.html || (echo "Falta web/index.html" && exit 1)
+
+      - name: Listar ficheiros que vão para o Pages
+        run: |
+          echo "Conteúdo de ./web:"
+          find web -maxdepth 2 -type f | sort
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./web   # <-- a pasta onde está o index.html
+          path: ./web   # <-- a raiz do teu site (onde está o index.html)
 
   deploy:
     environment:
