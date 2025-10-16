@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Prioridades — Ocorrências sem Paramédicos</title>
+  <meta name="description" content="Quadro de prioridades/funções por patente quando não houver paramédicos ao serviço — versão HTML limpa, responsiva e pronta para impressão." />
+  <style>
+    :root{
+      --bg:#fbfbfd; --panel:#fff; --ink:#1f2937; --muted:#6b7280; --brand:#ef4444; --accent:#e5e7eb; --ring:rgba(37,99,235,.15);
+      --doctor:#e8f5e9; --nurse:#ffe9ec; --psych:#fdebd3; --medic:#e0f2fe; --trainee:#f1f5f9; --security:#f5f5f5;
+    }
+    body{margin:0; background:var(--bg); color:var(--ink); font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; line-height:1.6}
+    .container{max-width:1000px; margin:4rem auto; padding:0 1.25rem}
+    header{background:linear-gradient(180deg,#fff5f5 0%, #fff 60%); border-bottom:1px solid var(--accent)}
+    header .container{padding:2.25rem 1.25rem}
+    h1{margin:0 0 .35rem; letter-spacing:-.01em; font-size: clamp(1.6rem,2.4vw,2.2rem)}
+    .subtitle{margin:0; color:#b91c1c; font-weight:700; text-transform:uppercase}
+    .meta{color:var(--muted); margin-top:.35rem}
+    nav.toc{background:var(--panel); border:1px solid var(--accent); border-radius:14px; padding:1rem 1.25rem; box-shadow:0 1px 2px rgba(0,0,0,.04)}
+    section{background:var(--panel); border:1px solid var(--accent); border-radius:16px; padding:1.25rem 1.25rem 1.35rem; margin:1.25rem 0; box-shadow:0 1px 2px rgba(0,0,0,.04)}
+    h2{font-size:1.25rem; margin:.25rem 0 .5rem}
+    /* Tabelas */
+    .table-wrap{overflow:auto}
+    table{width:100%; border-collapse:collapse}
+    th,td{border:1px solid var(--ink); border-color:#94a3b8; padding:.65rem .75rem; text-align:left; vertical-align:top}
+    thead th{background:#e2e8f0; font-weight:700; text-transform:uppercase; letter-spacing:.04em}
+    .sect{font-weight:600; color:#111827}
+    .doctor{background:var(--doctor)}
+    .nurse{background:var(--nurse)}
+    .psych{background:var(--psych)}
+    .medic{background:var(--medic)}
+    .trainee{background:var(--trainee)}
+    .security{background:var(--security)}
+    .badge{display:inline-block; width:.55rem; height:.55rem; background:#0f172a; border-radius:2px; margin:0 .15rem; opacity:.8}
+    .callout{border-left:4px solid var(--brand); background:#fff1f2; padding:.75rem 1rem; border-radius:8px}
+    .notes{background:#111827; color:#e5e7eb; border-radius:12px; padding:1rem 1.1rem; border:1px solid #0b1220}
+    .notes h3{margin:.2rem 0 .6rem; font-size:1rem; color:#fff}
+    .notes ul{margin:.25rem 0 0 1rem}
+    .notes li{margin:.2rem 0}
+    /* Print */
+    @media print{
+      header, nav.toc {box-shadow:none}
+      section{break-inside: avoid}
+      a{color: inherit !important; text-decoration: none}
+      .container{margin:1rem auto}
+      body{background:#fff}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <p class="subtitle">Importante — Ocorrências para quando não houver paramédicos ao serviço!!</p>
+      <h1>Prioridades / Funções por Patente</h1>
+      <p class="meta">Documento de referência rápida</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:28%">Patente</th>
+              <th>Ordem</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="doctor">
+              <td class="sect">Médico <span class="badge"></span><span class="badge"></span></td>
+              <td>
+                1º Cirurgias/Operações (Tratamento);<br>
+                2º Radiologia (Tratamento);<br>
+                3º Cuidados Intensivos (Trat. Moderados e Graves);<br>
+                4º Ocorrências; <br>
+                5º Cuidados Intensivos (Tratamentos Ligeiros);<br>
+                6º Consultas. <span class="badge"></span><span class="badge"></span>
+              </td>
+            </tr>
+
+            <tr class="nurse">
+              <td class="sect">Enfermeiro</td>
+              <td>
+                1º Ocorrências; <br>
+                2º Cuidados Intensivos (Tratamentos Ligeiros); <br>
+                3º Auxílio Médico.
+              </td>
+            </tr>
+
+            <tr class="psych">
+              <td class="sect">Psicólogos <span class="badge"></span><span class="badge"></span><span class="badge"></span></td>
+              <td>
+                1º Consultas; <span class="badge"></span><span class="badge"></span><span class="badge"></span> <br>
+                2º Cuidados Intensivos (Tratamentos Ligeiros); <br>
+                3º Ocorrências; <br>
+                4º Marcação de consultas.
+              </td>
+            </tr>
+
+            <tr class="medic">
+              <td class="sect">Paramédicos</td>
+              <td>Somente e exclusivamente ocorrências.</td>
+            </tr>
+
+            <tr class="trainee">
+              <td class="sect">Estagiário</td>
+              <td>
+                1º Ocorrências; <br>
+                2º Cuidados Intensivos (Tratamentos Ligeiros); <br>
+                3º Auxílio Médico.
+              </td>
+            </tr>
+
+            <tr class="security">
+              <td class="sect">Segurança/Rececionista</td>
+              <td>Ajudar com dúvidas que os utentes tenham; <br> Proteger o local de trabalho.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="notes">
+      <h3>Notas</h3>
+      <ul>
+        <li><strong>Quando estiver apenas 1 membro de serviço</strong> com uma emergência Grave, outra Ligeira e uma Ocorrência 911: em 1º emergência Grave, em 2º levar o Ligeiro para a Equipa B, e em 3º ir à Ocorrência;</li>
+        <li><span class="badge"></span><span class="badge"></span> Consultas de Família, Rotina, Análises ao Sangue, etc.;</li>
+        <li><span class="badge"></span> Todos os psicólogos são enfermeiros, porém poderá abrir-se algumas exceções;</li>
+        <li><span class="badge"></span><span class="badge"></span> Somente consultas de Psicologia e Psicotécnicos, porém poderão abrir-se algumas exceções.</li>
+      </ul>
+    </section>
+
+    <footer class="container" style="color:var(--muted)">
+      <hr>
+      <p class="small">© SHSA — Quadro de prioridades em ausência de paramédicos. Este material é de apoio operacional.</p>
+    </footer>
+  </main>
+</body>
+</html>

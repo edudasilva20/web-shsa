@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Manual de Sutura</title>
+  <meta name="description" content="Manual de Sutura — versão HTML limpa, profissional e pronta para impressão." />
+  <style>
+    :root{
+      --bg: #fbfbfd;
+      --panel: #ffffff;
+      --ink: #1f2937;
+      --muted: #6b7280;
+      --brand: #2563eb;
+      --accent: #e5e7eb;
+      --ring: rgba(37, 99, 235, .2);
+    }
+    @media (prefers-color-scheme: light){:root{--bg:#fbfbfd}}
+    html{font-size:16px}
+    body{
+      margin:0; background:var(--bg); color:var(--ink);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      line-height:1.6;
+    }
+    .container{max-width: 980px; margin: 4rem auto; padding: 0 1.25rem}
+    header{
+      background: linear-gradient(180deg, #f7faff 0%, #fff 60%);
+      border-bottom:1px solid var(--accent);
+    }
+    header .container{margin:0 auto; padding:3rem 1.25rem}
+    h1{
+      font-size: clamp(1.8rem, 2.6vw, 2.4rem);
+      line-height:1.2; margin:0 0 .5rem 0;
+      letter-spacing: -.02em;
+    }
+    .subtitle{color:var(--muted); margin:0}
+    nav.toc{
+      background:var(--panel);
+      border: 1px solid var(--accent);
+      border-radius: 14px;
+      padding: 1rem 1.25rem;
+      box-shadow: 0 1px 2px rgba(0,0,0,.04);
+    }
+    nav.toc h2{font-size:1rem; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); margin:.25rem 0 .75rem}
+    nav.toc ol{margin:0; padding-left:1.1rem}
+    nav.toc a{color:var(--brand); text-decoration:none}
+    nav.toc a:hover{text-decoration:underline}
+    section{background:var(--panel); border:1px solid var(--accent); border-radius:16px; padding:1.25rem 1.25rem 1.35rem; margin: 1.25rem 0; box-shadow:0 1px 2px rgba(0,0,0,.04)}
+    section h2{margin-top:.25rem; letter-spacing:-.01em}
+    h2{font-size:1.35rem}
+    h3{font-size:1.05rem; color:var(--muted); text-transform:uppercase; letter-spacing:.06em}
+    ul, ol{padding-left:1.25rem}
+    .meta{
+      display:flex; gap:.75rem; align-items:center; margin-top:.75rem; color:var(--muted);
+      font-size:.95rem;
+    }
+    .tag{border:1px solid var(--accent); background:#fafafa; padding:.15rem .5rem; border-radius:999px}
+    .card-grid{display:grid; grid-template-columns: 1fr; gap: 1.25rem}
+    @media(min-width:800px){.card-grid{grid-template-columns: 1fr 1fr}}
+    .callout{border-left:4px solid var(--brand); padding: .5rem 1rem; background: #f8fbff; border-radius:8px}
+    a.anchor{color:inherit; text-decoration:none}
+    a.anchor:hover{text-decoration:underline}
+    hr{border:0; border-top:1px solid var(--accent); margin:2rem 0}
+    .small{font-size:.95rem}
+    footer{color:var(--muted); padding:2rem 0 4rem}
+    /* Print */
+    @media print{
+      header, nav.toc {box-shadow:none}
+      section{break-inside: avoid}
+      a{color: inherit !important; text-decoration: none}
+      .container{margin:1rem auto}
+      body{background:#fff}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Manual de Sutura</h1>
+      <div class="meta">
+        <span class="tag">Resumo rápido</span>
+        <span>Fios • Pontos • Técnica • Cuidados</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <nav class="toc" aria-label="Índice">
+      <h2>Índice</h2>
+      <ol>
+        <li><a href="#intro">Introdução</a></li>
+        <li><a href="#sec1">Secção 1 — Fio / Linha</a>
+          <ol>
+            <li><a href="#tipos-de-fio">Tipos de fio</a></li>
+            <li><a href="#categorias-dos-fios">Categorias dos fios</a></li>
+            <li><a href="#caracteristicas-das-fibras">Características das fibras</a></li>
+            <li><a href="#contraindicacoes">Contraindicações para sutura</a></li>
+            <li><a href="#material">Material</a></li>
+          </ol>
+        </li>
+        <li><a href="#sec2">Secção 2 — Pontos</a>
+          <ol>
+            <li><a href="#pontos-descontinuos">Pontos descontínuos</a></li>
+            <li><a href="#pontos-continuos">Pontos contínuos</a></li>
+            <li><a href="#tempo-remocao">Tempo para remoção</a></li>
+            <li><a href="#remocao">Remoção de pontos</a></li>
+            <li><a href="#pos-remocao">Pós remoção</a></li>
+          </ol>
+        </li>
+        <li><a href="#sec3">Secção 3 — Sutura</a>
+          <ol>
+            <li><a href="#grampeador">Grampeador / Agrafador de pele</a></li>
+            <li><a href="#realizacao">Realização da sutura</a></li>
+          </ol>
+        </li>
+      </ol>
+    </nav>
+
+    <section id="intro">
+      <h2>Introdução</h2>
+      <p><strong>Pontos ou Suturas</strong> são técnicas para promover o fechamento adequado de feridas e a aproximação ideal dos bordos. A escolha do fio depende da localização do ferimento.</p>
+    </section>
+
+    <section id="sec1">
+      <h2>Secção 1 — Fio / Linha</h2>
+
+      <h3 id="tipos-de-fio">Tipos de fio</h3>
+      <ul>
+        <li><strong>Fio 6-0</strong>: mais fino; áreas de importância estética (ex.: rosto).</li>
+        <li><strong>Fio 5-0</strong>: mão e dedos.</li>
+        <li><strong>Fio 4-0</strong>: extremidades proximais e tronco.</li>
+        <li><strong>Fio 3-0</strong>: grande calibre; planta do pé e escalpo.</li>
+        <li><strong>Fio 2-0</strong>: couro cabeludo.</li>
+      </ul>
+
+      <h3 id="categorias-dos-fios">Categorias dos fios</h3>
+      <ol>
+        <li><strong>Absorvíveis</strong> — degradam-se no organismo.
+          <ul>
+            <li><em>Categute</em>: origem orgânica (mucosa de boi); duração ~1–2 semanas.</li>
+            <li><em>Sintéticos</em>: dissolução por hidrólise (contacto com água tecidual).</li>
+          </ul>
+        </li>
+        <li><strong>Inabsorvíveis</strong> — permanecem a longo prazo.
+          <ul>
+            <li><em>Orgânicos</em>: seda, algodão.</li>
+            <li><em>Mistos</em>: ex.: algodão revestido com poliéster.</li>
+            <li><em>Sintéticos</em>: nylon (mono e multifilamentos).</li>
+            <li><em>Mineral</em>: fio de aço para fixação óssea.</li>
+          </ul>
+        </li>
+      </ol>
+
+      <h3 id="caracteristicas-das-fibras">Características das fibras dos fios</h3>
+      <ul>
+        <li><strong>Monofilamentados</strong>: único filamento; menor aderência bacteriana; útil quando há risco de infeção.</li>
+        <li><strong>Multifilamentados</strong>: trançados; maior resistência mecânica, porém maior risco de infeção.</li>
+      </ul>
+
+      <h3 id="contraindicacoes">Contraindicações para sutura / Não suturar quando</h3>
+      <ul>
+        <li>Feridas ou lesões infetadas;</li>
+        <li>Mordeduras de animais;</li>
+        <li>Perfurações profundas;</li>
+        <li>Presença de debris não removíveis;</li>
+        <li>Feridas que exigem alta tensão tecidual;</li>
+        <li>Sangramento ativo não controlado;</li>
+        <li>Feridas superficiais (escoriações, erosões).</li>
+      </ul>
+
+      <h3 id="material">Material</h3>
+      <div class="card-grid">
+        <ul>
+          <li>Luvas estéreis, máscara e touca</li>
+          <li>Pinças de dissecção (dente de rato)</li>
+          <li>Tesouras cirúrgicas (dissecção e corte de fios)</li>
+          <li>Agulhas para sutura (vários tamanhos e formatos)</li>
+          <li>Gaze (compressas estéreis)</li>
+          <li>Fios cirúrgicos</li>
+        </ul>
+        <ul>
+          <li>Soro fisiológico</li>
+          <li>Antissépticos</li>
+          <li>Adesivos cirúrgicos</li>
+          <li>Fitas adesivas / curativos</li>
+          <li>Clamps hemostáticos</li>
+          <li>Porta-agulhas</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="sec2">
+      <h2>Secção 2 — Pontos</h2>
+
+      <h3 id="pontos-descontinuos">Pontos descontínuos</h3>
+      <ul>
+        <li><strong>Ponto simples</strong>: universal; nó lateral evita contacto com bordas.</li>
+        <li><strong>Ponto simples invertido</strong>: nó oculto; reduz tensão.</li>
+        <li><strong>Ponto em U (vertical)</strong>: dois pontos simples com perfuração dupla; boa hemostasia, útil em hemorragia subdérmica.</li>
+        <li><strong>Ponto em U (horizontal)</strong>: alças em posição horizontal; indicado em hérnias e suturas sob tensão.</li>
+        <li><strong>Ponto em X</strong>: alças cruzadas; aumenta superfície de apoio para hemostasia e fechamento de aponeuroses/parede.</li>
+      </ul>
+
+      <h3 id="pontos-continuos">Pontos contínuos</h3>
+      <ul>
+        <li><strong>Caseado simples</strong>: rápido; para bordas não espessas, vasos, músculos e subcutâneo.</li>
+        <li><strong>Caseado ancorado</strong>: variação com âncora antes do tracionamento.</li>
+        <li><strong>Intradérmico</strong>: excelente estética; passagem paralela à pele sem marcas externas; indicado para feridas com pouca tensão.</li>
+      </ul>
+
+      <h3 id="tempo-remocao">Tempo para remoção de pontos (Área → Dias)</h3>
+      <ul class="small">
+        <li><strong>Rosto</strong>: 5–8</li>
+        <li><strong>Boca e gengiva</strong>: &gt; 7</li>
+        <li><strong>Pescoço</strong>: &gt; 5</li>
+        <li><strong>Couro cabeludo</strong>: &gt; 7</li>
+        <li><strong>Peito e abdómen</strong>: &gt; 7</li>
+        <li><strong>Braços e dorso da mão</strong>: &gt; 7</li>
+        <li><strong>Pernas e dorso dos pés</strong>: &gt; 10</li>
+        <li><strong>Costas</strong>: &gt; 10</li>
+        <li><strong>Palmas das mãos / planta dos pés</strong>: &gt; 14</li>
+      </ul>
+
+      <h3 id="remocao">Remoção de pontos</h3>
+      <ol>
+        <li>Passar soro sobre os pontos.</li>
+        <li>Secar com gaze.</li>
+        <li>Cortar a parte inferior do nó (tesoura/bisturi).</li>
+        <li>Colocar os pontos retirados em gaze.</li>
+        <li>Limpar com pomada betadine.</li>
+        <li>Fazer curativo, se necessário.</li>
+      </ol>
+
+      <h3 id="pos-remocao">Pós remoção de pontos</h3>
+      <ul>
+        <li>Proteger o ferimento por 1 mês.</li>
+        <li>Evitar atividades físicas que possam reabrir a ferida; usar fita se indispensável.</li>
+        <li>Evitar molhar o local por 2 semanas para reduzir infeção.</li>
+      </ul>
+    </section>
+
+    <section id="sec3">
+      <h2>Secção 3 — Sutura</h2>
+
+      <h3 id="grampeador">Grampeador de pele / Agrafador de pele</h3>
+      <ul>
+        <li><strong>Material</strong>: plástico absorvível ou aço inox/titânio (não absorvível).</li>
+        <li><strong>Aplicação</strong>: regiões espessas ou com movimento (ex.: abdómen, órgãos ocos).</li>
+        <li><strong>Vantagens</strong>: aplicação rápida e resistente.</li>
+        <li><strong>Desvantagens</strong>: custo elevado e cicatriz mais visível; apenas grampos superficiais são retirados.</li>
+      </ul>
+
+      <h3 id="realizacao">Realização da sutura</h3>
+      <ol>
+        <li>Utilizar porta-agulhas para prender agulha curva.</li>
+        <li>Iniciar com a agulha entrando pela pele, unindo as paredes na porção mais profunda.</li>
+        <li>Fazer o nó com o porta-agulhas e cortar os pontos. Evitar espaços vazios.</li>
+        <li>Retirar pontos após cicatrização superficial, se necessário. Fios absorvíveis internos dispensam remoção.</li>
+      </ol>
+
+      <div class="callout small" role="note">
+        <strong>Nota:</strong> Esta é uma síntese de referência rápida para uso educacional.
+      </div>
+    </section>
+
+    <footer class="container">
+      <hr>
+      <p class="small"> Serviços Hospitalares de San Andreas — Manual de Sutura. Este documento não substitui protocolos clínicos.</p>
+    </footer>
+  </main>
+</body>
+</html>

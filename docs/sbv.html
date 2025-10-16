@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Manual de Suporte Básico de Vida (SBV)</title>
+  <meta name="description" content="Versão HTML limpa, clara e profissional do Manual de SBV: avaliação inicial, RCP, DAE e desobstrução da via aérea." />
+  <style>
+    :root{
+      --bg:#fbfbfd; --panel:#ffffff; --ink:#111827; --muted:#6b7280; --brand:#2563eb; --line:#e5e7eb;
+      --ring: rgba(37, 99, 235, .18);
+    }
+    html{font-size:16px}
+    body{margin:0; background:var(--bg); color:var(--ink); font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; line-height:1.65}
+    .container{max-width:1000px; margin:0 auto; padding:0 1.25rem}
+    header{background:linear-gradient(180deg, #f6faff 0%, #fff 70%); border-bottom:1px solid var(--line)}
+    header .wrap{padding:3rem 0}
+    h1{margin:0 0 .35rem; font-size:clamp(1.8rem, 3vw, 2.5rem); letter-spacing:-.02em}
+    .subtitle{margin:0; color:var(--muted)}
+    .meta{display:flex; gap:.5rem; align-items:center; margin-top:.85rem; color:var(--muted); font-size:.95rem}
+    .tag{border:1px solid var(--line); background:#fafafa; padding:.15rem .55rem; border-radius:999px}
+
+    nav.toc{background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:1rem 1.25rem; box-shadow:0 1px 2px rgba(0,0,0,.04); margin:1.25rem 0 1.5rem}
+    nav.toc h2{font-size:1rem; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); margin:.25rem 0 .75rem}
+    nav.toc ol{margin:0; padding-left:1.15rem}
+    nav.toc a{color:var(--brand); text-decoration:none}
+    nav.toc a:hover{text-decoration:underline}
+
+    main{padding:2rem 0 3rem}
+    section{background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:1.25rem 1.25rem 1.35rem; margin: 1.25rem 0; box-shadow:0 1px 2px rgba(0,0,0,.04)}
+    h2{font-size:1.35rem; letter-spacing:-.01em; margin:.15rem 0 .35rem}
+    h3{font-size:1.05rem; color:var(--muted); text-transform:uppercase; letter-spacing:.06em; margin-top:1rem}
+    ul, ol{padding-left:1.25rem}
+
+    .callout{border-left:4px solid var(--brand); background:#f8fbff; padding:.65rem 1rem; border-radius:8px; margin:.75rem 0}
+    .kpi{display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:.75rem; margin:.5rem 0}
+    .kpi .box{border:1px solid var(--line); border-radius:12px; padding:.75rem 1rem; background:#fff}
+    .small{font-size:.95rem}
+
+    footer{color:var(--muted); padding:2rem 0 4rem}
+
+    @media(min-width:860px){.kpi{grid-template-columns: repeat(4, minmax(0,1fr))}}
+
+    /* Print */
+    @media print{
+      header, nav.toc, section{box-shadow:none}
+      section{break-inside:avoid}
+      a{color:inherit !important; text-decoration:none}
+      body{background:#fff}
+      .container{max-width:760px}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container wrap">
+      <h1>Manual de Suporte Básico de Vida (SBV)</h1>
+      <p class="subtitle">Guia prático: reconhecimento da PCR, RCP 30:2, uso do DAE e desobstrução da via aérea.</p>
+      <div class="meta">
+        <span class="tag">RCP 30:2</span>
+        <span class="tag">Frequência 100–120/min</span>
+        <span class="tag">Compressão 5–6 cm</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <nav class="toc" aria-label="Índice">
+      <h2>Índice</h2>
+      <ol>
+        <li><a href="#intro">Introdução</a></li>
+        <li><a href="#sec1">Secção 1 — Paragem Cardiorrespiratória</a>
+          <ol>
+            <li><a href="#avaliacao-inicial">Avaliação inicial</a></li>
+            <li><a href="#rcp">Reanimação Cardiopulmonar (RCP/CPR)</a></li>
+            <li><a href="#dae">Desfibrilhação Automática Externa (DAE)</a></li>
+            <li><a href="#trauma-toracico">Vítima com possí­veis danos na zona torácica</a></li>
+          </ol>
+        </li>
+        <li><a href="#sec2">Secção 2 — Desobstrução da Via Aérea</a>
+          <ol>
+            <li><a href="#obstrucao">Obstrução da via aérea</a></li>
+            <li><a href="#tecnicas-consciente">Técnicas em vítima consciente</a></li>
+            <li><a href="#tecnicas-inconsciente">Técnicas em vítima inconsciente</a></li>
+          </ol>
+        </li>
+      </ol>
+    </nav>
+
+    <section id="intro">
+      <h2>Introdução</h2>
+      <p>A Paragem Cardiorrespiratória (PCR) é uma situação súbita em que a vítima está inconsciente, sem respiração normal e sem sinais de circulação. O reconhecimento precoce, a ativação do 112 e as manobras corretas de <strong>Suporte Básico de Vida (SBV)</strong> — com ou sem desfibrilhação — aumentam significativamente a probabilidade de sobrevivência.</p>
+      <div class="kpi small">
+        <div class="box"><strong>Objetivo do SBV</strong><br>Manter circulação e oxigenação até ajuda diferenciada.</div>
+        <div class="box"><strong>Início precoce</strong><br>Sobrevivência ↓ 7–10% por minuto sem intervenção.</div>
+        <div class="box"><strong>Quem aplica</strong><br>Profissionais e cidadãos treinados.</div>
+        <div class="box"><strong>Prioridades</strong><br>Segurança, avaliar, chamar ajuda, RCP, DAE.</div>
+      </div>
+    </section>
+
+    <section id="sec1">
+      <h2>Secção 1 — Paragem Cardiorrespiratória</h2>
+
+      <h3 id="avaliacao-inicial">Avaliação inicial</h3>
+      <ol>
+        <li><strong>Garantir segurança do local</strong> (trânsito, fogo, eletricidade, etc.).</li>
+        <li><strong>Avaliar consciência</strong>: tocar nos ombros e questionar em voz alta.</li>
+        <li><strong>Pedir ajuda</strong>: solicitar ligação para <strong>112</strong> e procurar <abbr title="Desfibrilhador Automático Externo">DAE</abbr>.</li>
+        <li><strong>Posicionar a vítima</strong>: decúbito dorsal em superfície rígida.</li>
+      </ol>
+
+      <h3 class="small">Avaliar respiração e circulação</h3>
+      <ul>
+        <li><strong>Abrir via aérea</strong> com <em>frente‑queixo</em> (máx. 10 s para ver/ouvir/sentir).</li>
+        <li><strong>Gasping</strong> não é respiração normal.</li>
+        <li>Para leigos, não é obrigatório palpar pulso; ausência de respiração normal = iniciar RCP.</li>
+        <li>Profissionais podem palpar pulso carotídeo (máx. 10 s).</li>
+      </ul>
+
+      <div class="callout" role="note"><strong>Posição Lateral de Segurança (PLS):</strong> Se respira mas está inconsciente, colocar em PLS e vigiar respiração.</div>
+
+      <h3 id="rcp">Reanimação Cardiopulmonar (RCP)</h3>
+      <ol>
+        <li><strong>Posição das mãos</strong>: calcanhar da mão no centro do tórax; outra mão por cima; braços estendidos; ombros sobre as mãos.</li>
+        <li><strong>Compressões</strong>: profundidade 5–6 cm (adulto), frequência 100–120/min, permitir retorno completo.</li>
+        <li><strong>Ventilações</strong>: após 30 compressões, abrir via aérea; 2 ventilações eficazes (≈1 s cada). <strong>Rácio 30:2.</strong></li>
+        <li><strong>Continuar</strong> ciclos de 30:2 até chegada de ajuda, sinais de vida ou exaustão; alternar reanimadores a cada ~2 min.</li>
+      </ol>
+
+      <h3 id="dae">Desfibrilhação Automática Externa (DAE)</h3>
+      <ol>
+        <li><strong>Ligar o DAE</strong> e seguir instruções de voz/visuais.</li>
+        <li><strong>Aplicar elétrodos</strong>: tórax exposto; um abaixo da clavícula direita, outro no lado esquerdo infra‑axilar; secar pele se necessário.</li>
+        <li><strong>Analisar ritmo</strong>: ninguém toca na vítima.</li>
+        <li><strong>Choque</strong>: se aconselhado, aplicar e <em>retomar de imediato compressões</em> por 2 minutos.</li>
+        <li><strong>Sem choque</strong>: continuar RCP por 2 minutos e seguir DAE.</li>
+      </ol>
+      <div class="callout small">Minimizar interrupções das compressões — pausar apenas para colocar elétrodos e administrar choque.</div>
+
+      <h3 id="trauma-toracico">Vítima com possíveis danos na zona torácica</h3>
+      <ul>
+        <li><strong>Abertura da via aérea</strong>: se suspeita de trauma cervical, elevar mandíbula sem extensão; se ineficaz, frente‑queixo com cautela.</li>
+        <li><strong>Compressões</strong>: mesma profundidade/posição; ajustar mãos em deformidade torácica.</li>
+        <li><strong>DAE</strong>: afastar elétrodos 1–2 cm de pensos/pacemaker; secar a pele molhada.</li>
+      </ul>
+    </section>
+
+    <section id="sec2">
+      <h2>Secção 2 — Desobstrução da Via Aérea</h2>
+
+      <h3 id="obstrucao">Obstrução da via aérea</h3>
+      <p><strong>Sinais de obstrução grave:</strong> incapacidade de falar/tossir eficazmente, respiração ruidosa ou ausente, cianose, mãos no pescoço.</p>
+
+      <h3 id="tecnicas-consciente">Técnicas em vítima consciente</h3>
+      <ol>
+        <li><strong>Estimular a tosse</strong> se eficaz.</li>
+        <li><strong>Golpes interescapulares</strong>: até 5 golpes vigorosos, com suporte do tórax e tronco inclinado para a frente.</li>
+        <li><strong>Compressões abdominais (Manobra de Heimlich)</strong>: punho entre umbigo e esterno, tração rápida para dentro e para cima; repetir até expulsão ou inconsciência. <em>Em grávidas/obesos, preferir compressões torácicas.</em></li>
+      </ol>
+
+      <h3 id="tecnicas-inconsciente">Técnicas em vítima inconsciente</h3>
+      <ol>
+        <li><strong>Colocar no chão</strong> e ativar o SEM (112).</li>
+        <li><strong>Iniciar RCP</strong> com 30 compressões.</li>
+        <li><strong>Abrir via aérea e inspecionar</strong>: se corpo estranho visível, remover com dedo em gancho. <strong>Não fazer varrimento cego.</strong></li>
+        <li><strong>Ventilar</strong>: 2 insuflações; se ineficazes, reposicionar e tentar de novo.</li>
+        <li><strong>Continuar ciclos 30:2</strong>, verificando a boca apenas após cada ciclo, até resolução ou chegada de ajuda.</li>
+      </ol>
+    </section>
+
+    <footer class="container">
+      <hr>
+      <p class="small">© Serviços Hospitalares de San Andreas — Guia de Suporte Basico de Vida.</p>
+    </footer>
+  </main>
+</body>
+</html>
