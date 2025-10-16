@@ -4,7 +4,6 @@ on:
   push:
     branches: [ main ]   # ajusta se o teu branch for outro
   workflow_dispatch:      # permite disparar manualmente
-
 permissions:
   contents: read
   pages: write
